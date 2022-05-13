@@ -8,30 +8,27 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Reference</th>
+                
+                
                 <th>Libelle</th>
                 <th>Description</th>
                 <th>PrixUnitaire</th>
                 <th>Photo</th>
-                <th>Stock</th>
-                <th>Tva</th>
-                <th>PrixAchat</th>
+                
+                
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for produit in produits %}
             <tr>
-                <td>{{ produit.id }}</td>
-                <td>{{ produit.reference }}</td>
+                
+              
                 <td>{{ produit.libelle }}</td>
                 <td>{{ produit.description }}</td>
                 <td>{{ produit.prixUnitaire }}</td>
                 <td>{{ produit.photo }}</td>
-                <td>{{ produit.stock }}</td>
-                <td>{{ produit.tva }}</td>
-                <td>{{ produit.prixAchat }}</td>
+                
                 <td>
                     <a href="{{ path('app_produit_show', {'id': produit.id}) }}">Details</a>
                     <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">Modifier</a>

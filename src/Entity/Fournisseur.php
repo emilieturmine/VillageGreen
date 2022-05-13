@@ -87,6 +87,10 @@ class Fournisseur
 
         return $this;
     }
+    public function __toString()
+    {
+        return $this->nom;
+    }
 
     /**
      * @return Collection<int, Produit>
