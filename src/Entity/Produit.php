@@ -31,16 +31,16 @@ class Produit
     #[ORM\Column(type: 'integer')]
     private $stock;
 
-    #[ORM\Column(type: 'decimal', precision: 2, scale: 2)]
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
     private $tva;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
     private $prixAchat;
 
-    #[ORM\ManyToOne(targetEntity: fournisseur::class, inversedBy: 'produits')]
+    #[ORM\ManyToOne(targetEntity: Fournisseur::class, inversedBy: 'produits')]
     private $fournisseur;
 
-    #[ORM\ManyToOne(targetEntity: categorie::class, inversedBy: 'produits')]
+    #[ORM\ManyToOne(targetEntity: Categorie::class, inversedBy: 'produits')]
     private $categorie;
 
     public function getId(): ?int
