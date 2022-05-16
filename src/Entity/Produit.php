@@ -4,37 +4,65 @@ namespace App\Entity;
 
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: ProduitRepository::class)]
 class Produit
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Length(
+        min: 5,
+        max: 255,
+        minMessage: 'La reference doit faire minimum {{ limit }} caractere ',
+        maxMessage: 'La reference doit faire maximum {{ limit }} caractere',
+    )]
+    
+    #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     private $reference;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Length(
+        min: 5,
+        max: 255,
+        minMessage: 'Le libelle doit faire minimum {{ limit }} caractere ',
+        maxMessage: 'Le libelle doit faire maximum {{ limit }} caractere',
+    )]
+    #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     private $libelle;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Assert\Length(
+        min: 5,
+        max: 255,
+        minMessage: 'La description doit faire minimum {{ limit }} caractere ',
+        maxMessage: 'La description doit faire maximum {{ limit }} caractere',
+    )]
+    #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     private $description;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
+    #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     private $prixUnitaire;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    // #[Assert\NotBlank(message: 'La valeur ne peut rester null')]#[Assert\Url]
     private $photo;
 
     #[ORM\Column(type: 'integer')]
+    #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     private $stock;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
+    #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     private $tva;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
+    #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     private $prixAchat;
 
     #[ORM\ManyToOne(targetEntity: Fournisseur::class, inversedBy: 'produits')]

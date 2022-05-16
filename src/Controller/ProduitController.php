@@ -37,10 +37,13 @@ class ProduitController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $produitRepository->add($produit, true);
-
+            $this->addFlash(
+                'success',
+                'Produit ajouté avec succès !!'
+            );
             return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
         }
-
+        
         return $this->renderForm('produit/new.html.twig', [
             'produit' => $produit,
             'form' => $form,
@@ -63,7 +66,10 @@ class ProduitController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $produitRepository->add($produit, true);
-
+            $this->addFlash(
+                'success',
+                'Produit modifié avec succès !!'
+            );
             return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
         }
 
