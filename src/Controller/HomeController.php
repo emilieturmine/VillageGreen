@@ -15,5 +15,12 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
         ]);
     }
+    #[Route('/MeilleureVente', name: 'mvente')]
+    public function Mvente(): Response
+    {
+        return $this->render('home/mvente.html.twig', [
+            'controller_name' => 'HomeController',
+        ]);
+    }
    
 }

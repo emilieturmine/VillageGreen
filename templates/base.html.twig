@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Accueil{% endblock %}</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
@@ -14,6 +14,16 @@
        
     </head>
     <body>
+    <h1>VILLAGE GREEN </h1>
+    <p>nous contacter</p>
+    <p>A propos </p>
+    <p>Recherche<p>
+    <p>Frais de port offert à partir de 49 euros</p>
+     <p>Garantie 3 ans</p>
+      <p>Devise </p>
+       <p>Identifiez-vous</p>
+        <p>Votre panier</p>
+         <p>Plus que quelques jours avant noël!Découvrez nos idées!!</p>
      <div class= "container_fluid">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
 <a class="navbar-brand" href="{{ path('app_home') }}">VillageGreen</a>
@@ -29,10 +39,16 @@
         <li class="nav-item">
             <a class="nav-link" href="{{ path('app_produit_index') }}">Catalogue</a>
             
-        {# </li>
+        </li>
          <li class="nav-item">
-            <a class="nav-link" href="{{ path('#') }}">#</a>
-        </li> #}
+            <a class="nav-link" href="{{ path('mvente') }}">Meilleures Ventes</a>
+        </li> 
+         <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_fournisseur_index') }}">Marques</a>
+        </li> 
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_actu_index') }}">Actualités</a>
+        </li> 
     </ul>
 </div>
 </nav>
@@ -40,6 +56,7 @@
      <div class="alert alert-success">
          {{ message }}
      </div>
+
  {% endfor %}
 {% block body %}{% endblock %}
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
