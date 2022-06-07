@@ -2,29 +2,26 @@
 
 namespace App\Form;
 
-use App\Entity\Actu;
+use App\Entity\SsCategorie;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ActuType extends AbstractType
+class SsCategorieType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('nom')
-            ->add('type')
-            ->add('date')
-            ->add('lieu')
-            ->add('photo1')
-            ->add('photo2')
+            ->add('photo')
+            ->add('catParent')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Actu::class,
+            'data_class' => SsCategorie::class,
         ]);
     }
 }

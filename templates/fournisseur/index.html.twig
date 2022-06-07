@@ -25,7 +25,7 @@
                 <td>{{ fournisseur.adresse }}</td>
                 <td>{{ fournisseur.cp }}</td>
                 <td>{{ fournisseur.ville }}</td>
-                <td>{{ fournisseur.photo }}</td>
+                <td>	<img src="imagesVG/foupho/{{fournisseur.photo}}"alt="card-img-top"></td>
                 <td>
                     <a href="{{ path('app_fournisseur_show', {'id': fournisseur.id}) }}">show</a>
                     <a href="{{ path('app_fournisseur_edit', {'id': fournisseur.id}) }}">edit</a>

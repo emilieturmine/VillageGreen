@@ -22,10 +22,10 @@ class LigneDeCommande
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
     private $totalLigne;
 
-    #[ORM\OneToOne(targetEntity: produit::class, cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(targetEntity: Produit::class, cascade: ['persist', 'remove'])]
     private $produit;
 
-    #[ORM\ManyToOne(targetEntity: commande::class, inversedBy: 'ligneDeCommandes')]
+    #[ORM\ManyToOne(targetEntity: Commande::class, inversedBy: 'ligneDeCommandes')]
     private $commande;
 
     public function getId(): ?int

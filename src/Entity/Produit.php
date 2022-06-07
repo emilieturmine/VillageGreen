@@ -5,13 +5,14 @@ namespace App\Entity;
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+
 #[ORM\Entity(repositoryClass: ProduitRepository::class)]
 class Produit
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    
+
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
@@ -21,7 +22,7 @@ class Produit
         minMessage: 'La reference doit faire minimum {{ limit }} caractere ',
         maxMessage: 'La reference doit faire maximum {{ limit }} caractere',
     )]
-    
+
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     private $reference;
 
@@ -68,14 +69,15 @@ class Produit
     #[ORM\ManyToOne(targetEntity: Fournisseur::class, inversedBy: 'produits')]
     private $fournisseur;
 
-    #[ORM\ManyToOne(targetEntity: Categorie::class, inversedBy: 'produits')]
-    private $categorie;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $photo2;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $photo3;
+
+    #[ORM\ManyToOne(targetEntity: SsCategorie::class, inversedBy: 'produits')]
+    private $ssCategorie;
 
     public function getId(): ?int
     {
@@ -190,17 +192,7 @@ class Produit
         return $this;
     }
 
-    public function getCategorie(): ?categorie
-    {
-        return $this->categorie;
-    }
-
-    public function setCategorie(?categorie $categorie): self
-    {
-        $this->categorie = $categorie;
-
-        return $this;
-    }
+   
 
     public function getPhoto2(): ?string
     {
@@ -222,6 +214,18 @@ class Produit
     public function setPhoto3(?string $photo3): self
     {
         $this->photo3 = $photo3;
+
+        return $this;
+    }
+
+    public function getSsCategorie(): ?SsCategorie
+    {
+        return $this->ssCategorie;
+    }
+
+    public function setSsCategorie(?SsCategorie $ssCategorie): self
+    {
+        $this->ssCategorie = $ssCategorie;
 
         return $this;
     }

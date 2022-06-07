@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New SsCategorie{% endblock %}
+
+{% block body %}
+    <h1>Create new SsCategorie</h1>
+
+    {{ include('ss_categorie/_form.html.twig') }}
+
+    <a href="{{ path('app_ss_categorie_index') }}">back to list</a>
+{% endblock %}

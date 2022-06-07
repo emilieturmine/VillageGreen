@@ -2,14 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\CategorieRepository;
 use App\Repository\SsCategorieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CategorieRepository::class)]
-class Categorie
+#[ORM\Entity(repositoryClass: SsCategorieRepository::class)]
+class SsCategorie
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -22,14 +21,16 @@ class Categorie
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $photo;
 
-    #[ORM\OneToMany(mappedBy: 'catParent', targetEntity: SsCategorie::class, orphanRemoval: true)]
-    private $ssCategories;
+    #[ORM\ManyToOne(targetEntity: Categorie::class, inversedBy: 'ssCategories')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $catParent;
+
+    #[ORM\OneToMany(mappedBy: 'ssCategories', targetEntity: Produit::class)]
+    private $produits;
 
     public function __construct()
     {
-       
         $this->produits = new ArrayCollection();
-        $this->ssCategories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -61,38 +62,45 @@ class Categorie
         return $this;
     }
 
-    /**
-     * @return Collection<int, SsCategorie>
-     */
-    public function getSsCategories(): Collection
+    public function getCatParent(): ?Categorie
     {
-        return $this->ssCategories;
+        return $this->catParent;
     }
 
-    public function addSsCategory(SsCategorie $ssCategory): self
+    public function setCatParent(?Categorie $catParent): self
     {
-        if (!$this->ssCategories->contains($ssCategory)) {
-            $this->ssCategories[] = $ssCategory;
-            $ssCategory->setCatParent($this);
+        $this->catParent = $catParent;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Produit>
+     */
+    public function getProduits(): Collection
+    {
+        return $this->produits;
+    }
+
+    public function addProduit(Produit $produit): self
+    {
+        if (!$this->produits->contains($produit)) {
+            $this->produits[] = $produit;
+            $produit->setSsCategorie($this);
         }
 
         return $this;
     }
 
-    public function removeSsCategory(SsCategorie $ssCategory): self
+    public function removeProduit(Produit $produit): self
     {
-        if ($this->ssCategories->removeElement($ssCategory)) {
+        if ($this->produits->removeElement($produit)) {
             // set the owning side to null (unless already changed)
-            if ($ssCategory->getCatParent() === $this) {
-                $ssCategory->setCatParent(null);
+            if ($produit->getSsCategorie() === $this) {
+                $produit->setSsCategorie(null);
             }
         }
 
         return $this;
-    }
-
-    public function __toString()
-    {
-        return $this->nom;
     }
 }

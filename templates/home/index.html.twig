@@ -1,19 +1,96 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}Accueil
+{% endblock %}
 
 {% block body %}
-<h3>Accueil</h3>
-<p>Bienvenue!!</p>
- <p>A propos</p>
- <p>Sit laboriosam quis ad blanditiis voluptatem ex doloribus perferendis vel impedit quisquam. Et exercitationem illum ex expedita odit quod quod. Ut enim beatae in nisi modi sit maxime cumque aut alias ratione qui dolorem veniam eum suscipit corporis. Et autem consequatur ab libero magni sed ipsa voluptatem et quaerat optio. </p>
-<p>Sit laboriosam quis ad blanditiis voluptatem ex doloribus perferendis vel impedit quisquam. Et exercitationem illum ex expedita odit quod quod. Ut enim beatae in nisi modi sit maxime cumque aut alias ratione qui dolorem veniam eum suscipit corporis. Et autem consequatur ab libero magni sed ipsa voluptatem et quaerat optio. </p>
-<p>Notre catalogue :<p>
-<q>La musique donne une âme à nos coeurs, et des ailes à la pensée."</q>
-<p>Platon</p>
-<P>Meilleures Ventes:</p>
-<p>Parce que nous travaillons en direct avec les plus grandes marques, nous pouvons vous proposer les meilleurs prix du marché.</p>
-<P>Marques Vedettes </p>
-<q>La musiques peut rendre les hommes LIBRES.</q>
-<p>Actualités:</p>
-{% endblock %}
+	<article>
+		
+		<h3><strong>Bienvenue!!</strong></h3>
+		<h5></strong>A propos</strong></h5>
+		<p>Sit laboriosam quis ad blanditiis voluptatem ex doloribus perferendis vel impedit quisquam. Et exercitationem illum ex expedita odit quod quod. Ut enim beatae in nisi modi sit maxime cumque aut alias ratione qui dolorem veniam eum suscipit corporis. Et autem consequatur ab libero magni sed ipsa voluptatem et quaerat optio.
+		</p>
+		<p>Sit laboriosam quis ad blanditiis voluptatem ex doloribus perferendis vel impedit quisquam. Et exercitationem illum ex expedita odit quod quod. Ut enim beatae in nisi modi sit maxime cumque aut alias ratione qui dolorem veniam eum suscipit corporis. Et autem consequatur ab libero magni sed ipsa voluptatem et quaerat optio.
+		</p>
+	</article>
+	<article>
+		<h5></strong>Notre catalogue :</strong></h5>
+		{% for categorie in categories %}
+			
+			<div class="col-3">
+				<div class="card">
+					<a href="{{ path('app_home_categorie', { categorie: categorie.id} ) }}">	
+					<div class="card-body">
+						<img src="/imagesVG/CatPho/{{categorie.photo}}"alt="card-img-top">
+						<h6 class="card-title">{{categorie.nom}}</h6>
+					</div>
+					</a>
+				</div>
+			</div>
+			
+		{% endfor %}
+		<p></p>
+	</article>
+	<div>
+		<q>La musique donne une âme à nos coeurs, et des ailes à la pensée."</q>
+	</p>
+	<p><strong>Platon</strong></p>
+</div>
+<article>
+	<h5>Meilleures Ventes:</h5>
+	{% for produit in produits %}
+		<div class="col-3">
+			<div class="card">
+			<img src="imagesVG/propho/{{produit.photo}}"alt="card-img-top">
+				<div class="card-body">
+
+					<h5 class="card-title">
+						<p class="card-text">{{produit.libelle}}</p>
+					</h5>
+
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+</article>
+<div>
+	<p><strong>Parce que nous travaillons en direct avec les plus grandes marques, nous pouvons vous proposer les meilleurs prix du marché.</strong></p>
+</div>
+<article>
+	<h5>Marques Vedettes</h5>
+	{% for fournisseur in fournisseurs %}
+		<div class="col-3">
+			<div class="card">
+				<img src="imagesVG/foupho/{{fournisseur.photo}}"alt="card-img-top">
+				<div class="card-body">
+
+					<h5 class="card-title">
+						<p class="card-text">{{fournisseur.nom}}</p>
+					</h5>
+
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+</article>
+<div>
+	<q>La musiques peut rendre les hommes LIBRES.</q>
+	<p><strong>Bob Marley</strong></p>
+</div>
+<article>
+	<h5>Actualités:</h5>
+	{% for actu in actus %}
+		<div class="col-3">
+			<div class="card">
+				<img src="imagesVG/actupho/{{actu.photo}}"alt="card-img-top">
+				<div class="card-body">
+
+					<h5 class="card-title">
+						<p class="card-text">{{actu.titre}}</p>
+					</h5>
+
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+</article>{% endblock %}

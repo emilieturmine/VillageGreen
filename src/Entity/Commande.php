@@ -30,7 +30,7 @@ class Commande
     #[ORM\Column(type: 'string', length: 255)]
     private $villeF;
 
-    #[ORM\ManyToOne(targetEntity: utilisateur::class, inversedBy: 'commandes')]
+    #[ORM\ManyToOne(targetEntity: Utilisateur::class, inversedBy: 'commandes')]
     #[ORM\JoinColumn(nullable: false)]
     private $utilisateur;
 
