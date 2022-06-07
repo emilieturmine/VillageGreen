@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{% block title %}Meilleure Ventes
+{% endblock %}
+
+{% block body %}
+	<article>
+		<h3>Nos meilleure ventes:</h3>
+
+		{% for produit in produits %}
+			<div class="col-3">
+				<div class="card">
+					<div class="card-body">
+
+						<h5 class="card-title">
+							<p class="card-text">{{produit.libelle}}</p>
+						</h5>
+
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</article>
+{% endblock %}
