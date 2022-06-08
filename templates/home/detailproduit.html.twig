@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil
+{% endblock %}
+
+{% block body %}
+		<h5></strong>Catégorie  {{ produit.sscategorie.catParent.nom }} Sous categorie {{ produit.sscategorie.nom }} Produit {{ produit.libelle }} </strong></h5>
+		
+			<div class="col-3">
+				<div class="card">
+					<div class="card-body">
+						<img src="/imagesVG/propho/{{produit.photo}}"alt="card-img-top">
+						<h6 class="card-title">{{produit.libelle}}</h6>
+					</div>
+					</a>
+				</div>
+			</div>
+			
+		<p></p>
+	
+</article>{% endblock %}

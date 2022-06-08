@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Categorie;
+use App\Entity\Produit;
 use App\Repository\ActuRepository;
 use App\Repository\ProduitRepository;
 use App\Repository\CategorieRepository;
@@ -11,7 +12,10 @@ use App\Repository\SsCategorieRepository;
 use App\Repository\LigneDeCommandeRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\SsCategorie;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+
 
 class HomeController extends AbstractController
 {
@@ -43,7 +47,23 @@ class HomeController extends AbstractController
 
         ]);
     }
-
+    #[Route('/home_sscategorie/{sscategorie}', name: 'app_home_sscategorie')]
+    public function app_home_sscategorie(SsCategorie $sscategorie): Response
+    {
+        
+        return $this->render('home/sscategorie.html.twig', [
+            'sscategorie' => $sscategorie,
+           
+        ]);
+    }
+    #[Route('/home_produit/{produit}', name: 'app_home_produit')]
+    public function app_home_produit(Produit $produit): Response
+    {
+        
+        return $this->render('home/detailproduit.html.twig', [
+            'produit' => $produit
+        ]);
+    }
     
     #[Route('/MeilleureVente', name: 'mvente')]
     public function Mvente(ProduitRepository  $produitRepository): Response

@@ -8,7 +8,8 @@
 		{% for sscat in categorie.ssCategories %}
 			
 			<div class="col-3">
-				<div class="card">
+			<a href="{{ path("app_home_sscategorie", {sscategorie: sscat.id}) }}">		
+			<div class="card">
 					<div class="card-body">
 						<img src="/imagesVG/ssCatPho/{{sscat.photo}}"alt="card-img-top">
 						<h6 class="card-title">{{sscat.nom}}</h6>
