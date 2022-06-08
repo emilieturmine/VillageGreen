@@ -25,7 +25,7 @@ class SsCategorie
     #[ORM\JoinColumn(nullable: false)]
     private $catParent;
 
-    #[ORM\OneToMany(mappedBy: 'ssCategories', targetEntity: Produit::class)]
+    #[ORM\OneToMany(mappedBy: 'ssCategorie', targetEntity: Produit::class)]
     private $produits;
 
     public function __construct()
