@@ -3,18 +3,42 @@
 {% block title %}Hello PanierController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<h3>Votre panier</h3>
+<table class="table">
+<thead>
+<tr>
+<th>Produit</th>
+<th>Prix</th>
+<th>quantite</th>
+<th>Total</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody>
+{%for element in dataPanier %}
+<tr>
+    <td>{{element.produit.libelle}}</td>
+    <td>{{element.produit.prixUnitaire}}€</td>
+    <td>{{element.quantite}}</td>
+    <td >{{ element.quantite * element.produit.prixUnitaire }} €</td>
+    <td>
+    <a href="{{path("panier_add",{id:element.produit.id})}}"class="btn btn-success">Ajouter</a> 
+    <a href="{{path("panier_remove",{id:element.produit.id})}}" class="btn btn-warning">retirer</a>
+    <a href="{{path("panier_delete",{id:element.produit.id})}}" class="btn btn-danger">supprimer</a>
+    </td>
+</tr>
+{%else%}
+<tr>
+<td colspan="5" class="text-center">Votre panier est vide</td>
+</tr>
+{%endfor%}
+</tbody>
+<tfoot>
+<td colspan="3">Total</td>
+<td class="text-end">{{total}}€</td>
+<td><a href="{{path("app_home")}}"class="btn btn-success">Continuer mes achats</a> <td>
+ <td><a href="{{path("panier_delete_all")}}"class="btn btn-danger">Vider mon panier</a> <td> 
+</tfoot>
+</table>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/emilie/VillageGreen/src/Controller/PanierController.php'|file_link(0) }}">src/Controller/PanierController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/emilie/VillageGreen/templates/panier/index.html.twig'|file_link(0) }}">templates/panier/index.html.twig</a></code></li>
-    </ul>
-</div>
 {% endblock %}
