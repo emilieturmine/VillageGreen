@@ -15,7 +15,7 @@ use App\Entity\Categorie;
 use App\Entity\Livraison;
 use App\Entity\Fournisseur;
 use App\Entity\SsCategorie;
-use App\Entity\Utilisateur;
+use App\Entity\User;
 use App\Entity\LigneDeCommande;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -319,47 +319,47 @@ class AppFixtures extends Fixture
 
         //UtilisateurFixture
 
-        $utilisateur1 = new Utilisateur();
-        $utilisateur1->setPseudo("In");
-        $utilisateur1->setMdp("XJN42SCO8YL");
-        $utilisateur1->setNom("Santiago");
-        $utilisateur1->setPrenom("Dexter");
-        $utilisateur1->setEmail("ultrices.a.auctor@accumsan.co.uk");
-        $utilisateur1->setRole("admistration");
-        $utilisateur1->setAdresse("13 rue retu");
-        $utilisateur1->setCp(80000);
-        $utilisateur1->setVille("Amiens");
-        $utilisateur1->setCoefficient("0.24");
-        $utilisateur1->setCommercial(NULL);
-        $manager->persist($utilisateur1);
+        $user1 = new User();
+        $user1->setEmail("ultrices.a.auctor@accumsan.co.uk");
+        $user1->setRoles([1]);
+        $user1->setPassword("XJN42SCO8YL");
+        $user1->setPseudo("In");
+        $user1->setNom("Santiago");
+        $user1->setPrenom("Dexter");
+        $user1->setAdresse("13 rue retu");
+        $user1->setCp(80000);
+        $user1->setVille("Amiens");
+        $user1->setCoefficient("0.24");
+        $user1->setCommercial(NULL);
+        $manager->persist($user1);
 
-        $utilisateur2 = new Utilisateur();
-        $utilisateur2->setPseudo("Maecenas");
-        $utilisateur2->setMdp("EGY57MUM3UN");
-        $utilisateur2->setNom("Vasquez");
-        $utilisateur2->setPrenom("Carol");
-        $utilisateur2->setEmail("iaculis.quis@orci.ca");
-        $utilisateur2->setRole("client particulier");
-        $utilisateur2->setAdresse("2057 Curabitur Road");
-        $utilisateur2->setCp(62000);
-        $utilisateur2->setVille("Arras");
-        $utilisateur2->setCoefficient("0.30");
-        $utilisateur2->setCommercial($utilisateur1);
-        $manager->persist($utilisateur2);
+        $user2 = new User();
+        $user2->setEmail("iaculis.quis@orci.ca");
+        $user1->setRoles([2]);
+        $user2->setPassword("EGY57MUM3UN");
+        $user2->setPseudo("Maecenas");
+        $user2->setNom("Vasquez");
+        $user2->setPrenom("Carol");
+        $user2->setAdresse("2057 Curabitur Road");
+        $user2->setCp(62000);
+        $user2->setVille("Arras");
+        $user2->setCoefficient("0.30");
+        $user2->setCommercial($user1);
+        $manager->persist($user2);
 
-        $utilisateur3 = new Utilisateur();
-        $utilisateur3->setPseudo("euismod");
-        $utilisateur3->setMdp("LYD05OPA7DQ");
-        $utilisateur3->setNom("Cortez");
-        $utilisateur3->setPrenom("Troy");
-        $utilisateur3->setEmail("a @sodalesmauris.co.uk");
-        $utilisateur3->setRole("client professionnel");
-        $utilisateur3->setAdresse("287 -6448 Tincidunt Ave ");
-        $utilisateur3->setCp(30000);
-        $utilisateur3->setVille("Marseille");
-        $utilisateur3->setCoefficient(0, 15);
-        $utilisateur3->setCommercial($utilisateur1);
-        $manager->persist($utilisateur3);
+        $user3 = new User();
+        $user3->setEmail("a @sodalesmauris.co.uk");
+        $user1->setRoles([3]);
+        $user3->setPassword("LYD05OPA7DQ");
+        $user3->setPseudo("euismod");
+        $user3->setNom("Cortez");
+        $user3->setPrenom("Troy");
+        $user3->setAdresse("287 -6448 Tincidunt Ave ");
+        $user3->setCp(30000);
+        $user3->setVille("Marseille");
+        $user3->setCoefficient(0, 15);
+        $user3->setCommercial($user1);
+        $manager->persist($user3);
 
         //ProduitFixtures
 
@@ -510,7 +510,7 @@ class AppFixtures extends Fixture
         $commande1->setStatut("livree");
         $commande1->setCpF(80560);
         $commande1->setVilleF("khkhkkhgs");
-        $commande1->setUtilisateur($utilisateur2);
+        $commande1->setUser($user2);
         $manager->persist($commande1);
 
         $commande2 = new Commande();
@@ -519,7 +519,7 @@ class AppFixtures extends Fixture
         $commande2->setStatut("livree");
         $commande2->setCpF(80560);
         $commande2->setVilleF("khkhkkhgs");
-        $commande2->setUtilisateur($utilisateur2);
+        $commande2->setUser($user2);
         $manager->persist($commande2);
 
 

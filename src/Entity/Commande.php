@@ -30,15 +30,16 @@ class Commande
     #[ORM\Column(type: 'string', length: 255)]
     private $villeF;
 
-    #[ORM\ManyToOne(targetEntity: Utilisateur::class, inversedBy: 'commandes')]
-    #[ORM\JoinColumn(nullable: false)]
-    private $utilisateur;
 
     #[ORM\OneToMany(mappedBy: 'commande', targetEntity: Livraison::class)]
     private $livraisons;
 
     #[ORM\OneToMany(mappedBy: 'commande', targetEntity: LigneDeCommande::class)]
     private $ligneDeCommandes;
+
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'commandes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $user;
 
     public function __construct()
     {
@@ -111,18 +112,7 @@ class Commande
         return $this;
     }
 
-    public function getUtilisateur(): ?utilisateur
-    {
-        return $this->utilisateur;
-    }
-
-    public function setUtilisateur(?utilisateur $utilisateur): self
-    {
-        $this->utilisateur = $utilisateur;
-
-        return $this;
-    }
-
+   
     /**
      * @return Collection<int, Livraison>
      */
@@ -179,6 +169,18 @@ class Commande
                 $ligneDeCommande->setCommande(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
