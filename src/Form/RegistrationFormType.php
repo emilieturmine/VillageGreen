@@ -44,7 +44,7 @@ class RegistrationFormType extends AbstractType
                 ->add('adresse',TextType::class)
                 ->add('cp',TextType::class)
                 ->add('ville',TextType::class)
-                ->add('coefficient',TextType::class)
+               
                 ->add('agreeTerms', CheckboxType::class, [
                     'mapped' => false,
                     'constraints' => [

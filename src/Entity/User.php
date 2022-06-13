@@ -23,7 +23,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $email;
 
     #[ORM\Column(type: 'json')]
-    private $roles = [1=>"Commercial",2=>"client particulier",3=>"client professionnel",4=>"Admin"];
+    private $roles;
 
     #[ORM\Column(type: 'string')]
     private $password;
@@ -49,7 +49,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 255)]
     private $coefficient;
 
-    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'aretirer')]
+   
     private $commercial;
 
     
@@ -60,8 +60,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $isVerified = false;
 
     public function __construct()
-    {
-       
+    { 
         $this->commandes = new ArrayCollection();
     }
 
