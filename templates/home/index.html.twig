@@ -1,43 +1,47 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil
-{% endblock %}
+	{% block title %}Accueil{% endblock %}
 
-{% block body %}
-<div class="container-fluid">
-	<article>
+		{% block body %}
+			<div class="col-12">
 		
-		<h3><strong>Bienvenue!!</strong></h3>
-			<br>
-				<br>
+			<article>
 		
-		<h5></strong>A propos</strong></h5>
-			<br>
-		<p>Sit laboriosam quis ad blanditiis voluptatem ex doloribus perferendis vel impedit quisquam. Et exercitationem illum ex expedita odit quod quod. Ut enim beatae in nisi modi sit maxime cumque aut alias ratione qui dolorem veniam eum suscipit corporis. Et autem consequatur ab libero magni sed ipsa voluptatem et quaerat optio.
-		</p>
-		<p>Sit laboriosam quis ad blanditiis voluptatem ex doloribus perferendis vel impedit quisquam. Et exercitationem illum ex expedita odit quod quod. Ut enim beatae in nisi modi sit maxime cumque aut alias ratione qui dolorem veniam eum suscipit corporis. Et autem consequatur ab libero magni sed ipsa voluptatem et quaerat optio.
-		</p>
+				<h3 class="text-center"><strong>Bienvenue!!</strong></h3>
+					<br>
+					<br>
+		
+				<h5></strong>A propos</strong></h5>
+					<br>
+					<p>Sit laboriosam quis ad blanditiis voluptatem ex doloribus perferendis vel impedit quisquam. Et exercitationem illum ex expedita odit quod quod. Ut enim beatae in nisi modi sit maxime cumque aut alias ratione qui dolorem veniam eum suscipit corporis. Et autem consequatur ab libero magni sed ipsa voluptatem et quaerat optio.
+					</p>
+					<p>Sit laboriosam quis ad blanditiis voluptatem ex doloribus perferendis vel impedit quisquam. Et exercitationem illum ex expedita odit quod quod. Ut enim beatae in nisi modi sit maxime cumque aut alias ratione qui dolorem veniam eum suscipit corporis. Et autem consequatur ab libero magni sed ipsa voluptatem et quaerat optio.
+						</p>
 	</article>
 		<br>
 	<article>
 		<h5></strong>Notre catalogue :</strong></h5>
 			<br>
-		<div class="row">
+		</div>
+
+	
 		{% for categorie in categories %}
-			
-			
-				<div class="card col-3">
+				
+				<div class=" col-3">
+				
 					<a href="{{ path('app_catalogue_categorie', { categorie: categorie.id} ) }}">	
-					<div class="card-body">
-						<img src="/imagesVG/CatPho/{{categorie.photo}}"alt="card-img-top">
-						<h6 class="card-title">{{categorie.nom}}</h6>
-					</div>
+						<div class="card-body">
+							<img src="/imagesVG/CatPho/{{categorie.photo}}"alt="{{categorie.nom}}" alt="img.fluid" style="width:250px;height:250
+							px">
+							<br>
+								<h6 class="card-title">{{categorie.nom}}</h6>
+						</div>
 					</a>
 				</div>
-			</div>
+			
 			
 		{% endfor %}
-		<p></p>
+			
 	</article>
 		<br>
 	<div>
@@ -49,18 +53,18 @@
 <article>
 	<h5>Meilleures Ventes:</h5>
 		<br>
-	<div class ="row">
+	
 	{% for produit in produits %}
-
+<div class ="row">
 		<div class="col-3">
 			<div class="card">
-			<img src="imagesVG/propho/{{produit.photo}}"alt="card-img-top" >
+			<img src="imagesVG/propho/{{produit.photo}}"alt="{{produit.libelle}}" class="img-fluid"style="width:250px;height:250
+							px" >
 				<div class="card-body">
 
 					<h5 class="card-title">
 						<p class="card-text">{{produit.libelle}}</p>
 					</h5>
-
 				</div>
 				</div>
 			</div>
@@ -78,7 +82,8 @@
 	{% for fournisseur in fournisseurs %}
 		<div class="col-3">
 			<div class="card">
-				<img src="imagesVG/foupho/{{fournisseur.photo}}"alt="card-img-top">
+				<img src="imagesVG/foupho/{{fournisseur.photo}}"alt="{{fournisseur.nom}}" class="img-fluid"style="width:250px;height:250
+							px;">
 				<div class="card-body">
 
 					<h5 class="card-title">
@@ -102,7 +107,8 @@
 	{% for actu in actus %}
 		<div class="col-3">
 			<div class="card">
-				<img src="imagesVG/actupho/{{actu.photo}}"alt="card-img-top">
+				<img src="imagesVG/actupho/{{actu.photo}}"alt="{{actu.nom}}" class="img-fluid"style="width:300px;height:300
+							px;">
 				<div class="card-body">
 
 					<h5 class="card-title">
@@ -111,8 +117,11 @@
 
 				</div>
 			</div>
-		</div></div>
+		</div>
 	{% endfor %}
 	</article>
 		<br>
+
+		</div>
+
 		{% endblock %}
