@@ -20,6 +20,7 @@ class FournisseurController extends AbstractController
             'fournisseurs' => $fournisseurRepository->findAll(),
         ]);
     }
+    
 
     #[Route('/new', name: 'app_fournisseur_new', methods: ['GET', 'POST'])]
     public function new(Request $request, FournisseurRepository $fournisseurRepository): Response

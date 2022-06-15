@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil
+{% block title %}Catalogue
 {% endblock %}
 
 {% block body %}
@@ -8,7 +8,7 @@
 		{% for sscat in categorie.ssCategories %}
 			
 			<div class="col-3">
-			<a href="{{ path("app_home_sscategorie", {sscategorie: sscat.id}) }}">		
+			<a href="{{ path("app_catalogue_ssCategorie", {sscategorie: sscat.id}) }}">		
 			<div class="card">
 					<div class="card-body">
 						<img src="/imagesVG/ssCatPho/{{sscat.photo}}"alt="card-img-top">

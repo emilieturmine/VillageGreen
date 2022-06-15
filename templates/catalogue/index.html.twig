@@ -1,12 +1,13 @@
 
 {% extends 'base.html.twig' %}
 {% block title %}Catalogue{% endblock %}
+{% block body %}
 <h5></strong>Notre catalogue :</strong></h5>
 		{% for categorie in categories %}
 			
 			<div class="col-3">
 				<div class="card">
-					<a href="{{ path('app_home_categorie', { categorie: categorie.id} ) }}">	
+					<a href="{{ path('app_catalogue_categorie', { categorie: categorie.id} ) }}">	
 					<div class="card-body">
 						<img src="/imagesVG/CatPho/{{categorie.photo}}"alt="card-img-top">
 						<h6 class="card-title">{{categorie.nom}}</h6>
@@ -16,3 +17,4 @@
 			</div>
 			
 		{% endfor %}
+{% endblock %}

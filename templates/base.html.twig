@@ -18,8 +18,10 @@
 
 	</head>
 	<body>
+	{{include ("./base/entete.html.twig")}}
 		
 		<div class="container_fluid">
+		<div class="row">
 			<nav class="navbar navbar-expand-lg navbar-light bg-light">
 				<a class="navbar-brand" href="{{ path('app_home') }}">VillageGreen</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,7 +41,7 @@
 							<a class="nav-link" href="{{ path('mvente') }}">Meilleures Ventes</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="{{ path('app_fournisseur_index') }}">Marques</a>
+							<a class="nav-link" href="{{ path('app_marques_index') }}">Marques</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="{{ path('app_actu_index') }}">Actualités</a>
@@ -66,6 +68,7 @@
 						
 												
 					</ul>
+				</div>
 				</div>
 			</nav>
 		
