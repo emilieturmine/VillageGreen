@@ -321,7 +321,7 @@ class AppFixtures extends Fixture
 
         $user1 = new User();
         $user1->setEmail("ultrices.a.auctor@accumsan.co.uk");
-        $user1->setRoles(["ROLE-USER"]);
+        $user1->setRoles(["ROLE_USER"]);
         $user1->setPassword("XJN42SCO8YL");
         $user1->setPseudo("In");
         $user1->setNom("Santiago");
@@ -335,7 +335,7 @@ class AppFixtures extends Fixture
 
         $user2 = new User();
         $user2->setEmail("iaculis.quis@orci.ca");
-        $user1->setRoles(["ROLE-USER"]);
+        $user2->setRoles(["ROLE_USER"]);
         $user2->setPassword("EGY57MUM3UN");
         $user2->setPseudo("Maecenas");
         $user2->setNom("Vasquez");
@@ -349,7 +349,7 @@ class AppFixtures extends Fixture
 
         $user3 = new User();
         $user3->setEmail("a @sodalesmauris.co.uk");
-        $user1->setRoles(["ROLE-USER"]);
+        $user3->setRoles(["ROLE_USER"]);
         $user3->setPassword("LYD05OPA7DQ");
         $user3->setPseudo("euismod");
         $user3->setNom("Cortez");
