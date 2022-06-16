@@ -9,19 +9,27 @@
 //$manager->flush();
 namespace App\DataFixtures;
 
+use App\Entity\User;
 use App\Entity\Produit;
 use App\Entity\Commande;
 use App\Entity\Categorie;
 use App\Entity\Livraison;
 use App\Entity\Fournisseur;
 use App\Entity\SsCategorie;
-use App\Entity\User;
 use App\Entity\LigneDeCommande;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
+        private $uph;
+
+        public function __construct(UserPasswordHasherInterface $uph)
+        {
+                $this->uph = $uph;        
+        }
+
     public function load(ObjectManager $manager): void
     {
 
@@ -316,13 +324,17 @@ class AppFixtures extends Fixture
         $manager->persist( $sscategorie29);
 
 
-
+/***************************************************************************************************************************** */
+/***************************************************************************************************************************** */
+/***************************************************************************************************************************** */
+/***************************************************************************************************************************** */
+/***************************************************************************************************************************** */
         //UtilisateurFixture
 
         $user1 = new User();
         $user1->setEmail("ultrices.a.auctor@accumsan.co.uk");
         $user1->setRoles(["ROLE_USER"]);
-        $user1->setPassword("XJN42SCO8YL");
+        $user1->setPassword($this->uph->hashPassword($user1, "Afpa1234"));
         $user1->setPseudo("In");
         $user1->setNom("Santiago");
         $user1->setPrenom("Dexter");
@@ -336,7 +348,7 @@ class AppFixtures extends Fixture
         $user2 = new User();
         $user2->setEmail("iaculis.quis@orci.ca");
         $user2->setRoles(["ROLE_USER"]);
-        $user2->setPassword("EGY57MUM3UN");
+        $user2->setPassword($this->uph->hashPassword($user2, "Afpa1234"));
         $user2->setPseudo("Maecenas");
         $user2->setNom("Vasquez");
         $user2->setPrenom("Carol");
@@ -350,7 +362,7 @@ class AppFixtures extends Fixture
         $user3 = new User();
         $user3->setEmail("a @sodalesmauris.co.uk");
         $user3->setRoles(["ROLE_USER"]);
-        $user3->setPassword("LYD05OPA7DQ");
+        $user3->setPassword($this->uph->hashPassword($user3, "Afpa1234"));
         $user3->setPseudo("euismod");
         $user3->setNom("Cortez");
         $user3->setPrenom("Troy");

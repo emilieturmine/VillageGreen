@@ -2,29 +2,55 @@
 
 
 {% block body %}
-	<header >
-		 <div class="jumbotron"> 
-		 	<div class="text-right mt-3">
+	<header class="row p-3 mb-0 bg-dark text-white">
+		 	<div class="col-2 text-left ">
+		 		<img src="./imagesVG/Component/logo.png" alt="logo"  style="width:150px;height:150px" class="img.fluid" >
+			</div>
+			<div class="col-8 text-center mt-4 mb-4">
+				<h1  >VILLAGE GREEN</h1>
+			</div>
+		 	<div class="col-2 text-right mt-2 mr-n5">
 				<p>Frais de port offert à partir de 49 euros</p>
 				<p>Garantie 3 ans</p>
 				<p>Devise €</p>
 	 		</div>
 			
-
-				<h1 class="text-center col-12  mt-0">VILLAGE GREEN</h1>
-				<br>
-			<div class="row my-0 mt-5 text-center">
 		
-		
-		<p class="col-2 p-b-0">nous contacter</p>
-				<p class="col-2">A propos</p>
-				<p class="col-2">Recherche</p>
-				<p class="col-2">S'identifier</p>
-				<p class="col-2">S'inscrire</p>
-				<p class="col-2">Votre panier</p>
-	
-	</div>
-
-	</div> 
-</header>
+			<ul class="nav justify-content-start justify-content space-between text-white mt-2 ml-0 col-4">
+				<li class="nav-item col-2 text-left ">
+					<a class="nav-link text-white " href="{{path('app_contact_new')}}">Contact</a>
+				 </li>	
+  				<li class="nav-item col-2 ml-4">
+    				<a class="nav-link text-white" href="{{path('app_apropos')}}">Presentation</a>
+  				</li>	
+					 		
+  			</ul>
+				  <form class="d-flex col-4 form-inline text-center">
+				  <input class="form-control me-sm-2" type="text" placeholder="recherche">
+				  <button class="btn btn-secondary my-2 my-sm-0" type="submit">recherche</button>
+				</form>
+				<ul class="nav justify-content-left justify-content-space-between text-white col-3 mt-2">
+					{% if app.user %}
+						
+						<li class="nav-item col-2 ml-6">
+							<a class="nav-link ms-auto text-white " href="{{ path('app_user_show', { id: app.user.id} ) }}">{{app.user.pseudo}}</a>
+						</li> 
+				 		<li class="nav-item col-1 ml-5 mr-5">
+							<a class="nav-link text-white" href="{{ path('panier_index') }}">Panier</a>
+						</li>
+						<li class="nav-item col-1 ml-5">
+							<a class="nav-link text-white" href="{{ path('app_logout') }}">Deconnexion</a>
+						</li>
+					{% else %}
+						<li class="nav-item">
+							<a class="nav-link col-2 text-white mr-1" href="{{ path('app_login') }}">Connexion</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link col-2 text-white mr-1" href="{{ path('app_register') }}">Inscription</a>
+						</li>
+			{% endif %}
+			</ul>
+	</header>
 {% endblock %}
+
+

@@ -15,5 +15,11 @@ class BaseController extends AbstractController
             'controller_name' => 'BaseController',
         ]);
     }
-    
+    #[Route('/apropos', name: 'app_apropos')]
+    public function apropos(): Response
+    {
+        return $this->render('base/apropos.html.twig', [
+            'controller_name' => 'BaseController',
+        ]);
+    }
 }
