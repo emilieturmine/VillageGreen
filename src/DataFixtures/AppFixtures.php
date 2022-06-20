@@ -141,7 +141,7 @@ class AppFixtures extends Fixture
      
         $categorie2 = new Categorie();
         $categorie2->setNom("Pianos");
-        $categorie2->setPhoto("c2.jpg");
+        $categorie2->setPhoto("c2.png");
         $manager->persist($categorie2);
 
         $categorie3 = new Categorie();
