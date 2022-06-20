@@ -2,7 +2,7 @@
 
 
 {% block body %}
-	<header class="row p-3 mb-0 bg-dark text-white">
+	<header class="row p-3 mb-0 bg-dark text-white ">
 		 	<div class="col-2 text-left ">
 		 		<img src="./imagesVG/Component/logo.png" alt="logo"  style="width:150px;height:150px" class="img.fluid" >
 			</div>
@@ -15,41 +15,42 @@
 				<p>Devise €</p>
 	 		</div>
 			
-		
-			<ul class="nav justify-content-start justify-content space-between text-white mt-2 ml-0 col-4">
-				<li class="nav-item col-2 text-left ">
+
+			<ul id="navbar-left" class="nav text-white mt-2 ml-0 col-2">
+				<li class="nav-item  text-left ">
 					<a class="nav-link text-white " href="{{path('app_contact_new')}}">Contact</a>
 				 </li>	
-  				<li class="nav-item col-2 ml-4">
+  				<li class="nav-item ml-4">
     				<a class="nav-link text-white" href="{{path('app_apropos')}}">Presentation</a>
   				</li>	
 					 		
   			</ul>
-				  <form class="d-flex col-4 form-inline text-center">
+				  <form id ="navbar-center" class="d-flex justify-content-center col-8 form-inline ">
 				  <input class="form-control me-sm-2" type="text" placeholder="recherche">
 				  <button class="btn btn-secondary my-2 my-sm-0" type="submit">recherche</button>
 				</form>
-				<ul class="nav justify-content-left justify-content-space-between text-white col-3 mt-2">
+				<ul class="nav justify-content-right justify-content-space-between text-white col-2 mt-2">
 					{% if app.user %}
 						
-						<li class="nav-item col-2 ml-6">
+						<li class="nav-item ml-6">
 							<a class="nav-link ms-auto text-white " href="{{ path('app_user_show', { id: app.user.id} ) }}">{{app.user.pseudo}}</a>
 						</li> 
-				 		<li class="nav-item col-1 ml-5 mr-5">
+				 		<li class="nav-item  ml-5 mr-5">
 							<a class="nav-link text-white" href="{{ path('panier_index') }}">Panier</a>
 						</li>
-						<li class="nav-item col-1 ml-5">
+						<li class="nav-item  ml-5">
 							<a class="nav-link text-white" href="{{ path('app_logout') }}">Deconnexion</a>
 						</li>
 					{% else %}
 						<li class="nav-item">
-							<a class="nav-link col-2 text-white mr-1" href="{{ path('app_login') }}">Connexion</a>
+							<a class="nav-link  text-white mr-1" href="{{ path('app_login') }}">Connexion</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link col-2 text-white mr-1" href="{{ path('app_register') }}">Inscription</a>
+							<a class="nav-link  text-white mr-1" href="{{ path('app_register') }}">Inscription</a>
 						</li>
 			{% endif %}
 			</ul>
+		
 	</header>
 {% endblock %}
 

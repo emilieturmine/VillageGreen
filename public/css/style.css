@@ -2,7 +2,25 @@ header{
     font-family:Jacques Francois;
     background-color: #264653;
 }
-#promo{
+
+#navbar-center
+{
+    text-align: center;
+    justify-content: center;
+  
     font-family:Jacques Francois;
-    background-color: #2A9D8F;
+}
+
+#navbar-left{
+    text-align: left;
+    justify-content:start;
+    
+}
+#navbar-gen{
+display:flex;
+    background-color: #E9C46A;
+  justify-content: center !important ;}
+
+  #navbarSupportedContent a{
+    padding-left: 200px;
 }
