@@ -70,7 +70,7 @@ class ProduitController extends AbstractController
                 'success',
                 'Produit modifié avec succès !!'
             );
-            return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_produit_show', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('produit/edit.html.twig', [

@@ -18,9 +18,12 @@ header{
 }
 #navbar-gen{
 display:flex;
-    background-color: #E9C46A;
+    background-color: #2A9D8F;
   justify-content: center !important ;}
 
   #navbarSupportedContent a{
     padding-left: 200px;
+}
+#footer{
+    background-color: #2A9D8F;
 }
