@@ -9,7 +9,7 @@
 		{% block body %}
 
 			<div class="col-12">
-				<img src="imagesVG/Component/b1.png"alt="banniere" class="img-fluid" >
+				<img src="/imagesVG/Component/b1.png"alt="banniere" class="img-fluid" >
 				<article>
 					<h1 class="text-center mt-4"><strong>Bienvenue!!</strong></h1>
 						<p class="ml-5 text-center mt-3"><strong> Je suis aujourd’hui très fier de diriger cette entreprise familiale indépendante de plus de 1.500 employés et de 15.850.000 clients. 
@@ -50,7 +50,8 @@
 									<div class="card-body text-dark">
 										<img src="imagesVG/propho/{{produit.photo}}"alt="{{produit.libelle}}" class="img-fluid"style="width: 250px;;height: 250px;" >
 											<h5 class="card-title text-dark mt-3">{{produit.libelle}}</h5>
-									</div>
+										<h5 class="card-title text-danger mt-3">{{produit.prixUnitaire}} €</h5>
+										</div>
 								</a>
 							</div>
 						{% endfor %}

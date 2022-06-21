@@ -45,7 +45,7 @@ class ProduitRepository extends ServiceEntityRepository
     public function findAllMVentesHome(): array
     {
         return $this->createQueryBuilder('mv')
-            ->setMaxResults(4)
+            ->setMaxResults(8)
             ->getQuery()
             ->getResult();
     }

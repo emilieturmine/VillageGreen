@@ -175,31 +175,31 @@ class AppFixtures extends Fixture
         $categorie8->setPhoto("c8.png");
         $manager->persist($categorie8);
 
-// CategorieFixtures
+// SSCategorieFixtures
 
   $sscategorie1 = new SsCategorie();
          $sscategorie1->setNom("Flûtes");
-         $sscategorie1->setPhoto("sc1.jfif");
+         $sscategorie1->setPhoto("sc1.jpg ");
          $sscategorie1->setCatParent($categorie1);
         $manager->persist( $sscategorie1);
 
          $sscategorie2 = new SsCategorie();
          $sscategorie2->setNom("Trompettes");
-         $sscategorie2->setPhoto("sc2.jfif");
+         $sscategorie2->setPhoto("sc2.jpg");
          $sscategorie2->setCatParent($categorie1);
         $manager->persist( $sscategorie2);
 
 
          $sscategorie3 = new SsCategorie();
          $sscategorie3->setNom("Clarinettes");
-         $sscategorie3->setPhoto("sc3.jfif");
+         $sscategorie3->setPhoto("sc3.jpg");
          $sscategorie3->setCatParent($categorie1);
         $manager->persist( $sscategorie3);
 
 
          $sscategorie4 = new SsCategorie();
          $sscategorie4->setNom("Saxophone");
-         $sscategorie4->setPhoto("sc4.jfif");
+         $sscategorie4->setPhoto("sc4.jpg");
          $sscategorie4->setCatParent($categorie1);
         $manager->persist( $sscategorie4);
 
@@ -229,7 +229,7 @@ class AppFixtures extends Fixture
 
          $sscategorie9 = new SsCategorie();
          $sscategorie9->setNom("Partitions");
-         $sscategorie9->setPhoto("sc11.jfif");
+         $sscategorie9->setPhoto("sc11.jpg");
          $sscategorie9->setCatParent($categorie2);
         $manager->persist( $sscategorie9);
 
@@ -301,25 +301,25 @@ class AppFixtures extends Fixture
 
          $sscategorie26 = new SsCategorie();
          $sscategorie26->setNom("Caisson");
-         $sscategorie26->setPhoto("sc26.jfif");
+         $sscategorie26->setPhoto("sc26.jpg");
          $sscategorie26->setCatParent($categorie5);
         $manager->persist( $sscategorie26);
 
          $sscategorie27 = new SsCategorie();
          $sscategorie27->setNom("Basses");
-         $sscategorie27->setPhoto("sc27.jfif");
+         $sscategorie27->setPhoto("sc27.jpg");
          $sscategorie27->setCatParent($categorie5);
         $manager->persist( $sscategorie27);
 
          $sscategorie28 = new SsCategorie();
          $sscategorie28->setNom("Amplis");
-         $sscategorie28->setPhoto("sc28.jfif");
+         $sscategorie28->setPhoto("sc28.jpg");
          $sscategorie28->setCatParent($categorie5);
         $manager->persist( $sscategorie28);
 
          $sscategorie29 = new SsCategorie();
          $sscategorie29->setNom("Casques");
-         $sscategorie29->setPhoto("sc29.jfif");
+         $sscategorie29->setPhoto("sc29.jpg");
          $sscategorie29->setCatParent($categorie5);
         $manager->persist( $sscategorie29);
 

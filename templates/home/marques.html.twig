@@ -1,21 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Les marques{% endblock %}
+    {% block title %}Les marques{% endblock %}
 
-{% block body %}
-    <h1>Nos Marques: </h1>
-
-    
-        {% for fournisseur in fournisseurs %}
+        {% block body %}
+            <div class="col-12 text-center">
+                    <img src="imagesVG/Component/b2.jpg" alt="banniere" class="img-fluid" style="width:2500px;height:700px">
+                <article>
+                    <h1 class="text-center mt-4 "><strong>Nos Marques: </strong></h1>
+            </div>
+        
+                    {% for fournisseur in fournisseurs %}
             
-            <div class="col-3">
-			<a href="{{ path("app_marques_produit", {fournisseur: fournisseur.id}) }}">		   
-                <td>{{ fournisseur.nom }}</td>
-               <td>	<img src="imagesVG/foupho/{{fournisseur.photo}}"alt="card-img-top"></td>
-               
-           </div>
-       
-          
+            <div class="col-3 justify-content-space-between text-center mt-5">
+			            <a href="{{ path("app_marques_produit", {fournisseur: fournisseur.id}) }}">		   
+                <div class="card-body text-dark"> 
+              	        <img src="imagesVG/foupho/{{fournisseur.photo}}"alt="{{fournisseur.nom}}"class="text-dark img.fluid" style="width:250px;height:250px">
+                        <h5 class="card-title text-dark mt-3">{{fournisseur.nom}}</h5>
+                </div>
+                        </a>
+            </div>
         {% endfor %}
+    </article>
       {% endblock %}   
     

@@ -1,23 +1,24 @@
 {% extends 'base.html.twig' %}
-{% block title %}Meilleure Ventes
-{% endblock %}
+	{% block title %}Meilleure Ventes{% endblock %}
 
-{% block body %}
-	<article>
-		<h3>Nos meilleure ventes:</h3>
-
+		{% block body %}
+	
+		<div class="col-12 text-center">
+					<img src="imagesVG/Component/b2.jpg" alt="banniere" class="img-fluid" style="width:2500px;height:700px">
+			<article>
+					<h1 class="text-center mt-4 "><strong>Nos meilleure ventes:</strong></h1>
+		</div>
 		{% for produit in produits %}
-			<div class="col-3">
-				<div class="card">
-					<div class="card-body">
-
-						<h5 class="card-title">
-							<p class="card-text">{{produit.libelle}}</p>
-						</h5>
-
-					</div>
+		<div class="  col-3  justify-content-space-between text-center mt-5">
+			<a href="{{ path('app_catalogue_produit', { produit: produit.id} ) }}">	
+				<div class="card-body text-dark">
+					<img src="imagesVG/propho/{{produit.photo}}"alt="{{produit.libelle}}" class="img-fluid"style="width: 250px;;height: 250px;" >
+						<h5 class="card-title text-dark mt-3">{{produit.libelle}}</h5>
+					<h5 class="card-title text-danger mt-3">{{produit.prixUnitaire}} €</h5>
 				</div>
-			</div>
-		{% endfor %}
-	</article>
+			
+			</a>
+		</div>
+	{% endfor %}
+</article>
 {% endblock %}

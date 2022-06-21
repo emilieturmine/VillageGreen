@@ -23,11 +23,11 @@ class CatalogueController extends AbstractController
         ]);
     }
     #[Route('/catalogue_categorie/{categorie}', name: 'app_catalogue_categorie')]
-    public function app_catalogue_categorie(Categorie $categorie): Response
+    public function app_catalogue_categorie(Categorie $categorie,ProduitRepository $produitRepository): Response
     {
-        
-        return $this->render('catalogue/categorie.html.twig', [
-            'categorie' => $categorie,
+        $produits = $produitRepository->findAllMVentesHome();
+        return $this->render('catalogue/categorie.html.twig', ['controller_name' => 'CatalogueController',
+            'categorie' => $categorie, 'produits' => $produits,
 
         ]);
     }
