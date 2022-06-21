@@ -29,18 +29,17 @@
 				  <input class="form-control me-sm-2" type="text" placeholder="recherche">
 				  <button class="btn btn-secondary my-2 my-sm-0" type="submit">recherche</button>
 				</form>
-				<ul class="nav justify-content-right justify-content-space-between text-white col-2 mt-2">
+				<ul class="nav justify-content-right justify-content-space-between text-white col-2 mt-4">
 					{% if app.user %}
 						
 						<li class="nav-item ml-6">
-							<a class="nav-link ms-auto text-white " href="{{ path('app_user_show', { id: app.user.id} ) }}">{{app.user.pseudo}}</a>
+							<a class="nav-link ms-auto text-white " href="{{ path('app_user_show', { id: app.user.id} ) }}">Bienvenue {{app.user.pseudo}}!</a>
 						</li> 
-				 		<li class="nav-item  ml-5 mr-5">
-							<a class="nav-link text-white" href="{{ path('panier_index') }}">Panier</a>
-						</li>
+				 		
 						<li class="nav-item  ml-5">
 							<a class="nav-link text-white" href="{{ path('app_logout') }}">Deconnexion</a>
 						</li>
+						
 					{% else %}
 						<li class="nav-item">
 							<a class="nav-link  text-white mr-1" href="{{ path('app_login') }}">Connexion</a>
