@@ -3,6 +3,7 @@
 {% block title %}Modifier les produits{% endblock %}
 
 {% block body %}
+{{include ("./base/navbaradmin.html.twig")}}
     <h1>Modifier les produits</h1>
 
     {{ include('produit/_form.html.twig', {'button_label': 'Update'}) }}

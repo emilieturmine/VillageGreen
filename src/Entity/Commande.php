@@ -41,6 +41,9 @@ class Commande
     #[ORM\JoinColumn(nullable: false)]
     private $user;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $adresseF;
+
     public function __construct()
     {
         $this->livraisons = new ArrayCollection();
@@ -181,6 +184,22 @@ class Commande
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+    public function __toString()
+    {
+        return $this->nom;
+    }
+
+    public function getAdresseF(): ?string
+    {
+        return $this->adresseF;
+    }
+
+    public function setAdresseF(string $adresseF): self
+    {
+        $this->adresseF = $adresseF;
 
         return $this;
     }

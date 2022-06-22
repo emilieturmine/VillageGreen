@@ -3,6 +3,7 @@
 {% block title %}Edit Actu{% endblock %}
 
 {% block body %}
+{{include ("./base/navbaradmin.html.twig")}}
     <h1>Edit Actu</h1>
 
     {{ include('actu/_form.html.twig', {'button_label': 'Update'}) }}

@@ -488,7 +488,7 @@ class AppFixtures extends Fixture
         $produit6->setTva(5, 00);
         $produit6->setPrixAchat(550);
         $produit6->setFournisseur($fournisseur6);
-        $produit1->setSsCategorie($sscategorie17);
+        $produit6->setSsCategorie($sscategorie17);
         $produit6->setPhoto2("p62.jpg");
         $produit6->setPhoto3(NULL);
         $manager->persist($produit6);
@@ -781,6 +781,7 @@ class AppFixtures extends Fixture
         $commande1->setDate(new \DateTime(2021 - 04 - 20));
         $commande1->setTotal(1232);
         $commande1->setStatut("livree");
+        $commande1->setAdresseF("7 rue danton");
         $commande1->setCpF(80560);
         $commande1->setVilleF("khkhkkhgs");
         $commande1->setUser($user2);
@@ -790,6 +791,7 @@ class AppFixtures extends Fixture
         $commande2->setDate(new \DateTime(2021 - 04 - 20));
         $commande2->setTotal(699);
         $commande2->setStatut("livree");
+        $commande2->setAdresseF("7 rue danton");
         $commande2->setCpF(80560);
         $commande2->setVilleF("khkhkkhgs");
         $commande2->setUser($user2);

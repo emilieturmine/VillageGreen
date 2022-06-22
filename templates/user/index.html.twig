@@ -1,9 +1,15 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}User index{% endblock %}
+{# A faire: 
+- creer un template client et un template admin 
+- Les personaliser 
+-faire front dessus 
+-Les rendre fonctionnel
+#}
+{% block title %}Liste des utilisateurs{% endblock %}
 
 {% block body %}
-    <h1>User index</h1>
+{{include ("./base/navbaradmin.html.twig")}}
+    <h1>Liste des utilisateurs</h1>
 
     <table class="table">
         <thead>
