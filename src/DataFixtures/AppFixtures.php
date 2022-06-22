@@ -380,6 +380,20 @@ class AppFixtures extends Fixture
         $user3->setCoefficient(0, 15);
         $user3->setCommercial($user1);
         $manager->persist($user3);
+
+        $user4 = new User();
+        $user4->setEmail("emilie.turmine@villagegreen.com");
+        $user4->setRoles(["ROLE_ADMIN"]);
+        $user4->setPassword($this->uph->hashPassword($user4, "azerty"));
+        $user4->setPseudo("emilie");
+        $user4->setNom("Turmine");
+        $user4->setPrenom("Emilie");
+        $user4->setAdresse("7 rue de la toile ");
+        $user4->setCp(30000);
+        $user4->setVille("Saturne");
+        $user4->setCoefficient(0,30);
+        $user4->setCommercial(NULL);
+        $manager->persist($user4);
 /***************************************************************************************************************************** */
 /***************************************************************************************************************************** */
 /***************************************************************************************************************************** */
