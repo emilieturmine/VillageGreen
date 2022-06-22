@@ -7,16 +7,16 @@
 						<img src="/imagesVG/Component/b3b.png" alt="banniere" class="img-fluid" style="width:2500px;height:700px">
 			<article>
 						<h1 class="text-center mt-5 "><strong>Nos Produits:</strong></h1>
-				</div>
-						<h6 class= " mt-5 ml-5">{{ sscategorie.catParent.nom }} > {{ sscategorie.nom }}</h6>
-					
+				
+						<h4 class= " text-center mt-5 ">{{ sscategorie.catParent.nom }} > {{ sscategorie.nom }}</h4>
+					</div>	
 				{% for prosscat in sscategorie.produits %}
-					<div class="col-3 justify-content-space-between text-center mt-5">
+					<div class="col-4  text-center mt-5">
 						<a href="{{ path("app_catalogue_produit", {produit: prosscat.id}) }}">
 							<div class="card-body text-dark mt-5">
-								<img src="/imagesVG/propho/{{prosscat.photo}}"alt="{{prosscat.libelle}}"style="width:250px;height:250px" class="text-dark img.fluid mt-5" >
-								<h5 class="card-title text-dark mt-3">{{prosscat.libelle}}</h5>
-								<h5 class="card-title text-danger mt-3">{{prosscat.prixUnitaire}} €</h5>
+								<img src="/imagesVG/propho/{{prosscat.photo}}"alt="{{prosscat.libelle}}"style="width:200px;height:200px" class="text-dark img.fluid mt-5" >
+								<h4 class="card-title text-dark mt-3">{{prosscat.libelle}}</h4>
+								<h4 class="card-title text-danger mt-3 "><strong>{{prosscat.prixUnitaire}} € </strong></h4>
 							</div>
 						</a>
 					</div>

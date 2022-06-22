@@ -130,7 +130,11 @@ class AppFixtures extends Fixture
         $fournisseur12->setVille("Saxa");
         $fournisseur12->setPhoto("f12.jfif");
         $manager->persist($fournisseur12);
-
+/***************************************************************************************************************************** */
+/***************************************************************************************************************************** */
+/***************************************************************************************************************************** */
+/***************************************************************************************************************************** */
+/***************************************************************************************************************************** */
 
         // CategorieFixtures
 
@@ -174,7 +178,11 @@ class AppFixtures extends Fixture
         $categorie8->setNom("Micros");
         $categorie8->setPhoto("c8.png");
         $manager->persist($categorie8);
-
+/***************************************************************************************************************************** */
+/***************************************************************************************************************************** */
+/***************************************************************************************************************************** */
+/***************************************************************************************************************************** */
+/***************************************************************************************************************************** */
 // SSCategorieFixtures
 
   $sscategorie1 = new SsCategorie();
@@ -372,7 +380,11 @@ class AppFixtures extends Fixture
         $user3->setCoefficient(0, 15);
         $user3->setCommercial($user1);
         $manager->persist($user3);
-
+/***************************************************************************************************************************** */
+/***************************************************************************************************************************** */
+/***************************************************************************************************************************** */
+/***************************************************************************************************************************** */
+/***************************************************************************************************************************** */
         //ProduitFixtures
 
 
@@ -511,9 +523,244 @@ class AppFixtures extends Fixture
         $produit9->setTva(5, 00);
         $produit9->setPrixAchat(750);
         $produit9->setFournisseur($fournisseur9);
-        $produit1->setSsCategorie($sscategorie5);
+        $produit9->setSsCategorie($sscategorie5);
         $manager->persist($produit9);
 
+       $produit10 = new Produit();
+       $produit10->setReference("166859");
+       $produit10->setLibelle("TRS-21G Soprano Recorder");
+       $produit10->setDescription("    Doigté allemand
+       3 pièces
+      
+       Couleur: Blanc
+       Etui et écouvillon incl.
+   ");
+       $produit10->setPrixUnitaire(3,98);
+       $produit10->setPhoto("p101.jpg");
+       $produit10->setStock(50);
+       $produit10->setTva(5, 00);
+       $produit10->setPrixAchat(0.50);
+       $produit10->setPhoto2("p102.jpg");
+       $produit10->setPhoto3("p103.jpg");
+       $produit10->setFournisseur($fournisseur2);
+        $produit10->setSsCategorie($sscategorie1);
+        $manager->persist($produit10);
+
+       $produit11 = new Produit();
+       $produit11->setReference("140092");
+       $produit11->setLibelle("YRS-24 B Soprano Recorder");
+       $produit11->setDescription("    Corps en ABS
+       3 pièces
+       Couleur: Blanc
+       Trousse incl.
+   ");
+       $produit11->setPrixUnitaire(8.90);
+       $produit11->setPhoto("p111.jpg");
+       $produit11->setPhoto2("p112.jpg");
+       $produit11->setPhoto3("p113.jpg");
+       $produit11->setStock(50);
+       $produit11->setTva(5, 00);
+       $produit11->setPrixAchat(2);
+       $produit11->setFournisseur($fournisseur3);
+        $produit11->setSsCategorie($sscategorie1);
+        $manager->persist($produit11);
+
+        $produit12 = new Produit();
+        $produit12->setReference("200795");
+        $produit12->setLibelle("506B Symphony Sopranino");
+        $produit12->setDescription("    Série Symphony
+        Corps marron foncé
+        3 pièces
+        Trousse incl.
+    ");
+        $produit12->setPrixUnitaire(18.90);
+        $produit12->setPhoto("p121.jpg");
+        $produit12->setPhoto2("p122.jpg");
+        $produit12->setPhoto3("p123.jpg");
+        $produit12->setStock(50);
+        $produit12->setTva(5, 00);
+        $produit12->setPrixAchat(3);
+        $produit12->setFournisseur($fournisseur3);
+        $produit12->setSsCategorie($sscategorie1);
+        $manager->persist($produit12);
+
+        $produit13 = new Produit();
+        $produit13->setReference("120131");
+        $produit13->setLibelle("4105 Rottenburgh Sopranino");
+        $produit13->setDescription("
+        Double trou
+        Etui, écouvillon, chiffon, tableau de doigtés et set d'entretien incl.
+    ");
+        $produit13->setPrixUnitaire(275);
+        $produit13->setPhoto("p131.jpg");
+        $produit13->setPhoto2("p132.jpg");
+        $produit13->setPhoto3("p133.jpg");
+        $produit13->setStock(2);
+        $produit13->setTva(5, 00);
+        $produit13->setPrixAchat(100);
+        $produit13->setFournisseur($fournisseur2);
+        $produit13->setSsCategorie($sscategorie1);
+        $manager->persist($produit13);
+
+        $produit14 = new Produit();
+        $produit14->setReference("150560");
+        $produit14->setLibelle("Mollenhauer 2296 Canta Alto Recorder");
+        $produit14->setDescription("   Corps en poirier naturel
+        Doigté allemand
+        Trousse en coton incl.");
+        $produit14->setPrixUnitaire(375);
+        $produit14->setPhoto("p141.jpg");
+        $produit14->setPhoto2("p142.jpg");
+        $produit14->setPhoto3("p143.jpg");
+        $produit14->setStock(2);
+        $produit14->setTva(5, 00);
+        $produit14->setPrixAchat(175);
+        $produit14->setFournisseur($fournisseur2);
+        $produit14->setSsCategorie($sscategorie1);
+        $manager->persist($produit14);
+
+        $produit15 = new Produit();
+        $produit15->setReference("200801");
+        $produit15->setLibelle("509B Symphony Alto Recorder
+        ");
+        $produit15->setDescription("      Série Symphony
+        En matière plastique
+        Corps marron foncé
+        Trousse et repose-pouce amovible incl.
+    
+    ");
+        $produit15->setPrixUnitaire(38);
+        $produit15->setPhoto("p151.jpg");
+        $produit15->setPhoto2("p152.jpg");
+        $produit15->setPhoto3("p153.jpg");
+        $produit15->setStock(2);
+        $produit15->setTva(5, 00);
+        $produit15->setPrixAchat(4);
+        $produit15->setFournisseur($fournisseur1);
+        $produit15->setSsCategorie($sscategorie1);
+        $manager->persist($produit15);
+
+        $produit16 = new Produit();
+        $produit16->setReference("490150");
+        $produit16->setLibelle(" 5431KC Denner Tenor with Key");
+        $produit16->setDescription("    Doigté baroque
+        Double trou
+        En cerisier
+        Etui et accessoires incl.
+    ");
+        $produit16->setPrixUnitaire(1229);
+        $produit16->setPhoto("p161.jpg");
+        $produit16->setPhoto2("p162.jpg");
+        $produit16->setPhoto3("p163.jpg");
+        $produit16->setStock(1);
+        $produit16->setTva(5, 00);
+        $produit16->setPrixAchat(750);
+        $produit16->setFournisseur($fournisseur2);
+        $produit16->setSsCategorie($sscategorie1);
+        $manager->persist($produit16);
+
+        $produit17 = new Produit();
+        $produit17->setReference("166866");
+        $produit17->setLibelle("TRB-31B Matt Bass Recorder");
+        $produit17->setDescription("Le YDP-144 noir vous offre une expérience pianistique proche de celle un authentique piano à queue ',
+");
+        $produit17->setPrixUnitaire(99);
+        $produit17->setPhoto("p171.jpg");
+        $produit17->setPhoto2("p172.jpg");
+        $produit17->setPhoto3("p173.jpg");
+        $produit17->setStock(10);
+        $produit17->setTva(5, 00);
+        $produit17->setPrixAchat(50);
+        $produit17->setFournisseur($fournisseur6);
+        $produit17->setSsCategorie($sscategorie1);
+        $manager->persist($produit17);
+
+        $produit18 = new Produit();
+        $produit18->setReference("469561");
+        $produit18->setLibelle("Nataraj Bansuri Pro Flute D");
+        $produit18->setDescription("    Flûte traversière indienne en bambou
+        Tonalité: Ré
+        Qualité professionnelle
+        Couverture en soie incl.
+       ");
+        $produit18->setPrixUnitaire(66);
+        $produit18->setPhoto("p181.jpg");
+        $produit18->setPhoto2("p182.jpg");
+        $produit18->setPhoto3("p183.jpg");
+        $produit18->setStock(1);
+        $produit18->setTva(5, 00);
+        $produit18->setPrixAchat(16);
+        $produit18->setFournisseur($fournisseur1);
+        $produit18->setSsCategorie($sscategorie1);
+        $manager->persist($produit18);
+
+        $produit19 = new Produit();
+        $produit19->setReference("519031");
+        $produit19->setLibelle("Artinoise Re.corder Black");
+        $produit19->setDescription("   
+        Capteurs tactiles pour la reconnaissance des doigtés
+        Capteur d'air pour mesurer la force de la respiration
+        Capteur d'inertie supplémentaire pour donner plus d'expressivité au jeu
+        Fabriquée en Italie
+    ");
+        $produit19->setPrixUnitaire(66);
+        $produit19->setPhoto("p191.jpg");
+        $produit19->setPhoto2("p192.jpg");
+        $produit19->setPhoto3("p193.jpg");
+        $produit19->setStock(1);
+        $produit19->setTva(5, 00);
+        $produit19->setPrixAchat(40);
+        $produit19->setFournisseur($fournisseur7);
+        $produit19->setSsCategorie($sscategorie1);
+        $manager->persist($produit19);
+
+        $produit20 = new Produit();
+        $produit20->setReference("315977");
+        $produit20->setLibelle("Shaman Double Flute");
+        $produit20->setDescription("   
+        Fabriquée par le maître artisan Turquoise Bear
+        En pin
+        Huilée avec de l'huile d'amande
+        Livrée en trousse
+    ");
+        $produit20->setPrixUnitaire(159);
+        $produit20->setPhoto("p201.jpg");
+        $produit20->setPhoto2("p202.jpg");
+        $produit20->setPhoto3("p203.jpg");
+        $produit20->setStock(1);
+        $produit20->setTva(5, 00);
+        $produit20->setPrixAchat(75);
+        $produit20->setFournisseur($fournisseur3);
+        $produit20->setSsCategorie($sscategorie1);
+        $manager->persist($produit20);
+
+        $produit21 = new Produit();
+        $produit21->setReference("514853");
+        $produit21->setLibelle(" Duduk Premium in A");
+        $produit21->setDescription("
+    
+            Tonalité: La
+            Qualité de concert
+            Fabriqué à partir de bois d'abricotier séché pendant env. 10 à 12 ans
+            
+        
+        ");
+        $produit21->setPrixUnitaire(311);
+        $produit21->setPhoto("p211.jpg");
+        $produit21->setPhoto2("p212.jpg");
+        $produit21->setPhoto3("p213.jpg");
+        $produit21->setStock(1);
+        $produit21->setTva(5, 00);
+        $produit21->setPrixAchat(150);
+        $produit21->setFournisseur($fournisseur8);
+        $produit21->setSsCategorie($sscategorie1);
+        $manager->persist($produit21);
+
+/***************************************************************************************************************************** */
+/***************************************************************************************************************************** */
+/***************************************************************************************************************************** */
+/***************************************************************************************************************************** */
+/***************************************************************************************************************************** */
         //CommandeFixtures
 
         $commande1 = new Commande();
@@ -534,7 +781,11 @@ class AppFixtures extends Fixture
         $commande2->setUser($user2);
         $manager->persist($commande2);
 
-
+/***************************************************************************************************************************** */
+/***************************************************************************************************************************** */
+/***************************************************************************************************************************** */
+/***************************************************************************************************************************** */
+/***************************************************************************************************************************** */
 
         //LivraisonFixtures
 
@@ -561,7 +812,11 @@ class AppFixtures extends Fixture
         $livraison3->setVilleL("khkhkkhgs");
         $livraison3->setCommande($commande2);
         $manager->persist($livraison3);
-
+/***************************************************************************************************************************** */
+/***************************************************************************************************************************** */
+/***************************************************************************************************************************** */
+/***************************************************************************************************************************** */
+/***************************************************************************************************************************** */
         //LigneCommandeFixture
 
 
