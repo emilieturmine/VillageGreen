@@ -7,8 +7,8 @@
 <div class="col-12">
 
 
-    <h1 class="text-info text-center mt-5"> Liste des fournisseurs</h1>
-</div>
+    <h1 class="text-info text-center mt-5"> Liste des fournisseurs <a href="{{ path('app_fournisseur_new') }}" class="btn btn-success  ml-5 mr-5 text-center">Ajouter</a> </h1>
+
 <div id="crud" class="col-12 text-center   mt-5">
     <table class="table">
         <thead class="table bg-info mt-5 text-white text-center">
@@ -28,7 +28,7 @@
                 <td class="text-center">
                     <a href="{{ path('app_fournisseur_show', {'id': fournisseur.id}) }}" class=" btn btn-info mr-5">Voir</a>
                     <a href="{{ path('app_fournisseur_edit', {'id': fournisseur.id}) }}"class=" btn btn-warning mr-5">Modifier</a>
-                    <a href="{{ path('app_fournisseur_new') }}" class=" btn btn-danger mr-5">Ajouter</a>
+                  
                 </td>
             </tr>
         {% else %}

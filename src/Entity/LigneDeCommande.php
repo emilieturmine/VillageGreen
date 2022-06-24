@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\LigneDeCommandeRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: LigneDeCommandeRepository::class)]
 class LigneDeCommande
@@ -14,12 +15,15 @@ class LigneDeCommande
     private $id;
 
     #[ORM\Column(type: 'integer')]
+    #[Assert\Positive]
     private $quantite;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
+    #[Assert\Positive]
     private $prixVente;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Assert\Positive]
     private $totalLigne;
 
     #[ORM\OneToOne(targetEntity: Produit::class, cascade: ['persist', 'remove'])]

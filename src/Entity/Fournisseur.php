@@ -6,6 +6,7 @@ use App\Repository\FournisseurRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: FournisseurRepository::class)]
 class Fournisseur
@@ -16,15 +17,43 @@ class Fournisseur
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Length(
+        min: 5,
+        max: 255,
+        minMessage: 'La reference doit faire minimum {{ limit }} caractere ',
+        maxMessage: 'La reference doit faire maximum {{ limit }} caractere',
+    )]
+    #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     private $nom;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Length(
+        min: 5,
+        max: 255,
+        minMessage: 'La reference doit faire minimum {{ limit }} caractere ',
+        maxMessage: 'La reference doit faire maximum {{ limit }} caractere',
+    )]
+    #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     private $adresse;
 
     #[ORM\Column(type: 'integer')]
+    #[Assert\Length(
+        min: 5,
+        max: 5,
+        minMessage: 'La reference doit faire minimum {{ limit }} caractere ',
+        maxMessage: 'La reference doit faire maximum {{ limit }} caractere',
+    )]
+    #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     private $cp;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Length(
+        min: 5,
+        max: 255,
+        minMessage: 'La reference doit faire minimum {{ limit }} caractere ',
+        maxMessage: 'La reference doit faire maximum {{ limit }} caractere',
+    )]
+    #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     private $ville;
 
     #[ORM\OneToMany(mappedBy: 'fournisseur', targetEntity: Produit::class)]

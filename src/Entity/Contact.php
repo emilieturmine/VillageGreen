@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ContactRepository;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: ContactRepository::class)]
 class Contact
 {
@@ -14,18 +14,57 @@ class Contact
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Length(
+        min: 5,
+        max: 255,
+        minMessage: 'La reference doit faire minimum {{ limit }} caractere ',
+        maxMessage: 'La reference doit faire maximum {{ limit }} caractere',
+    )]
+
+    #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
+  
     private $Nom;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Length(
+        min: 5,
+        max: 255,
+        minMessage: 'La reference doit faire minimum {{ limit }} caractere ',
+        maxMessage: 'La reference doit faire maximum {{ limit }} caractere',
+    )]
+
+    #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
+  
     private $Prenom;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Email(
+        message: 'votre adresse {{ value }} est invalide.',
+    )]
     private $Email;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Length(
+        min: 5,
+        max: 255,
+        minMessage: 'La reference doit faire minimum {{ limit }} caractere ',
+        maxMessage: 'La reference doit faire maximum {{ limit }} caractere',
+    )]
+
+    #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
+  
     private $sujet;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Length(
+        min: 5,
+        max: 255,
+        minMessage: 'La reference doit faire minimum {{ limit }} caractere ',
+        maxMessage: 'La reference doit faire maximum {{ limit }} caractere',
+    )]
+
+    #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
+  
     private $contenu;
 
     public function getId(): ?int

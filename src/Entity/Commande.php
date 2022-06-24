@@ -6,7 +6,7 @@ use App\Repository\CommandeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: CommandeRepository::class)]
 class Commande
 {
@@ -16,18 +16,42 @@ class Commande
     private $id;
 
     #[ORM\Column(type: 'date')]
+    #[Assert\Date]
     private $date;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
+    #[Assert\Positive]
+    
     private $total;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Length(
+        min: 5,
+        max: 255,
+        minMessage: 'La description doit faire minimum {{ limit }} caractere ',
+        maxMessage: 'La description doit faire maximum {{ limit }} caractere',
+    )]
     private $statut;
 
     #[ORM\Column(type: 'integer')]
+    #[Assert\Length(
+        min: 5,
+        max: 5,
+        minMessage: 'La description doit faire minimum {{ limit }} caractere ',
+        maxMessage: 'La description doit faire maximum {{ limit }} caractere',
+    )]
+    #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     private $cpF;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Length(
+        min: 5,
+        max: 255,
+        minMessage: 'La description doit faire minimum {{ limit }} caractere ',
+        maxMessage: 'La description doit faire maximum {{ limit }} caractere',
+    )]
+    #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     private $villeF;
 
 
@@ -42,6 +66,13 @@ class Commande
     private $user;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Length(
+        min: 5,
+        max: 255,
+        minMessage: 'La description doit faire minimum {{ limit }} caractere ',
+        maxMessage: 'La description doit faire maximum {{ limit }} caractere',
+    )]
+    #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     private $adresseF;
 
     public function __construct()

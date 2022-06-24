@@ -48,22 +48,31 @@ class Produit
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
+    #[Assert\Positive]
     private $prixUnitaire;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    // #[Assert\NotBlank(message: 'La valeur ne peut rester null')]#[Assert\Url]
+    #[Assert\Length(
+        min: 5,
+        max: 255,
+        minMessage: 'La description doit faire minimum {{ limit }} caractere ',
+        maxMessage: 'La description doit faire maximum {{ limit }} caractere',
+    )]
     private $photo;
 
     #[ORM\Column(type: 'integer')]
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
+    #[Assert\PositiveOrZero]
     private $stock;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
+    #[Assert\Positive]
     private $tva;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
+    #[Assert\Positive]
     private $prixAchat;
 
     #[ORM\ManyToOne(targetEntity: Fournisseur::class, inversedBy: 'produits')]

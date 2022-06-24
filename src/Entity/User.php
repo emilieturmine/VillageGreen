@@ -21,33 +21,99 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
+    #[Assert\Email(
+        message: 'Votre adresse {{ value }} est invalide.',
+    )]
     private $email;
 
     #[ORM\Column(type: 'json')]
+    #[Assert\Json(
+        message: "Cette donnée n'est pas connue"
+    )]
     private $roles;
 
     #[ORM\Column(type: 'string')]
+    #[SecurityAssert\UserPassword(
+        message: 'Mauvais mot de passe',
+    )]
     private $password;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Assert\Length(
+        min: 5,
+        max: 255,
+        minMessage: 'La reference doit faire minimum {{ limit }} caractere ',
+        maxMessage: 'La reference doit faire maximum {{ limit }} caractere',
+    )]
+
+    #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     private $pseudo;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Length(
+        min: 5,
+        max: 255,
+        minMessage: 'La reference doit faire minimum {{ limit }} caractere ',
+        maxMessage: 'La reference doit faire maximum {{ limit }} caractere',
+    )]
+
+    #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     private $nom;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Length(
+        min: 5,
+        max: 255,
+        minMessage: 'La reference doit faire minimum {{ limit }} caractere ',
+        maxMessage: 'La reference doit faire maximum {{ limit }} caractere',
+    )]
+
+    #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
+    #[Assert\Length(
+        min: 5,
+        max: 255,
+        minMessage: 'La reference doit faire minimum {{ limit }} caractere ',
+        maxMessage: 'La reference doit faire maximum {{ limit }} caractere',
+    )]
+
+    #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     private $prenom;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Length(
+        min: 5,
+        max: 255,
+        minMessage: 'La reference doit faire minimum {{ limit }} caractere ',
+        maxMessage: 'La reference doit faire maximum {{ limit }} caractere',
+    )]
+
+    #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     private $adresse;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Length(
+        min: 5,
+        max: 255,
+        minMessage: 'La reference doit faire minimum {{ limit }} caractere ',
+        maxMessage: 'La reference doit faire maximum {{ limit }} caractere',
+    )]
+
+    #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     private $cp;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Length(
+        min: 5,
+        max: 255,
+        minMessage: 'La reference doit faire minimum {{ limit }} caractere ',
+        maxMessage: 'La reference doit faire maximum {{ limit }} caractere',
+    )]
+
+    #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     private $ville;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Positive]
     private $coefficient;
 
    

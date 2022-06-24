@@ -14,15 +14,43 @@ class Livraison
     private $id;
 
     #[ORM\Column(type: 'date', nullable: true)]
+    #[Assert\Date]
     private $date;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Length(
+        min: 5,
+        max: 255,
+        minMessage: 'La reference doit faire minimum {{ limit }} caractere ',
+        maxMessage: 'La reference doit faire maximum {{ limit }} caractere',
+    )]
+
+    #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
+    
     private $adresseL;
 
     #[ORM\Column(type: 'integer')]
+    #[Assert\Length(
+        min: 5,
+        max: 5,
+        minMessage: 'La reference doit faire minimum {{ limit }} caractere ',
+        maxMessage: 'La reference doit faire maximum {{ limit }} caractere',
+    )]
+
+    #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
+    
     private $cpL;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Length(
+        min: 5,
+        max: 255,
+        minMessage: 'La reference doit faire minimum {{ limit }} caractere ',
+        maxMessage: 'La reference doit faire maximum {{ limit }} caractere',
+    )]
+
+    #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
+    
     private $villeL;
 
     #[ORM\ManyToOne(targetEntity: commande::class, inversedBy: 'livraisons')]
