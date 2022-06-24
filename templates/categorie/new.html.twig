@@ -1,12 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Categorie{% endblock %}
+{% block title %}Creer une categorie{% endblock %}
 
 {% block body %}
-{{include ("./base/navbaradmin.html.twig")}}
-    <h1>Create new Categorie</h1>
+<div class="col-12 text-center text-info">
+    <h1 class="text-center mt-5">Creer une categorie</h1>
 
     {{ include('categorie/_form.html.twig') }}
 
-    <a href="{{ path('app_categorie_index') }}">back to list</a>
+    <a href="{{ path('app_categorie_index') }}" class="btn btn-info mx-3 my-3">Retour à la liste</a>
+</div>
 {% endblock %}
