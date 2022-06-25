@@ -1,0 +1,97 @@
+{# reste a faire : rendre responsive,gerer actus,revoir espacement et police. #}
+
+
+
+{% extends 'base.html.twig' %}
+
+	{% block title %}Accueil{% endblock %}
+
+		{% block body %}
+
+			<div class="col-12">
+				<img src="/imagesVG/Component/b1.png"alt="banniere" class="img-fluid" >
+				<article>
+					<h1 class="text-center mt-4"><strong>Bienvenue!!</strong></h1>
+						<p class="ml-5 text-center mt-3"><strong> Je suis aujourd’hui très fier de diriger cette entreprise familiale indépendante de plus de 1.500 employés et de 15.850.000 clients. 
+							<br>Notre passion commune pour la musique nous unit et façonne notre philosophie.</strong></p>
+						<p class="ml-5 text-center"><strong>Vendre les meilleurs produits au meilleur prix est l’une de nos forces.
+							<br>Le service est tout autant important à nos yeux, nous souhaitons que vous en ayiez pour votre argent avec un crédo : la valeur ajoutée. 
+							<br>Les clients satisfaits nous apportent satisfaction et nous sommes ravis de l’ambiance conviviale qui règne ici.<strong>
+						</p>
+				</article>
+				<article>
+					<h3 class="text-center mt-4"></strong>Notre catalogue :</strong></h3>
+			</div>
+
+				{% for categorie in categories %}
+					<div class=" col-3 justify-content-space-between text-center mt-5">
+						<a   href="{{ path('app_catalogue_categorie', { categorie: categorie.id} ) }}">	
+							<div class="card-body text-dark">
+								<img class="text-dark" src="/imagesVG/CatPho/{{categorie.photo}}"alt="{{categorie.nom}}" class="img.fluid" style="width:250px;height:250px">
+									<h5 class="card-title text-dark mt-3">{{categorie.nom}}</h5>
+							</div>
+						</a>
+					</div>
+				{% endfor %}
+				</article>
+			<div class="col-12 text-center">
+				<article >
+						<h4><q class=" text-info mt-5">La musique donne une âme à nos coeurs, et des ailes à la pensée.</q></h4>
+							<h5><p class=" text-info mt-2"><strong>Platon</strong></p></h5>
+				</article>
+			
+			
+				<article >
+					<h3 class="text-center mt-4 "><strong>Meilleures Ventes:</strong></h3>
+			</div>
+						{% for produit in produits %}
+							<div class="  col-3  justify-content-space-between text-center mt-5">
+								<a href="{{ path('app_catalogue_produit', { produit: produit.id} ) }}">	
+									<div class="card-body text-dark">
+										<img src="imagesVG/propho/{{produit.photo}}"alt="{{produit.libelle}}" class="img-fluid"style="width: 250px;;height: 250px;" >
+											<h5 class="card-title text-dark mt-3">{{produit.libelle}}</h5>
+										<h5 class="card-title text-danger mt-3">{{produit.prixUnitaire}} €</h5>
+										</div>
+								</a>
+							</div>
+						{% endfor %}
+				</article>
+			<div class="col-12 text-center">
+				<article >
+					<h4 class="text-center text-info mt-5"><strong>Parce que nous travaillons en direct avec les plus grandes marques, nous pouvons vous proposer les meilleurs prix du marché.</strong></h4>
+				</article>
+				<article>
+					<h3 class="text-center mt-5"><strong>Marques Vedettes:</strong></h3>
+			</div>	
+						{% for fournisseur in fournisseurs %}
+							<div class="col-3 justify-content-space-between text-center mt-5">
+								<a href="{{ path('app_marques_produit', { fournisseur: fournisseur.id} ) }}">	
+									<div class="card-body text-dark">
+										<img src="imagesVG/foupho/{{fournisseur.photo}}"alt="{{fournisseur.nom}}" class="img-fluid"style="width:250px;height:250px;">
+											
+									</div>
+								</a>
+							</div>
+						{% endfor %}
+				</article>
+			<div class="col-12 text-center">
+				<article >
+					<h4><q class="text-info mt-5">La musique peut rendre les hommes LIBRES.</q></h4>
+					<h5><p class="text-info mt-2"><strong>Bob Marley</strong></p></h5>
+				</article>
+	
+				<article>
+					<h3 class="text-center mt-5"><strong>Actualités:</strong></h3>
+			</div>
+						{% for actu in actus %}
+							<div class="col-3">
+								<div class="card">
+									<img src="imagesVG/actupho/{{actu.photo}}"alt="{{actu.nom}}" class="img-fluid"style="width:300px;height:300px;">
+										<div class="card-body">
+											<h5 class="card-title">{{actu.titre}}</h5>
+										</div>
+								</div>
+							</div>
+						{% endfor %}
+				</article>
+		{% endblock %}

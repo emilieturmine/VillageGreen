@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un Fournisseur{% endblock %}
+
+{% block body %}
+<div class="col-12 text-center text-info">
+
+    <h1 class="text-center mt-5">Ajouter un Fournisseur</h1>
+
+
+    {{ include('fournisseur/_form.html.twig') }}
+
+    <a href="{{ path('app_fournisseur_index') }}" class="btn btn-info">Retour a la liste</a>
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SsCategorie{% endblock %}
+
+{% block body %}
+{{include ("./base/navbaradmin.html.twig")}}
+    <h1>SsCategorie</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ss_categorie.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ ss_categorie.nom }}</td>
+            </tr>
+            <tr>
+                <th>Photo</th>
+                <td>{{ ss_categorie.photo }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_ss_categorie_index') }}">back to list</a>
+
+    <a href="{{ path('app_ss_categorie_edit', {'id': ss_categorie.id}) }}">edit</a>
+
+    {{ include('ss_categorie/_delete_form.html.twig') }}
+{% endblock %}

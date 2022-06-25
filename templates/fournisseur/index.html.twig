@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Liste des fournisseurs{% endblock %}
+
+{% block body %}
+{{include ("./base/navbaradmin.html.twig")}}
+<div class="col-12">
+
+
+    <h1 class="text-info text-center mt-5"> Liste des fournisseurs <a href="{{ path('app_fournisseur_new') }}" class="btn btn-success  ml-5 mr-5 text-center">Ajouter</a> </h1>
+
+<div id="crud" class="col-12 text-center   mt-5">
+    <table class="table">
+        <thead class="table bg-info mt-5 text-white text-center">
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Ville</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody class ="text-center ">
+        {% for fournisseur in fournisseurs %}
+            <tr>
+                <td>{{ fournisseur.id }}</td>
+                <td>{{ fournisseur.nom }}</td>
+                <td>{{ fournisseur.ville }}</td>
+                <td class="text-center">
+                    <a href="{{ path('app_fournisseur_show', {'id': fournisseur.id}) }}" class=" btn btn-info mr-5">Voir</a>
+                    <a href="{{ path('app_fournisseur_edit', {'id': fournisseur.id}) }}"class=" btn btn-warning mr-5">Modifier</a>
+                  
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+    
+{% endblock %}

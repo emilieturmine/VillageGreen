@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+	{% block title %}Catalogue {% endblock %}
+
+		{% block body %}
+		
+					<div class="col-12 text-center">
+						<img src="/imagesVG/Component/b3b.png" alt="banniere" class="img-fluid" style="width:2500px;height:700px">
+				
+						<h1 class="text-center mt-5 "><strong>Fiche Produit:</strong></h1>
+					</div>
+						<h6 class= "col-12 mt-5 ml-5">{{ produit.sscategorie.catParent.nom }} > {{ produit.sscategorie.nom }} > {{ produit.libelle }}</h6>
+					
+						<article class="col-12 text-center mt-5">
+						
+							<h3 class="card-title"><strong>{{produit.libelle}}</strong></h3>
+							<div class="card-body text-dark mt-5">
+								<img src="/imagesVG/propho/{{produit.photo}}"alt="{{produit.libelle}}" style="width: 300px;;height: 300px;" class="text-dark img.fluid mt-5">
+							</div>
+						
+							<img src="/imagesVG/propho/{{produit.photo2}}"alt="{{produit.libelle}}" style="width: 100px;height: 100px;" class="text-dark img.fluid mt-5 ml-5">
+							<img src="/imagesVG/propho/{{produit.photo3}}"alt="{{produit.libelle}}" style="width: 100px;height: 100px;" class="text-dark img.fluid mt-5 mr-5">
+						
+						</article>
+					<div class="col-12 text-center">
+						<article class="row text-center ml-5 mt-5">
+							<div class="col-4">
+								<h4 class="strong text-info text-left ml-5 mt-5">Fiche technique: </h4>	
+									<p class="text-dark text-left ml-5  mt-5"><strong>Reference: </strong>{{produit.reference}}</p>
+									<p class="text-dark text-left ml-5 mt-5"><strong>libelle:</strong>{{produit.libelle}}</p>
+									<p class="text-dark text-left ml-5  mt-5 strong"><strong>Fournisseur:</strong> {{produit.fournisseur}}</p>
+				
+							</div>	
+							<div class="col-4">
+								<h4 class="strong text-info text-center mt-5">Description</h4>
+									<p class="text-dark text-center mt-3str">{{produit.description}}<p/>
+							
+							</div>
+							
+							<div class="col-4 text center ">
+								<h3 class="text-danger text-center mt-5 mb-5"><strong>Prix(HT):</strong>{{produit.prixUnitaire}} €</h3>	
+                					<a href="{{path("panier_add",{id:produit.id})}}" class="btn btn-success  mb-5 mt-5">
+                						<i class="bi bi-cart-plus"></i>Ajouter ce produit à mon panier</a>
+									<a href="{{path("app_catalogue")}}" class="btn btn-warning mb-5 mt-5">
+										<i class="bi bi-cart-plus"></i>Retourner au catalogue</a>
+							</div>
+						</article>
+					</div>
+		{% endblock %}

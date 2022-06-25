@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Marques{% endblock %}
+
+	{% block body %}
+	<div class="col-12 text-center">
+	<img src="/imagesVG/Component/b3b.png" alt="banniere" class="img-fluid" style="width:2500px;height:700px">
+		<article>
+			<h1 class="text-center mt-5"><strong>Nos Produits {{ fournisseur.nom }}:</strong></h1>
+</div>
+
+
+
+		{% for profou in fournisseur.produits %}
+			
+		<div class="col-4  text-center mt-5">
+							
+			<a href="{{ path("app_catalogue_produit", {produit: profou.id}) }}">
+			<div class="card-body text-dark mt-5">
+				
+						<img src="/imagesVG/propho/{{profou.photo}}"alt="{{profou.libelle}}"style="width:200px;height:200px" class="text-dark img.fluid mt-5" >
+					<h4 class="card-title text-dark mt-3">{{profou.libelle}}</h4>
+				<h4 class="card-title text-danger mt-3 "><strong>{{profou.prixUnitaire}} €</strong></h4>
+							
+					</div>
+					</a>
+				</div>
+			
+		{% endfor %}
+		
+	
+</article>
+{% endblock %}
+
+	

@@ -1,0 +1,56 @@
+
+
+
+{% block body %}
+	<header class="row p-3 mb-0 bg-dark text-white ">
+		 	<div class="col-2 text-left ">
+		 		<img src="/imagesVG/Component/logo.png" alt="logo"  style="width:150px;height:150px" class="img.fluid" >
+			</div>
+			<div class="col-8 text-center mt-4 mb-4">
+				<h1  >VILLAGE GREEN</h1>
+			</div>
+		 	<div class="col-2 text-right mt-2 mr-n5">
+				<p>Frais de port offert à partir de 49 euros</p>
+				<p>Garantie 3 ans</p>
+				<p>Devise €</p>
+	 		</div>
+			
+
+			<ul id="navbar-left" class="nav text-white mt-2 ml-0 col-2">
+				<li class="nav-item  text-left ">
+					<a class="nav-link text-white " href="{{path('app_contact_new')}}">Contact</a>
+				 </li>	
+  				<li class="nav-item ml-4">
+    				<a class="nav-link text-white" href="{{path('app_apropos')}}">Presentation</a>
+  				</li>	
+					 		
+  			</ul>
+				  <form id ="navbar-center" class="d-flex justify-content-center col-8 form-inline ">
+				  <input class="form-control me-sm-2" type="text" placeholder="recherche">
+				  <button class="btn btn-secondary my-2 my-sm-0" type="submit">recherche</button>
+				</form>
+				<ul class="nav justify-content-right justify-content-space-between text-white col-2 mt-4">
+					{% if app.user %}
+						
+						<li class="nav-item ml-6">
+							<a class="nav-link ms-auto text-white " href="{{ path('app_user_show', { id: app.user.id} ) }}">Bienvenue {{app.user.pseudo}}!</a>
+						</li> 
+				 		
+						<li class="nav-item  ml-5">
+							<a class="nav-link text-white" href="{{ path('app_logout') }}">Deconnexion</a>
+						</li>
+						
+					{% else %}
+						<li class="nav-item">
+							<a class="nav-link  text-white mr-1" href="{{ path('app_login') }}">Connexion</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link  text-white mr-1" href="{{ path('app_register') }}">Inscription</a>
+						</li>
+			{% endif %}
+			</ul>
+		
+	</header>
+{% endblock %}
+
+

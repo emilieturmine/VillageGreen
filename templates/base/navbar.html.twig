@@ -1,0 +1,49 @@
+</div>
+
+
+	<nav id="navbar-gen" class="navbar navbar-expand-lg navbar-light  col-12">
+		<a class="navbar-brand " href="{{ path('app_home') }}">VillageGreen</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav ">
+					<li class="nav-item active  ">
+						<a class="nav-link" href="{{ path('app_home') }}">Accueil</a>
+					</li>
+					<li class="nav-item active ">
+						<a class="nav-link" href="{{ path('app_catalogue') }}">Catalogue</a>
+
+					</li>
+					<li class="nav-item active ">
+						<a class="nav-link" href="{{ path('mvente') }}">Meilleures Ventes</a>
+					</li>
+					<li class="nav-item  active">
+						<a class="nav-link" href="{{ path('app_marques_index') }}">Marques</a>
+					</li>
+					<li class="nav-item  active">
+						<a class="nav-link" href="{{ path('app_actu_index') }}">Actualités</a>
+					</li>
+						
+				{% if app.user %}
+					<li class="nav-item  active ">
+						<a class="nav-link text-dark" href="{{ path('panier_index') }}">Panier</a>
+					</li>
+				{% if is_granted('ROLE_ADMIN') %}
+					<li class="nav-item  active ">
+						<a class="nav-link text-dark" href="{{ path('app_admin') }}">Admin</a>
+					</li>
+				{% else %}
+					<li>
+					<p>rejoignez notre communautée en vous inscrivant !</p>
+					</li>
+					
+				{% endif %}
+			{% endif %}			
+						
+				</ul>
+			</div>
+		</nav>
+			
+	

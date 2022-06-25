@@ -1,0 +1,45 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Catalogue{% endblock %}
+	{% block body %}
+	
+			<div class="col-12 text-center">
+				<img src="/imagesVG/Component/b2.jpg" alt="banniere" class="img-fluid" style="width:2500px;height:700px">
+				<article>
+					<h1 class="text-center mt-4 "><strong>Notre Catalogue:</strong></h1>
+			</div>
+					{% for categorie in categories %}
+			
+						<div class="col-3 justify-content-space-between text-center mt-5">
+								<a   href="{{ path("app_catalogue_categorie", { categorie: categorie.id} ) }}">	
+							<div class="card-body text-dark">
+								<img src="/imagesVG/CatPho/{{categorie.photo}}"alt="{{categorie.nom}}" class="text-dark img.fluid" style="width:250px;height:250px">
+								<h5 class="card-title text-dark mt-3">{{categorie.nom}}</h5>
+							</div>
+								</a>
+						</div>
+					{% endfor %}
+				</article>
+			<div class="col-12 text-center">
+				<article >
+						<h4><q class=" text-info mt-8">La musique donne une âme à nos coeurs, et des ailes à la pensée.</q></h4>
+							<h5><p class=" text-info mt-2"><strong>Platon</strong></p></h5>
+				</article>
+			
+			
+				<article >
+					<h3 class="text-center mt-4 "><strong>Meilleures Ventes:</strong></h3>
+			</div>
+					{% for produit in produits %}
+						<div class="  col-3  justify-content-space-between text-center mt-5">
+							<a href="{{ path('app_catalogue_produit', { produit: produit.id} ) }}">	
+								<div class="card-body text-dark">
+									<img src="imagesVG/propho/{{produit.photo}}"alt="{{produit.libelle}}" class="img-fluid"style="width: 250px;;height: 250px;" >
+										<h5 class="card-title text-dark mt-3">{{produit.libelle}}</h5>
+									<h5 class="card-title text-danger mt-3">{{produit.prixUnitaire}} €</h5></div>
+							</a>
+						</div>
+					{% endfor %}
+				</article>
+	{% endblock %}
