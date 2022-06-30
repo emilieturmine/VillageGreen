@@ -1,44 +1,47 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Contact index{% endblock %}
+{% block title %}Liste des messages
+{% endblock %}
 
 {% block body %}
-{{include ("./base/navbaradmin.html.twig")}}
-    <h1>Contact index</h1>
+	{{include ("./base/navbaradmin.html.twig")}}
+	<div class="col-12">
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>Email</th>
-                <th>Sujet</th>
-                <th>Contenu</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for contact in contacts %}
-            <tr>
-                <td>{{ contact.id }}</td>
-                <td>{{ contact.Nom }}</td>
-                <td>{{ contact.Prenom }}</td>
-                <td>{{ contact.Email }}</td>
-                <td>{{ contact.sujet }}</td>
-                <td>{{ contact.contenu }}</td>
-                <td>
-                    <a href="{{ path('app_contact_show', {'id': contact.id}) }}">show</a>
-                    <a href="{{ path('app_contact_edit', {'id': contact.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 
-    <a href="{{ path('app_contact_new') }}">Create new</a>
-{% endblock %}
+		<h1 class="text-info text-center mt-5">
+			Liste des messagess
+		</h1>
+		<div id="crud" class="col-12 text-center   mt-5">
+
+			<table class="table">
+				<thead class="table bg-info mt-5 text-white text-center">
+					<tr>
+						<th>Id</th>
+						<th>Nom</th>
+						<th>Email</th>
+						<th>Sujet</th>
+						<th>actions</th>
+					</tr>
+				</thead>
+				<tbody class="text-center ">
+					{% for contact in contacts %}
+						<tr>
+							<td>{{ contact.id }}</td>
+							<td>{{ contact.Nom }}</td>
+							<td>{{ contact.Email }}</td>
+							<td>{{ contact.sujet }}</td>
+							<td class="text-center">
+								<a href="{{ path('app_contact_show', {'id': contact.id}) }}" class=" btn btn-info mr-5">Voir</a>
+
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="7">no records found</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+
+
+		{% endblock %}

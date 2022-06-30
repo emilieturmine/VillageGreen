@@ -1,55 +1,78 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Produit{% endblock %}
+{% block title %}Produit
+{% endblock %}
 
 {% block body %}
-{{include ("./base/navbaradmin.html.twig")}}
-    <h1>Produit</h1>
+	<div class="col-12">
+		<h1 class="text-info text-center mt-5">Produit</h1>
+	</div>
+	<div class="col-4 text-center ">
+		<h3 class="bg-info text-white mt-5 text-center">
+			Identification du produit</h3>
+		<h5 class="mt-5">Numero du produit:
+			<strong class="text-info">
+				{{ produit.id }}</strong>
+		</h5>
+		<h5 class="mt-5">nom du produit :
+			<stong class="text-info">
+				{{ produit.libelle }}
+			</stong>
+		</h5>
+		<h5 class="mt-5">reference du produit :
+			<stong class="text-info">
+				{{ produit.reference }}
+			</stong>
+		</h5>
+		<h5 class="mt-5">Description du produit :
+			<stong class="text-info">
+				{{ produit.description }}
+			</stong>
+		</h5>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ produit.id }}</td>
-            </tr>
-            <tr>
-                <th>Reference</th>
-                <td>{{ produit.reference }}</td>
-            </tr>
-            <tr>
-                <th>Libelle</th>
-                <td>{{ produit.libelle }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ produit.description }}</td>
-            </tr>
-            <tr>
-                <th>PrixUnitaire</th>
-                <td>{{ produit.prixUnitaire }}</td>
-            </tr>
-            <tr>
-                <th>Photo</th>
-                <td>{{ produit.photo }}</td>
-            </tr>
-            <tr>
-                <th>Stock</th>
-                <td>{{ produit.stock }}</td>
-            </tr>
-            <tr>
-                <th>Tva</th>
-                <td>{{ produit.tva }}</td>
-            </tr>
-            <tr>
-                <th>PrixAchat</th>
-                <td>{{ produit.prixAchat }}</td>
-            </tr>
-        </tbody>
-    </table>
+	</div>
+	<div class="col-4 text-center  ">
+		<h3 class="bg-info text-white mt-5 text-center">
+			{{produit.libelle}}
+		</h3>
+		<img src="/imagesVG/propho/{{produit.photo}}" alt="{{produit.libelle}}" class="text-dark img.fluid" style="width:500px;height: 500px;">
+		<img src="/imagesVG/propho/{{produit.photo3}}" alt="{{produit.libelle}}" class="text-dark img.fluid" style="width:500px;height: 500px;">
+		<img src="/imagesVG/propho/{{produit.photo2}}" alt="{{produit.libelle}}" class="text-dark img.fluid" style="width:500px;height: 500px;">
 
-    <a href="{{ path('app_produit_index') }}">retour au catalogue</a>
 
-    <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">Modifier</a>
+	</div>
+	<div class="col-4 text-center ">
+		<h3 class="bg-info text-white mt-5 text-center">
+			Gestion du produit</h3>
 
-    {{ include('produit/_delete_form.html.twig') }}
+		<h5 class="mt-5">Prix d'achat du produit :
+			<stong class="text-info">
+				{{ produit.prixAchat }}€
+			</stong>
+		</h5>
+		<h5 class="mt-5">Prix unitaire du produit :
+			<stong class="text-info">
+				{{ produit.prixUnitaire }}€
+			</stong>
+		</h5>
+		<h5 class="mt-5">Tva du produit :
+			<stong class="text-info">
+				{{ produit.tva }}%
+			</stong>
+		</h5>
+		<h5 class="mt-5">Stock du produit :
+			<stong class="text-info">
+				{{ produit.stock }}
+			</stong>
+		</h5>
+
+	</div>
+	<div class="col-12 text-center">
+		<a href="{{ path('app_produit_index') }}" class="btn btn-info mx-5 my-5">Retour a la liste</a>
+
+		<a href="{{ path('app_produit_edit', {'id': produit.id}) }}" class="mx-5 my-5 btn btn-warning">Modifier</a>
+
+	</div>
+
+
 {% endblock %}

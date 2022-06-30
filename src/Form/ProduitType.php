@@ -1,10 +1,9 @@
 <?php
-
 namespace App\Form;
 
 use App\Entity\Produit;
 use App\Entity\Fournisseur;
-use App\Entity\Categorie;
+use App\Entity\SsCategorie;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,7 +13,6 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\PercentType;
-
 class ProduitType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -22,19 +20,20 @@ class ProduitType extends AbstractType
         $builder
             ->add('reference', TextType::class)
             ->add('libelle', TextType::class)
-            ->add('description',TextareaType::class)
-            ->add('prixUnitaire',MoneyType::class)
-            ->add('photo',TextType::class)
-            ->add('stock',IntegerType::class)
-            ->add('tva',PercentType::class)
-            ->add('prixAchat',MoneyType::class)
-            ->add('fournisseur',EntityType::class, [
-                    'class' => Fournisseur::class,
-                    'choice_label' => 'nom',])
-            ->add('categorie',EntityType::class, [
-                'class' => Categorie::class,
-                'choice_label' => 'nom',])
-        ;
+            ->add('description', TextareaType::class)
+            ->add('prixUnitaire', MoneyType::class)
+            ->add('photo', TextType::class)
+            ->add('stock', IntegerType::class)
+            ->add('tva', PercentType::class)
+            ->add('prixAchat', MoneyType::class)
+            ->add('fournisseur', EntityType::class, [
+                'class' => Fournisseur::class,
+                'choice_label' => 'nom',
+            ])
+            ->add('ssCategorie', EntityType::class, [
+                'class' => SsCategorie::class,
+                'choice_label' => 'nom',
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

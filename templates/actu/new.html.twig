@@ -1,12 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Actu{% endblock %}
+{% block title %}Creer une Actu
+{% endblock %}
 
 {% block body %}
-{{include ("./base/navbaradmin.html.twig")}}
-    <h1>Create new Actu</h1>
+	<div class="col-12 text-center text-info">
+		<h1 class="text-center mt-5">Creer une Actu</h1>
 
-    {{ include('actu/_form.html.twig') }}
+		{{ include('actu/_form.html.twig') }}
 
-    <a href="{{ path('app_actu_index') }}">back to list</a>
-{% endblock %}
+		<a href="{{ path('app_actu_index') }}" class="btn btn-info mx-3 my-3">Retour à la liste</a>
+	{% endblock %}

@@ -5,57 +5,45 @@
 -faire front dessus 
 -Les rendre fonctionnel
 #}
-{% block title %}Liste des utilisateurs{% endblock %}
+{% block title %}Liste des utilisateurs
+{% endblock %}
 
 {% block body %}
-{{include ("./base/navbaradmin.html.twig")}}
-    <h1>Liste des utilisateurs</h1>
+	{{include ("./base/navbaradmin.html.twig")}}
+	<div class="col-12">
+		<h1 class="text-info text-center mt-5">Liste des utilisateurs
+			<a href="{{ path('app_user_new') }}" class="btn btn-success  ml-5 mr-5 text-center">Ajouter</a>
+		</h1>
+		<div id="crud" class="col-12 text-center   mt-5">
+			<table class="table">
+				<thead class="table bg-info mt-5 text-white text-center">>
+					<tr>
+						<th>Id</th>
+						<th>Email</th>
+						<th>Pseudo</th>
+						<th>Ville</th>
+						<th>actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for user in users %}
+						<tr>
+							<td>{{ user.id }}</td>
+							<td>{{ user.email }}</td>
+							<td>{{ user.pseudo }}</td>
+							<td>{{ user.ville }}</td>
+							<td>
+								<a href="{{ path('app_user_show', {'id': user.id}) }}">Voir</a>
+								<a href="{{ path('app_user_edit', {'id': user.id}) }}">Modifier</a>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="13">no records found</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Email</th>
-                <th>Roles</th>
-                <th>Password</th>
-                <th>Pseudo</th>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>Adresse</th>
-                <th>Cp</th>
-                <th>Ville</th>
-                <th>Coefficient</th>
-                <th>IsVerified</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                <td>{{ user.password }}</td>
-                <td>{{ user.pseudo }}</td>
-                <td>{{ user.nom }}</td>
-                <td>{{ user.prenom }}</td>
-                <td>{{ user.adresse }}</td>
-                <td>{{ user.cp }}</td>
-                <td>{{ user.ville }}</td>
-                <td>{{ user.coefficient }}</td>
-                <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
-                <td>
-                    <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="13">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_user_new') }}">Create new</a>
-{% endblock %}
+			<a href="{{ path('app_user_new') }}">Create new</a>
+		{% endblock %}

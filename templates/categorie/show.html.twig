@@ -1,42 +1,54 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Categorie{% endblock %}
+{% block title %}Categorie
+{% endblock %}
 
 {% block body %}
-<div class="col-12">
-    <h1 class="text-info text-center mt-5">Categorie</h1>
-</div>
-<div class="col-4 text-center "> 
-    <h3 class="bg-info text-white mt-5 text-center"> Identification de la categorie<h3>
-    <h5 class="justify-content-inline mt-5">Numero de la categorie: <stong class="text-info"> {{ categorie.id }}</stong></h5>
-    <h5 class="justify-content-inline">nom de la categorie : <stong class="text-info">  {{ categorie.nom }} </stong></h5>
-</div>
-<div class="col-4 text-center  ">
-<h3 class="bg-info text-white mt-5 text-center"> {{categorie.nom}} <h3>
-    <img src="/imagesVG/CatPho/{{categorie.photo}}"alt="{{categorie.nom}}"class="text-dark img.fluid" style="width:500px;height: 500px;"> 
-</div>  
+	<div class="col-12">
+		<h1 class="text-info text-center mt-5">Categorie</h1>
+	</div>
+	<div class="col-4 text-center ">
+		<h3 class="bg-info text-white mt-5 text-center">
+			Identification de la categorie<h3>
+				<h5 class="justify-content-inline mt-5">Numero de la categorie:
+					<stong class="text-info">
+						{{ categorie.id }}</stong>
+				</h5>
+				<h5 class="justify-content-inline">nom de la categorie :
+					<stong class="text-info">
+						{{ categorie.nom }}
+					</stong>
+				</h5>
+			</div>
+			<div class="col-4 text-center  ">
+				<h3 class="bg-info text-white mt-5 text-center">
+					{{categorie.nom}}
+				</h3>
+				<img src="/imagesVG/CatPho/{{categorie.photo}}" alt="{{categorie.nom}}" class="text-dark img.fluid" style="width:500px;height: 500px;">
+			</div>
 
-<div class="text-center col-4"> 
-<h3 class="bg-info text-white mt-5 text-center"> Ses sous-categories</h3>
-        {% for sscat in categorie.ssCategories %}
-			
-      <div class=" justify-content-space-between text-center mt-5">
-            <a href="{{ path('app_catalogue_ssCategorie', {sscategorie: sscat.id}) }}">		
-              
-                <div class="card-body text-dark">
-                    <img class="text-dark img.fluid" src="/imagesVG/ssCatPho/{{sscat.photo}}"alt="{{sscat.nom}}">
-                        <h5 class="card-title text-dark mt-3">{{sscat.nom}}</h5>
-                </div>
-            </a>
-        </div>
-   
-    {% endfor %} 
+			<div class="text-center col-4">
+				<h3 class="bg-info text-white mt-5 text-center">
+					Ses sous-categories</h3>
+				{% for sscat in categorie.ssCategories %}
 
- </div>
-<div class="col-12 text-center">
-<a href="{{ path('app_categorie_index') }}" class="btn btn-info mx-5 my-5">Retour a la liste</a>
+					<div class=" justify-content-space-between text-center mt-5">
+						<a href="{{ path('app_catalogue_ssCategorie', {sscategorie: sscat.id}) }}">
 
-<a href="{{ path('app_categorie_edit', {'id': categorie.id}) }}" class="mx-5 my-5 btn btn-warning">Modifier</a>
+							<div class="card-body text-dark">
+								<img class="text-dark img.fluid" src="/imagesVG/ssCatPho/{{sscat.photo}}" alt="{{sscat.nom}}">
+								<h5 class="card-title text-dark mt-3">{{sscat.nom}}</h5>
+							</div>
+						</a>
+					</div>
 
-</div>
-{% endblock %}
+				{% endfor %}
+
+			</div>
+			<div class="col-12 text-center">
+				<a href="{{ path('app_categorie_index') }}" class="btn btn-info mx-5 my-5">Retour a la liste</a>
+
+				<a href="{{ path('app_categorie_edit', {'id': categorie.id}) }}" class="mx-5 my-5 btn btn-warning">Modifier</a>
+
+			</div>
+		{% endblock %}
