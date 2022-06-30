@@ -1,20 +1,19 @@
-
 <div class="text-left mt-5 mx-5 my-5 h5">
-{{ form_start(form) }}
-{{ form_row(form.nom,{
+	{{ form_start(form) }}
+	{{ form_row(form.nom ,{
     label: 'Nom:', attr: {
-    placeholder:'Le nom de la  sous categorie'}
+    placeholder:'Le nom de la sous categorie'}
 }) }}
-{{ form_row(form.photo,{
+	{{ form_row(form.photo ,{
     label: 'photo:', attr: {
     placeholder:'Le nom du fichier dans le dossier imagesVG/sscatpho'}
 }) }}
-{{ form_row(form.catParent,{
+	{{ form_row(form.catParent ,{
     label: 'categorie parent:', attr: {
     placeholder:'Le nom de la categorie parente'}
 }) }}
 </div>
 <div class="col-12 text-center">
-    <button class="btn btn-success">{{ button_label|default('Enregistrer') }}</button>
-{{ form_end(form) }}
+	<button class="btn btn-success">{{ button_label|default('Enregistrer') }}</button>
+	{{ form_end(form) }}
 </div>

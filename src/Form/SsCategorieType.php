@@ -1,3 +1,4 @@
+
 <?php
 
 namespace App\Form;
@@ -9,17 +10,15 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+
 class SsCategorieType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('Nom',TextType::class)
-            ->add('Photo',TextType::class)
-            ->add('catParent',EntityType::class, [
-                'class' => Categorie::class,
-                'choice_label' => 'Categorie',])
-        ;
+            ->add('Nom', TextType::class)
+            ->add('Photo', TextType::class)
+            ->add('catParent', TextType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

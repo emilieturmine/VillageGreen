@@ -1,38 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}SsCategorie index{% endblock %}
+{% block title %}Liste des Sous Categories
+{% endblock %}
 
 {% block body %}
-{{include ("./base/navbaradmin.html.twig")}}
-    <h1>SsCategorie index</h1>
+	{{include ("./base/navbaradmin.html.twig")}}
+	<div class="col-12">
+		<h1 class="text-info text-center mt-5">
+			Liste des sous categories
+			<a href="{{ path('app_ss_categorie_new') }}" class="btn btn-success  ml-5 mr-5 text-center">Ajouter</a>
+		</h1>
+		<div id="crud" class="col-12 text-center   mt-5">
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Photo</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for ss_categorie in ss_categories %}
-            <tr>
-                <td>{{ ss_categorie.id }}</td>
-                <td>{{ ss_categorie.nom }}</td>
-                <td>{{ ss_categorie.photo }}</td>
-                <td>
-                    <a href="{{ path('app_ss_categorie_show', {'id': ss_categorie.id}) }}">show</a>
-                    <a href="{{ path('app_ss_categorie_edit', {'id': ss_categorie.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+			<table class="table">
+				<thead class="table bg-info mt-5 text-white text-center">
+					<tr>
+						<th>Id</th>
+						<th>Nom</th>
+						<th>Photo</th>
+						<th>actions</th>
+					</tr>
+				</thead>
+				<tbody class="text-center ">
+					{% for ss_categorie in ss_categories %}
+						<tr>
+							<td>{{ ss_categorie.id }}</td>
+							<td>{{ ss_categorie.nom }}</td>
+							<td>{{ ss_categorie.photo }}</td>
+							<td class="text-center">
+								<a href="{{ path('app_ss_categorie_show', {'id': ss_categorie.id}) }}" class=" btn btn-info mr-5">Voir</a>
+								<a href="{{ path('app_ss_categorie_edit', {'id': ss_categorie.id}) }}" class=" btn btn-warning mr-5">Modifier</a>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="4">no records found</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
 
-    <a href="{{ path('app_ss_categorie_new') }}">Create new</a>
-{% endblock %}
+		{% endblock %}

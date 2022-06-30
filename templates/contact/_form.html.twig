@@ -1,4 +1,29 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+<div class="text-left mt-5 mx-5 my-5 h5">
+
+	{{ form_start(form) }}
+	{{ form_row(form.Nom,{
+    label: 'Nom:', attr: {
+    placeholder:'Votre nom'}
+}) }}
+	{{ form_row(form.Prenom,{
+    label: 'Prenom:', attr: {
+    placeholder:'Votre prenom'}
+}) }}
+	{{ form_row(form.Email,{
+    label: 'Email:', attr: {
+    placeholder:'Votre email'}
+}) }}
+	{{ form_row(form.sujet,{
+    label: 'Sujet:', attr: {
+    placeholder:'Le sujet de votre message'}
+}) }}
+	{{ form_row(form.contenu,{
+    label: 'Contenu:', attr: {
+    placeholder:'Le contenu de votre message'}
+	
+}) }}
+</div>
+<div class="col-12 text-center">
+	<button class="btn btn-success">{{ button_label|default('Enregistrer') }}</button>
+	{{ form_end(form) }}
+</div>

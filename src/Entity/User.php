@@ -9,10 +9,11 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
-#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -33,9 +34,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $roles;
 
     #[ORM\Column(type: 'string')]
-    #[SecurityAssert\UserPassword(
-        message: 'Mauvais mot de passe',
-    )]
+
     private $password;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
@@ -61,14 +60,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $nom;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\Length(
-        min: 5,
-        max: 255,
-        minMessage: 'La reference doit faire minimum {{ limit }} caractere ',
-        maxMessage: 'La reference doit faire maximum {{ limit }} caractere',
-    )]
-
-    #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     #[Assert\Length(
         min: 5,
         max: 255,
@@ -116,10 +107,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Positive]
     private $coefficient;
 
-   
+
     private $commercial;
 
-    
+
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Commande::class, orphanRemoval: true)]
     private $commandes;
 
@@ -127,7 +118,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $isVerified = false;
 
     public function __construct()
-    { 
+    {
         $this->commandes = new ArrayCollection();
     }
 
@@ -316,7 +307,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-   
+
     /**
      * @return Collection<int, Commande>
      */

@@ -1,43 +1,71 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Inscription{% endblock %}
+{% block title %}Inscription
+{% endblock %}
 
 {% block body %}
-    {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
-<section class="container">
-<div class ="row">
-<div class="col">
-    <h1 class="center">Inscription</h1>
 
-    {{ form_start(registrationForm) }}
+	{% for flash_error in app.flashes('verify_email_error') %}
+		<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+	{% endfor %}
+	<section class="container">
+		<div class="row">
+			<div class="col-12 text-info">
+				<h1 class="text-center mt-5">Inscription</h1>
+				<div class="text-left mt-5 mx-5 my-5 h5">
+					{{ form_start(registrationForm) }}
 
-    {{ form_errors(registrationForm) }}
-    
-    <fieldset class=" mb-3">
-    <legend>Votre identité: </legend>
+					{{ form_errors(registrationForm) }}
 
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.pseudo) }}
-        {{ form_row(registrationForm.nom) }}
-        {{ form_row(registrationForm.prenom) }}
-        </fieldset>
-        <fieldset class="mb-3">
-        <legend>Vos coordonnées:</legend>
-        {{ form_row(registrationForm.adresse) }}
-        {{ form_row(registrationForm.cp) }}
-         {{ form_row(registrationForm.ville) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Mot de passe'
+					<fieldset class="  mt-5 mb-5">
+						<legend class="mt-5 mb-5">Votre identité:
+						</legend>
+
+						{{ form_row(registrationForm.email,{
+    label: 'Email:', attr: {
+    placeholder:'Votre email'}
+}) }}
+						{{ form_row(registrationForm.pseudo ,{
+    label: 'Pseudo:', attr: {
+    placeholder:'Votre pseudo'}
+}) }}
+						{{ form_row(registrationForm.nom,{
+    label: 'Nom:', attr: {
+    placeholder:'Votre nom'}
+}) }}
+						{{ form_row(registrationForm.prenom ,{
+    label: 'Prenom:', attr: {
+    placeholder:'Votre prenom'}
+}) }}
+					</fieldset>
+					<fieldset class="mt-5 mb-5">
+						<legend class="mt-5 mb-5">Vos coordonnées:</legend>
+						{{ form_row(registrationForm.adresse ,{
+    label: 'Adresse:', attr: {
+    placeholder:'Votre adresse'}
+}) }}
+						{{ form_row(registrationForm.cp ,{
+    label: 'Code postal:', attr: {
+    placeholder:'Votre code postal'}
+}) }}
+						{{ form_row(registrationForm.ville ,{
+    label: 'Ville:', attr: {
+    placeholder:'Votre ville'}
+}) }}
+						{{ form_row(registrationForm.plainPassword, {
+            label: 'Mot de passe', placeholder:"Votre mot de passe"
         }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
-    <a href="{{path('app_login')}}">login</a>
-        {{ form_row(registrationForm._token) }}
-    {{ form_end(registrationForm) }}
-    </div>
-    </div>
-    </section>
-{% endblock %}
+						{{ form_row(registrationForm.agreeTerms ,{
+    label: 'Vous acceptez que vos informations personnelles soit enregistrée'}
+) }}
+						<div class="col-12 text-center mt-5">
+							<button type="submit" class="btn btn-success ">Enregistrer</button>
+							<a href="{{path('app_login')}}" class="btn btn-info">Se connecter</a>
+						</div>
+						{{ form_row(registrationForm._token) }}
+						{{ form_end(registrationForm) }}
+					</div>
+				</div>
+			</section>
+		</div>
+	{% endblock %}

@@ -1,84 +1,57 @@
+<div class="text-left mt-5 mx-5 my-5 h5">
+	{{ form_start(form, {'attr': {'novalidate': 'novalidate'}})  }}
 
-    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}})  }}
-       
-        <div class="col-md-6">
-            {{ form_row(form.reference ,{
+	<div class="col-md-6">
+		{{ form_row(form.reference ,{
                 label: 'Reference:', attr: {
                 placeholder:'La reference du produit'}
-            }) }} </div>
-            <div class="col-md-6"> {{ form_row(form.libelle ,{
+            }) }}
+	</div>
+	<div class="col-md-6">
+		{{ form_row(form.libelle ,{
             label: 'Libelle:', attr: {
             placeholder:'Le libelle du produit'}
             }) }}
-        </div>
-        </div>
-    <div class="col-md-12">  {{ form_row(form.description ,{
+	</div>
+
+	<div class="col-md-12">
+		{{ form_row(form.description ,{
             label: 'Description:', attr: {
             placeholder:'La description du produit '}
-        }) }} </div>
-        <div class="row">
-         <div class="col-md-3">
-    {{ form_row(form.prixUnitaire ,{
+        }) }}</div>
+	<div class="row">
+		<div class="col-md-3">
+			{{ form_row(form.prixUnitaire ,{
             label: 'Prix Unitaire:', attr: {
             placeholder:'Le prix unitaire du produit'}
         }) }}</div>
-     <div class="col-md-3">{{ form_row(form.photo ,{
+		<div class="col-md-3">{{ form_row(form.photo ,{
             label: 'Photo:', attr: {
             placeholder:'La photo du produit'}
         }) }}</div>
-    <div class="col-md-3">{{ form_row(form.stock ,{
+		<div class="col-md-3">{{ form_row(form.stock ,{
             label: 'Stock:', attr: {
             placeholder:'Le stock du produit'}
         }) }}</div>
-     <div class="col-md-3">{{ form_row(form.tva ,{
+		<div class="col-md-3">{{ form_row(form.tva ,{
             label: 'TVA:', attr: {
             placeholder:' Le taux de TVA du produit'}
         }) }}</div>
-    <div class="col-md-4">{{ form_row(form.prixAchat ,{
+		<div class="col-md-4">{{ form_row(form.prixAchat ,{
             label: "Prix d/'achat:", attr: {
             placeholder:"Le prix d/'achat"}
         }) }}</div>
-   <div class="col-md-4"> {{ form_row(form.fournisseur ,{
+		<div class="col-md-4">
+			{{ form_row(form.fournisseur ,{
             label: 'Fournisseur:', attr: {
             placeholder:'Choississez le nom du fournisseur'}
         }) }}</div>
-     <div class="col-md-4">{{ form_row(form.categorie ,{
-            label: 'Categorie:', attr: {
+		<div class="col-md-4">{{ form_row(form.ssCategorie ,{
+            label: 'Sous-categorie:', attr: {
             placeholder:'Choississez la catégorie'}
         }) }}
-    </div></div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <button class="btn">{{ button_label|default('Enregistrer') }}</button>
-{{ form_end(form) }}
+		</div>
+	</div>
 </div>
+<button class="btn btn-success text-center">{{ button_label|default('Enregistrer') }}</button>
+{{ form_end(form) }}

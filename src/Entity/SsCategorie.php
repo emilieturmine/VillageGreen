@@ -6,6 +6,7 @@ use App\Repository\SsCategorieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: SsCategorieRepository::class)]
 class SsCategorie
@@ -24,7 +25,7 @@ class SsCategorie
     )]
 
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
-   
+
     private $nom;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
@@ -35,7 +36,7 @@ class SsCategorie
         maxMessage: 'La reference doit faire maximum {{ limit }} caractere',
     )]
 
-   
+
     private $photo;
 
     #[ORM\ManyToOne(targetEntity: Categorie::class, inversedBy: 'ssCategories')]

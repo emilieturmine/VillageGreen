@@ -1,67 +1,58 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User{% endblock %}
+{% block title %}Utilisateur
+{% endblock %}
 
 {% block body %}
-{{include ("./base/navbaradmin.html.twig")}}
-    <h1>User</h1>
+	<div class="col-12">
+		<h1 class="text-info text-center mt-5">Profil</h1>
+	</div>
+	<div class="col-6 text-center ">
+		<h3 class="bg-info text-white mt-5 text-center">
+			Mes identifiants:</h3>
+		<h5 class="mt-5">Email :
+			<strong class="text-info">
+				{{ user.email }}</strong>
+		</h5>
+		<h5 class="mt-5">Nom :
+			<strong class="text-info">
+				{{ user.nom }}
+			</strong>
+		</h5>
+		<h5 class="mt-5">Prenom :
+			<strong class="text-info">
+				{{ user.prenom }}
+			</strong>
+		</h5>
+		<h5 class="mt-5">Pseudo :
+			<strong class="text-info">
+				{{ user.pseudo }}
+			</strong>
+		</h5>
+	</div>
+	<div class="col-6 text-center ">
+		<h3 class="bg-info text-white mt-5 text-center">
+			Mes coordonnées:</h3>
+		<h5 class="mt-5">Adresse client :
+			<strong class="text-info">
+				{{ user.adresse }}
+			</strong>
+		</h5>
+		<h5 class="mt-5">Code Postal :
+			<strong class="text-info">
+				{{ user.cp }}
+			</strong>
+		</h5>
+		<h5 class="mt-5">Ville :
+			<strong class="text-info">
+				{{ user.ville }}
+			</strong>
+		</h5>
+	</div>
+	<div class="col-12 text-center mx-5 my-5">
+		<a href="{{ path('app_user_edit', {'id': user.id}) }}" class="btn btn-warning mt-5">edit</a>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
-            </tr>
-            <tr>
-                <th>Pseudo</th>
-                <td>{{ user.pseudo }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ user.nom }}</td>
-            </tr>
-            <tr>
-                <th>Prenom</th>
-                <td>{{ user.prenom }}</td>
-            </tr>
-            <tr>
-                <th>Adresse</th>
-                <td>{{ user.adresse }}</td>
-            </tr>
-            <tr>
-                <th>Cp</th>
-                <td>{{ user.cp }}</td>
-            </tr>
-            <tr>
-                <th>Ville</th>
-                <td>{{ user.ville }}</td>
-            </tr>
-            <tr>
-                <th>Coefficient</th>
-                <td>{{ user.coefficient }}</td>
-            </tr>
-            <tr>
-                <th>IsVerified</th>
-                <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
-            </tr>
-        </tbody>
-    </table>
+		{{ include('user/_delete_form.html.twig') }}
 
-    <a href="{{ path('app_user_index') }}">back to list</a>
-
-    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
-
-    {{ include('user/_delete_form.html.twig') }}
+	</div>
 {% endblock %}
