@@ -6,29 +6,31 @@ header{
 #navbar-center
 {
     text-align: center;
-    justify-content: center;
+    /* justify-content: center; */
   
     font-family:Jacques Francois;
 }
 
 #navbar-left{
     text-align: left;
-    justify-content:start;
+    /* justify-content:start; */
     
 }
 #navbar-gen{
 display:flex;
     background-color: #2A9D8F;
-  justify-content: center !important ;}
+  /* justify-content: center !important ; */
+}
 
   #navbar-admin{
     display:flex;
         background-color: #E9C46A ;
-      justify-content: center !important ;}
+      /* justify-content: center !important ; */
+    }
     
 
   #navbarSupportedContent a{
-    padding-left: 200px;
+    /* padding-left: 200px; */
 }
 #footer{
     background-color: #2A9D8F;
@@ -36,6 +38,6 @@ display:flex;
 #crud
 {
     text-align: center;
-    justify-content: center;
+    /* justify-content: center; */
   
 }
