@@ -13,6 +13,14 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 #[Route('/panier', name: 'panier_')]
 class PanierController extends AbstractController
 {
+    
+    #[Route('/livraison', name: 'app_livraison')]
+    public function livraisont(): Response
+    {
+        return $this->render('panier/livraison.html.twig');
+    }
+    
+    
     #[Route('/panier', name: 'index')]
 
     public function index(SessionInterface $session,ProduitRepository $produitRepository)
@@ -90,7 +98,7 @@ class PanierController extends AbstractController
 
     }
 
-
+   
 
 
 

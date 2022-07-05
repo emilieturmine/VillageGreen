@@ -4,6 +4,8 @@
 	<html>
 		<head>
 			<meta charset="UTF-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+
 				<title>
 					{% block title %}Accueil{% endblock %}
 				</title>
@@ -23,6 +25,11 @@
 				
 					{{include ("./base/entete.html.twig")}}
 					{{include ("./base/navbar.html.twig")}}
+					{% if app.user and is_granted('ROLE_ADMIN')%}
+					
+					{{include ("./base/navbaradmin.html.twig")}}
+					
+				{% endif %}			
 					{{include ("./base/alerte.html.twig")}}
 				
 				

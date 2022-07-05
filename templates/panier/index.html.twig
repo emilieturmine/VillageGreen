@@ -3,46 +3,46 @@
 {% block title %}Panier{% endblock %}
 
 {% block body %}
-<div class="col-12">
 
-<h1 class="text-info text-center mt-5">Mon Panier:</h1>
-<p><a class="nav-link text-dark" href="{{ path('app_catalogue') }}">Continuer mes achats</a></p>
+    <div class="col-12">
+
+        <h1 class="text-info text-center mt-5 text-dark">Mon Panier:</h1>
+            <p>
+                <a class="nav-link text-dark" href="{{ path('app_catalogue') }}">Continuer mes achats</a>
+            </p>
+
+         
+            <div class=" text-center  text-dark w-100 mt-5" id="panier">
+                <button type="button" class="btn btn-warning btn-circle btn-xl mt-3 mr-5 ml-5">1 Panier</button>
+                <button type="button" class="btn btn-secondary btn-circle btn-xl mt-3 mr-5 ml-5 text-center">2 Livraison</button>
+                <button type="button" class="btn btn-secondary btn-circle btn-xl mt-3 mr-5 ml-5 text-center">3 paiement</button>
+           
+                {%for element in dataPanier %}
+            
+                    <div class=" card-body text-center bg-white ml-2 mr-2 mt-5">
+                    
+                        <img src="/imagesVG/propho/{{element.produit.photo}}"alt="{{element.produit.libelle}}"style="width:200px;height:200px" class="text-dark img.fluid mt-5" >
+                        <h6 class="card-title text-dark mt-2"> Libelle : {{element.produit.libelle}}</h6>
+                        <h6 class="card-title text-danger mt-2">Prix unitaire: {{element.produit.prixUnitaire}}€</h6>
+                        <h6 class="card-title text-dark mt-2">quantité : {{element.quantite}}</h6>
+                   
+               
+                        <a href="{{path("panier_add",{id:element.produit.id})}}"class="btn btn-success mt-5 mr-5 ml-5">Ajouter</a> 
+                        <a href="{{path("panier_remove",{id:element.produit.id})}}" class="btn btn-warning mt-5 mr-5 ml-5 ">retirer</a>
+                        <a href="{{path("panier_delete",{id:element.produit.id})}}" class="btn btn-danger mt-5 mr-5 ml-5">supprimer</a>
+                        <h6 class="card-title text-danger mt-5">Total de la ligne : {{ element.quantite * element.produit.prixUnitaire }} €</h6>
+                    </div>
+            
+                {%endfor%} 
+                
+                    <div class=" card-body text-center bg-white ml-2 mt-5 mr-2 ">
+        
+                        <h4 class="card-title  text-center text-dark mt-2">Total de la commande :</h4>
+                        <h3 class="text-danger">{{total}}€</h3>
+                    </div>
+                    <a href="{{path("app_home")}}"class="btn btn-success mt-5 mr-5 ml-5 mb-5">Valider mon panier</a> 
+                    <a href="{{path("app_home")}}"class="btn btn-warning mt-5 mr-5 ml-5 mb-5">Continuer mes achats</a> 
+                    <a href="{{path("panier_delete_all")}}"class="btn btn-danger mt-5 mr-5 ml-5 mb-5">Vider mon panier</a> 
+  </div>
 </div>
-<table class="table">
-<thead>
-<tr>
-<th>Produit</th>
-<th>Prix</th>
-<th>quantite</th>
-<th>Total</th>
-<th>Actions</th>
-</tr>
-</thead>
-<tbody>
-{%for element in dataPanier %}
-<tr>
-    <td>{{element.produit.libelle}}</td>
-    <td>{{element.produit.prixUnitaire}}€</td>
-    <td>{{element.quantite}}</td>
-    <td >{{ element.quantite * element.produit.prixUnitaire }} €</td>
-    <td>
-    <a href="{{path("panier_add",{id:element.produit.id})}}"class="btn btn-success">Ajouter</a> 
-    <a href="{{path("panier_remove",{id:element.produit.id})}}" class="btn btn-warning">retirer</a>
-    <a href="{{path("panier_delete",{id:element.produit.id})}}" class="btn btn-danger">supprimer</a>
-    </td>
-</tr>
-{%else%}
-<tr>
-<td colspan="5" class="text-center">Votre panier est vide</td>
-</tr>
-{%endfor%}
-</tbody>
-<tfoot>
-<td colspan="3">Total</td>
-<td class="text-end">{{total}}€</td>
-<td><a href="{{path("app_home")}}"class="btn btn-success">Continuer mes achats</a> <td>
- <td><a href="{{path("panier_delete_all")}}"class="btn btn-danger">Vider mon panier</a> <td> 
-</tfoot>
-</table>
-
 {% endblock %}

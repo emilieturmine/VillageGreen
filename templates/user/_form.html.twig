@@ -1,12 +1,19 @@
-{{ form_start(form) }}
-{{ form_row(form.email ,{
-    label: 'Email:', attr: {
-    placeholder:'Votre email'}
-}) }}
+{{ form_start(form,{'attr': {'novalidate' : 'novalidate'} }) }}
+
+{{  
+    form_row(form.email ,{
+        label: 'Email:', 
+        attr: {
+            placeholder:'Votre email'
+        }
+    }) 
+}}
+
 {{ form_row(form.pseudo ,{
     label: 'Pseudo:', attr: {
     placeholder:'Votre pseudo'}
 }) }}
+
 {{ form_row(form.nom ,{
     label: 'Nom:', attr: {
     placeholder:'Votre nom'}
