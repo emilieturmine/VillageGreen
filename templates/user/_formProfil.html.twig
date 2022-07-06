@@ -3,10 +3,7 @@
 <div class="row">
 
 <div class="col-6">
-{{ form_row(form.pseudo ,{
-    label: 'Pseudo:', attr: {
-    placeholder:'Votre pseudo'}
-}) }}
+
 
 {{ form_row(form.nom ,{
     label: 'Nom:', attr: {
@@ -26,14 +23,18 @@
         }
     }) 
 }}
-{{  
+{{ form_row(form.pseudo ,{
+    label: 'Pseudo:', attr: {
+    placeholder:'Votre pseudo'}
+}) }}
+{# {{  
     form_row(form.password ,{
         label: 'Mot de passe:', 
         attr: {
             placeholder:'Votre Mot de passe'
         }
-    }) 
-}}
+    })  #}
+{# }} #}
 </div>
 </div>
 <div class="col-12">

@@ -25,7 +25,7 @@ class LivraisonController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $livraisonRepository->add($livraison, true);
 
-            return $this->redirectToRoute('app_livraison_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_commande_new', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('livraison/new.html.twig', [

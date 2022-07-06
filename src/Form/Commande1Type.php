@@ -7,18 +7,18 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CommandeType extends AbstractType
+class Commande1Type extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('date')
-            ->add('total')
-            ->add('statut')
+            // ->add('date')
+            // ->add('total')
+            // ->add('statut')
             ->add('cpF')
             ->add('villeF')
             ->add('adresseF')
-            ->add('user')
+            // ->add('user')
         ;
     }
 
