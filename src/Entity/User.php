@@ -37,47 +37,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
        private $password;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    #[Assert\Length(
-        min: 5,
-        max: 255,
-        minMessage: 'La reference doit faire minimum {{ limit }} caractere ',
-        maxMessage: 'La reference doit faire maximum {{ limit }} caractere',
-    )]
-
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     private $pseudo;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\Length(
-        min: 5,
-        max: 255,
-        minMessage: 'La reference doit faire minimum {{ limit }} caractere ',
-        maxMessage: 'La reference doit faire maximum {{ limit }} caractere',
-    )]
-
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     private $nom;
 
     #[ORM\Column(type: 'string', length: 255)]
-   
-    #[Assert\Length(
-        min: 5,
-        max: 255,
-        minMessage: 'La reference doit faire minimum {{ limit }} caractere ',
-        maxMessage: 'La reference doit faire maximum {{ limit }} caractere',
-    )]
-
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     private $prenom;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\Length(
-        min: 5,
-        max: 255,
-        minMessage: 'La reference doit faire minimum {{ limit }} caractere ',
-        maxMessage: 'La reference doit faire maximum {{ limit }} caractere',
-    )]
-
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     private $adresse;
 
@@ -88,18 +59,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         minMessage: 'La reference doit faire minimum {{ limit }} caractere ',
         maxMessage: 'La reference doit faire maximum {{ limit }} caractere',
     )]
-
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     private $cp;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\Length(
-        min: 5,
-        max: 255,
-        minMessage: 'La reference doit faire minimum {{ limit }} caractere ',
-        maxMessage: 'La reference doit faire maximum {{ limit }} caractere',
-    )]
-
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     private $ville;
 

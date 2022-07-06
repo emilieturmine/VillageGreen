@@ -1,6 +1,7 @@
 <div class="text-left mt-5 mx-5 my-5 h5">
 {{ form_start(form) }}
-
+<div class="row">
+<div class="col-6">
     {{ form_row(form.nom,{
         label: 'Nom:', attr: {
         placeholder:'Le nom du fournisseur'}
@@ -11,8 +12,8 @@
         placeholder:'Le nom du fichier dans le dossier imagesVG/foupho'}
     }) }}
 
-
-
+</div>
+<div class="col-6">
     {{ form_row(form.adresse,{
         label: 'Adresse:', attr: {
         placeholder:"Son adresse "}
@@ -27,7 +28,7 @@
         label: 'Ville:', attr: {
         placeholder:'La ville du fournisseur'}
     }) }}
-
+</div></div>
 </div>    
 
     <button class="btn btn-success">{{ button_label|default('Enregistrer') }}</button>

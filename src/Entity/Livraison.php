@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use App\Repository\LivraisonRepository;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: LivraisonRepository::class)]
 class Livraison
 {
@@ -18,15 +18,7 @@ class Livraison
     private $date;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\Length(
-        min: 5,
-        max: 255,
-        minMessage: 'La reference doit faire minimum {{ limit }} caractere ',
-        maxMessage: 'La reference doit faire maximum {{ limit }} caractere',
-    )]
-
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
-    
     private $adresseL;
 
     #[ORM\Column(type: 'integer')]
@@ -36,24 +28,15 @@ class Livraison
         minMessage: 'La reference doit faire minimum {{ limit }} caractere ',
         maxMessage: 'La reference doit faire maximum {{ limit }} caractere',
     )]
-
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
-    
     private $cpL;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\Length(
-        min: 5,
-        max: 255,
-        minMessage: 'La reference doit faire minimum {{ limit }} caractere ',
-        maxMessage: 'La reference doit faire maximum {{ limit }} caractere',
-    )]
-
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     
     private $villeL;
 
-    #[ORM\ManyToOne(targetEntity: commande::class, inversedBy: 'livraisons')]
+    #[ORM\ManyToOne(targetEntity: Commande::class, inversedBy: 'livraisons')]
     private $commande;
 
     public function getId(): ?int

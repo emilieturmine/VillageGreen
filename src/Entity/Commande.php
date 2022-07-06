@@ -45,12 +45,6 @@ class Commande
     private $cpF;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\Length(
-        min: 5,
-        max: 255,
-        minMessage: 'La description doit faire minimum {{ limit }} caractere ',
-        maxMessage: 'La description doit faire maximum {{ limit }} caractere',
-    )]
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     private $villeF;
 
@@ -66,12 +60,6 @@ class Commande
     private $user;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\Length(
-        min: 5,
-        max: 255,
-        minMessage: 'La description doit faire minimum {{ limit }} caractere ',
-        maxMessage: 'La description doit faire maximum {{ limit }} caractere',
-    )]
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     private $adresseF;
 
@@ -220,7 +208,7 @@ class Commande
     }
     public function __toString()
     {
-        return $this->nom;
+        return $this->id;
     }
 
     public function getAdresseF(): ?string

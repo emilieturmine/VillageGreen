@@ -27,12 +27,6 @@ class Produit
     private $reference;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\Length(
-        min: 5,
-        max: 255,
-        minMessage: 'Le libelle doit faire minimum {{ limit }} caractere ',
-        maxMessage: 'Le libelle doit faire maximum {{ limit }} caractere',
-    )]
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     private $libelle;
 
@@ -52,12 +46,6 @@ class Produit
     private $prixUnitaire;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    #[Assert\Length(
-        min: 5,
-        max: 255,
-        minMessage: 'La description doit faire minimum {{ limit }} caractere ',
-        maxMessage: 'La description doit faire maximum {{ limit }} caractere',
-    )]
     private $photo;
 
     #[ORM\Column(type: 'integer')]

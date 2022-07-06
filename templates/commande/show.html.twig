@@ -7,7 +7,7 @@
 <div class="col-12">
     <h1 class="text-info text-center mt-5">Detail de la commande</h1>
 </div>
-<div class="col-4 text-center  ">
+<div class="col-3 text-center  ">
     <h3 class="bg-info text-white mt-5 text-center"> Identification de la commande<h3>
         <h5 class="justify-content-inline mt-5">Numero de commande : <stong class="text-info"> {{ commande.id }}</stong></h5>
         <h5 class="justify-content-inline">Date de la commande : <stong class="text-info">  {{ commande.date ? commande.date|date('d-m-Y') : '' }} </stong></h5>
@@ -20,7 +20,7 @@
         <h5 class="justify-content-inline">Email : <stong class="text-info">  {{ commande.user.email }} </stong></h5>
 
 </div>
-<div class="col-4">
+<div class="col-7">
     <h3 class="bg-info text-white mt-5 text-center"> Ligne de commande </h3>
         <table class="table mt-5">
             <thead class="bg-info text-white text-center">
@@ -57,7 +57,7 @@
 {# Ni la propriété "ligneDeCommande", ni l'une des méthodes "ligneDeCommande()", "getligneDeCommande()"/"isligneDeCommande()"/"hasligneDeCommande()" 
 ou "__call()" n'existent et n'ont un accès public dans la classe "App\ Entité\Commande". #}
 
-<div class="col-4">
+<div class="col-2">
 <h3 class="bg-info text-white mt-5 text-center"> Facturation et Livraison <h3>
 <h5 class="text-center mt-5">Adresse de facturation : <strong class="text-info"> 7 rue Danton 80000 Amiens</strong></h5>
 

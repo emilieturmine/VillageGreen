@@ -14,9 +14,11 @@ class SsCategorieType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('Nom', TextType::class)
-            ->add('Photo', TextType::class)
-            ->add('catParent', TextType::class);
+            ->add('nom', TextType::class)
+            ->add('photo', TextType::class)
+            ->add('catParent', EntityType::class, [
+                "class" => Categorie::class
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

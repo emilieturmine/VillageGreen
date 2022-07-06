@@ -2,12 +2,13 @@
 	{% block title %}Meilleure Ventes{% endblock %}
 
 		{% block body %}
-	
+	<div class="row">
 		<div class="col-12 text-center">
 					<img src="imagesVG/Component/b2.jpg" alt="banniere" class="img-fluid" style="width:2500px;height:700px">
 			<article>
 					<h1 class="text-center mt-4 "><strong>Nos meilleure ventes:</strong></h1>
 		</div>
+	</div>
 		{% for produit in produits %}
 		<div class="  col-3  justify-content-space-between text-center mt-5">
 			<a href="{{ path('app_catalogue_produit', { produit: produit.id} ) }}">	
@@ -19,6 +20,7 @@
 			
 			</a>
 		</div>
+	
 	{% endfor %}
 </article>
 {% endblock %}

@@ -40,7 +40,7 @@
                         <h4 class="card-title  text-center text-dark mt-2">Total de la commande :</h4>
                         <h3 class="text-danger">{{total}}€</h3>
                     </div>
-                    <a href="{{path("app_home")}}"class="btn btn-success mt-5 mr-5 ml-5 mb-5">Valider mon panier</a> 
+                    <a href="{{path("app_livraison_new")}}",compact("dataPanier","total")class="btn btn-success mt-5 mr-5 ml-5 mb-5">Valider mon panier</a> 
                     <a href="{{path("app_home")}}"class="btn btn-warning mt-5 mr-5 ml-5 mb-5">Continuer mes achats</a> 
                     <a href="{{path("panier_delete_all")}}"class="btn btn-danger mt-5 mr-5 ml-5 mb-5">Vider mon panier</a> 
   </div>

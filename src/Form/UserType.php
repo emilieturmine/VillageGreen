@@ -16,16 +16,14 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email', TextType::class)
-            // ->add('roles', TextType::class)
             ->add('password', TextType::class)
             ->add('pseudo', TextType::class)
             ->add('nom', TextType::class)
             ->add('prenom', TextType::class)
             ->add('adresse', TextType::class)
             ->add('cp', TextType::class)
-            ->add('ville', TextType::class)
-            ->add('coefficient', PercentType::class)
-            ->add('isVerified');
+            ->add('ville', TextType::class);
+           
     }
 
     public function configureOptions(OptionsResolver $resolver): void

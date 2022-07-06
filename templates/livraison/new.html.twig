@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Livraison{% endblock %}
+
+{% block body %}
+<div class="col-12">
+
+<h1 class="text-info text-center mt-5 text-dark">Livraison:</h1>
+    <p>
+        <a class="nav-link text-dark" href="{{ path('app_catalogue') }}">Continuer mes achats</a>
+    </p>
+
+ 
+    <div class=" text-center  text-dark w-100 mt-5" id="panier">
+        <button type="button" class="btn btn-secondary  btn-circle btn-xl mt-3 mr-5 ml-5">1 Panier</button>
+        <button type="button" class="btn btn-warning btn-circle btn-xl mt-3 mr-5 ml-5 text-center">2 Livraison</button>
+        <button type="button" class="btn btn-secondary btn-circle btn-xl mt-3 mr-5 ml-5 text-center">3 paiement</button>
+    </div>
+</div>
+
+<div class="col-12 text-center text-info">
+
+
+    {{ include('livraison/_form.html.twig') }}
+
+
+    <a href="{{ path('app_home') }}" class="btn btn-info text-center mx-3 my-3">Retour à la liste</a>
+</div>
+{% endblock %}

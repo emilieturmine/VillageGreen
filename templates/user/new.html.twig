@@ -4,10 +4,11 @@
 {% endblock %}
 
 {% block body %}
-	<div class="col-12 text-center text-info">
+	<div class="col-12  text-info text-center">
 		<h1 class="text-center mt-5">Creer un utilisateur</h1>
 
 		{{ include('user/_form.html.twig') }}
 
-		<a href="{{ path('app_user_index') }}" class="btn btn-info mx-3 my-3">Retour à la liste</a>
+		<a href="{{ path('app_user_index') }}" class="btn btn-info text-center mx-3 my-3">Retour à la liste</a>
+	</div>
 	{% endblock %}

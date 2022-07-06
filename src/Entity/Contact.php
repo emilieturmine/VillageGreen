@@ -14,27 +14,12 @@ class Contact
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\Length(
-        min: 5,
-        max: 255,
-        minMessage: 'La reference doit faire minimum {{ limit }} caractere ',
-        maxMessage: 'La reference doit faire maximum {{ limit }} caractere',
-    )]
-
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
   
     private $Nom;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\Length(
-        min: 5,
-        max: 255,
-        minMessage: 'La reference doit faire minimum {{ limit }} caractere ',
-        maxMessage: 'La reference doit faire maximum {{ limit }} caractere',
-    )]
-
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
-  
     private $Prenom;
 
     #[ORM\Column(type: 'string', length: 255)]
@@ -50,7 +35,6 @@ class Contact
         minMessage: 'La reference doit faire minimum {{ limit }} caractere ',
         maxMessage: 'La reference doit faire maximum {{ limit }} caractere',
     )]
-
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
   
     private $sujet;
@@ -62,9 +46,7 @@ class Contact
         minMessage: 'La reference doit faire minimum {{ limit }} caractere ',
         maxMessage: 'La reference doit faire maximum {{ limit }} caractere',
     )]
-
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
-  
     private $contenu;
 
     public function getId(): ?int

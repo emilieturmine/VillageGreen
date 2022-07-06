@@ -1,0 +1,16 @@
+<div class="text-left mt-5 mx-5 my-5 h5">
+{{ form_start(form) }}
+{{ form_row(form.adresseL,{
+    label: 'Adresse de livraison:', attr: {
+    placeholder:'Votre adresse de livraison '}
+}) }}
+{{ form_row(form.cpL,{
+    label: 'Code Postal:', attr: {
+    placeholder:'Le code postal '}
+}) }}
+{{ form_row(form.villeL,{
+    label: 'Ville:', attr: {
+    placeholder:'La ville '}
+}) }}</div>
+    <button class="btn btn-success text-center">{{ button_label|default('Enregistrer') }}</button>
+{{ form_end(form) }}
