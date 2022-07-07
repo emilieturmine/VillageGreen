@@ -21,7 +21,7 @@
             
                     <div class=" card-body text-center bg-white ml-2 mr-2 mt-5">
                     
-                        <img src="/imagesVG/propho/{{element.produit.photo}}"alt="{{element.produit.libelle}}"style="width:200px;height:200px" class="text-dark img.fluid mt-5" >
+                        <img src="{{ absolute_url ("/imagesVG/propho/{{element.produit.photo}}")}}" alt="{{element.produit.libelle}}"style="width:200px;height:200px" class="text-dark img.fluid mt-5" >
                         <h6 class="card-title text-dark mt-2"> Libelle : {{element.produit.libelle}}</h6>
                         <h6 class="card-title text-danger mt-2">Prix unitaire: {{element.produit.prixUnitaire}}€</h6>
                         <h6 class="card-title text-dark mt-2">quantité : {{element.quantite}}</h6>

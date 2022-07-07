@@ -28,7 +28,7 @@
 						<tr>
 							<td>{{ categorie.id }}</td>
 							<td>{{ categorie.nom }}</td>
-							<td>{{ categorie.photo }}</td>
+							<td>{{ absolute_url ("{{ categorie.photo }}")}}</td>
 							<td class="text-center">
 								<a href="{{ path('app_categorie_show', {'id': categorie.id}) }}" class=" btn btn-info mr-5">Voir</a>
 								<a href="{{ path('app_categorie_edit', {'id': categorie.id}) }}" class=" btn btn-warning mr-5">Modifier</a>

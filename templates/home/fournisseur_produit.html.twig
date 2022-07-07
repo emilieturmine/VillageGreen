@@ -18,7 +18,7 @@
 			<a href="{{ path("app_catalogue_produit", {produit: profou.id}) }}">
 			<div class="card-body text-dark mt-5">
 				
-						<img src="/imagesVG/propho/{{profou.photo}}"alt="{{profou.libelle}}"style="width:200px;height:200px" class="text-dark img.fluid mt-5" >
+						<img src="{{ absolute_url ("/imagesVG/propho/{{profou.photo}}")}}" alt="{{profou.libelle}}"style="width:200px;height:200px" class="text-dark img.fluid mt-5" >
 					<h4 class="card-title text-dark mt-3">{{profou.libelle}}</h4>
 				<h4 class="card-title text-danger mt-3 "><strong>{{profou.prixUnitaire}} €</strong></h4>
 							

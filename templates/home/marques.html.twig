@@ -5,7 +5,7 @@
         {% block body %}
         <div class="row">
             <div class="col-12 text-center">
-                    <img src="imagesVG/Component/b2.jpg" alt="banniere" class="img-fluid" style="width:2500px;height:700px">
+                    <img src="{{ absolute_url ("imagesVG/Component/b2.jpg")}}" alt="banniere" class="img-fluid" style="width:2500px;height:700px">
                 <article>
                     <h1 class="text-center mt-4 "><strong>Nos Marques: </strong></h1>
             </div>
@@ -15,7 +15,7 @@
             <div class="col-3 justify-content-space-between text-center mt-5">
 			            <a href="{{ path("app_marques_produit", {fournisseur: fournisseur.id}) }}">		   
                 <div class="card-body text-dark"> 
-              	        <img src="/imagesVG/foupho/{{fournisseur.photo}}"alt="{{fournisseur.nom}}"class="text-dark img.fluid" style="width:250px;height:250px">
+              	        <img src="{{ absolute_url ("/imagesVG/foupho/{{fournisseur.photo}}")}}" alt="{{fournisseur.nom}}"class="text-dark img.fluid" style="width:250px;height:250px">
                         <h5 class="card-title text-dark mt-3">{{fournisseur.nom}}</h5>
                 </div>
                         </a>

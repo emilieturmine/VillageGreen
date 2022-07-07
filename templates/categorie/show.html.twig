@@ -24,7 +24,7 @@
 				<h3 class="bg-info text-white mt-5 text-center">
 					{{categorie.nom}}
 				</h3>
-				<img src="/imagesVG/CatPho/{{categorie.photo}}" alt="{{categorie.nom}}" class="text-dark img.fluid" style="width:500px;height: 500px;">
+				<img src="{{ absolute_url ("/imagesVG/CatPho/{{categorie.photo}}")}}" alt="{{categorie.nom}}" class="text-dark img.fluid" style="width:500px;height: 500px;">
 			</div>
 
 			<div class="text-center col-4">
@@ -36,7 +36,7 @@
 						<a href="{{ path('app_catalogue_ssCategorie', {sscategorie: sscat.id}) }}">
 
 							<div class="card-body text-dark">
-								<img class="text-dark img.fluid" src="/imagesVG/ssCatPho/{{sscat.photo}}" alt="{{sscat.nom}}">
+								<img class="text-dark img.fluid" src="{{ absolute_url ("/imagesVG/ssCatPho/{{sscat.photo}}")}}" alt="{{sscat.nom}}">
 								<h5 class="card-title text-dark mt-3">{{sscat.nom}}</h5>
 							</div>
 						</a>

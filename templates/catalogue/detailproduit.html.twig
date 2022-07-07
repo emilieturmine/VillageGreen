@@ -15,11 +15,11 @@
 						
 							<h3 class="card-title"><strong>{{produit.libelle}}</strong></h3>
 							<div class="card-body text-dark mt-5">
-								<img src="/imagesVG/propho/{{produit.photo}}"alt="{{produit.libelle}}" style="width: 300px;;height: 300px;" class="text-dark img.fluid mt-5">
+								<img src="{{ absolute_url ("/imagesVG/propho/{{produit.photo}}"alt="{{produit.libelle}}")}}" style="width: 300px;;height: 300px;" class="text-dark img.fluid mt-5">
 							</div>
 						
-							<img src="/imagesVG/propho/{{produit.photo2}}"alt="{{produit.libelle}}" style="width: 100px;height: 100px;" class="text-dark img.fluid mt-5 ml-5">
-							<img src="/imagesVG/propho/{{produit.photo3}}"alt="{{produit.libelle}}" style="width: 100px;height: 100px;" class="text-dark img.fluid mt-5 mr-5">
+							<img src="{{ absolute_url ("/imagesVG/propho/{{produit.photo2}}")}}" alt="{{produit.libelle}}" style="width: 100px;height: 100px;" class="text-dark img.fluid mt-5 ml-5">
+							<img src="{{ absolute_url ("/imagesVG/propho/{{produit.photo3}}")}}"alt="{{produit.libelle}}" style="width: 100px;height: 100px;" class="text-dark img.fluid mt-5 mr-5">
 						
 						</article>
 					<div class="col-12 text-center">

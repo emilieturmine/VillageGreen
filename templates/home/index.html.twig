@@ -27,7 +27,7 @@
 					<div class=" col-3 justify-content-space-between text-center mt-5">
 						<a   href="{{ path('app_catalogue_categorie', { categorie: categorie.id} ) }}">	
 							<div class="card-body text-dark">
-								<img class="text-dark" src="/imagesVG/CatPho/{{categorie.photo}}"alt="{{categorie.nom}}" class="img.fluid" style="width:250px;height:250px">
+								<img class="text-dark" src="{{ absolute_url ("/imagesVG/CatPho/{{categorie.photo}}")}}" alt="{{categorie.nom}}" class="img.fluid" style="width:250px;height:250px">
 									<h5 class="card-title text-dark mt-3">{{categorie.nom}}</h5>
 							</div>
 						</a>
@@ -48,7 +48,7 @@
 							<div class="  col-3  justify-content-space-between text-center mt-5">
 								<a href="{{ path('app_catalogue_produit', { produit: produit.id} ) }}">	
 									<div class="card-body text-dark">
-										<img src="imagesVG/propho/{{produit.photo}}"alt="{{produit.libelle}}" class="img-fluid"style="width: 250px;;height: 250px;" >
+										<img src= "{{ absolute_url ("imagesVG/propho/{{produit.photo}}")}}" alt="{{produit.libelle}}" class="img-fluid"style="width: 250px;;height: 250px;" >
 											<h5 class="card-title text-dark mt-3">{{produit.libelle}}</h5>
 										<h5 class="card-title text-danger mt-3">{{produit.prixUnitaire}} €</h5>
 										</div>
@@ -67,7 +67,7 @@
 							<div class="col-3 justify-content-space-between text-center mt-5">
 								<a href="{{ path('app_marques_produit', { fournisseur: fournisseur.id} ) }}">	
 									<div class="card-body text-dark">
-										<img src="imagesVG/foupho/{{fournisseur.photo}}"alt="{{fournisseur.nom}}" class="img-fluid"style="width:250px;height:250px;">
+										<img src= "{{ absolute_url ("imagesVG/foupho/{{fournisseur.photo}}")}}" alt="{{fournisseur.nom}}" class="img-fluid"style="width:250px;height:250px;">
 											
 									</div>
 								</a>
@@ -86,7 +86,7 @@
 						{% for actu in actus %}
 							<div class="col-3">
 								<div class="card">
-									<img src="imagesVG/actupho/{{actu.photo}}"alt="{{actu.nom}}" class="img-fluid"style="width:300px;height:300px;">
+									<img src="{{ absolute_url ("imagesVG/actupho/{{actu.photo}}")}}" alt="{{actu.nom}}" class="img-fluid"style="width:300px;height:300px;">
 										<div class="card-body">
 											<h5 class="card-title">{{actu.titre}}</h5>
 										</div>
