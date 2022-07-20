@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ProduitRepository::class)]
 class Produit
@@ -12,7 +13,7 @@ class Produit
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-
+    #[Groups(['read:liste'])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
@@ -24,10 +25,12 @@ class Produit
     )]
 
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
+    #[Groups(['read:liste'])]
     private $reference;
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
+    #[Groups(['read:liste'])]
     private $libelle;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
@@ -43,6 +46,7 @@ class Produit
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     #[Assert\Positive]
+    #[Groups(['read:liste'])]
     private $prixUnitaire;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
@@ -51,6 +55,7 @@ class Produit
     #[ORM\Column(type: 'integer')]
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     #[Assert\PositiveOrZero]
+    #[Groups(['read:liste'])]
     private $stock;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
@@ -64,6 +69,7 @@ class Produit
     private $prixAchat;
 
     #[ORM\ManyToOne(targetEntity: Fournisseur::class, inversedBy: 'produits')]
+    #[Groups(['read:liste'])]
     private $fournisseur;
 
 
@@ -74,6 +80,7 @@ class Produit
     private $photo3;
 
     #[ORM\ManyToOne(targetEntity: SsCategorie::class, inversedBy: 'produits')]
+    #[Groups(['read:liste'])]
     private $ssCategorie;
 
     public function getId(): ?int

@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: SsCategorieRepository::class)]
 class SsCategorie
 {
@@ -18,6 +18,7 @@ class SsCategorie
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
+    #[Groups(['read:liste'])]
     private $nom;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
