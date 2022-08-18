@@ -17,14 +17,16 @@ class SsCategorie
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups(["read:categorie"])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
-    #[Groups(['read:liste'])]
+    #[Groups(['read:liste', "read:categorie"])]
     private $nom;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(["read:categorie"])]
     private $photo;
 
     #[ORM\ManyToOne(targetEntity: Categorie::class, inversedBy: 'ssCategories')]

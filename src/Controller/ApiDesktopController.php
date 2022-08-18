@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Categorie;
 use App\Entity\Fournisseur;
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,6 +19,13 @@ class ApiDesktopController extends AbstractController
     public function Liste(ProduitRepository $repo): Response
     {
         $liste=$repo->findAll();
+        return $this->json($liste,200,["Content-type"=>"application/json"],["groups"=>"read:liste"]);
+    }
+
+    #[Route('/api/liste2/{cat}', name: 'app_desktop_liste2',methods:['get'])]
+    public function Liste2(Categorie $cat): Response
+    {
+        $liste=$cat->getSsCategories();
         return $this->json($liste,200,["Content-type"=>"application/json"],["groups"=>"read:liste"]);
     }
 
