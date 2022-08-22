@@ -34,6 +34,7 @@ class SsCategorie
     private $catParent;
 
     #[ORM\OneToMany(mappedBy: 'ssCategorie', targetEntity: Produit::class)]
+    #[Groups(["read:categorie"])]
     private $produits;
 
     public function __construct()

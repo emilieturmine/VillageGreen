@@ -16,7 +16,7 @@ class Produit
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    #[Groups(['read:liste'])]
+    #[Groups(['read:liste', "read:categorie"])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
@@ -28,12 +28,12 @@ class Produit
     )]
 
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
-    #[Groups(['read:liste'])]
+    #[Groups(['read:liste', "read:categorie"])]
     private $reference;
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
-    #[Groups(['read:liste'])]
+    #[Groups(['read:liste', 'read:categorie'])]
     private $libelle;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
@@ -43,47 +43,53 @@ class Produit
         minMessage: 'La description doit faire minimum {{ limit }} caractere ',
         maxMessage: 'La description doit faire maximum {{ limit }} caractere',
     )]
-    #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
+    #[Assert\NotBlank(message: 'La valeur ne peut rester null')] 
+    #[Groups(["read:categorie"])]    
     private $description;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     #[Assert\Positive]
-    #[Groups(['read:liste'])]
+    #[Groups(['read:liste', 'read:categorie'])]
     private $prixUnitaire;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(["read:categorie"])]
     private $photo;
 
     #[ORM\Column(type: 'integer')]
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     #[Assert\PositiveOrZero]
-    #[Groups(['read:liste'])]
+    #[Groups(['read:liste', "read:categorie"])]
     private $stock;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     #[Assert\Positive]
+    #[Groups(["read:categorie"])]
     private $tva;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     #[Assert\Positive]
+    #[Groups(["read:categorie"])]
     private $prixAchat;
 
     #[ORM\ManyToOne(targetEntity: Fournisseur::class, inversedBy: 'produits')]
-    #[Groups(['read:liste'])]
+    #[Groups(['read:liste', "read:categorie"])]
     private $fournisseur;
 
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(["read:categorie"])]
     private $photo2;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(["read:categorie"])]
     private $photo3;
 
     #[ORM\ManyToOne(targetEntity: SsCategorie::class, inversedBy: 'produits')]
-    #[Groups(['read:liste'])]
+    
     private $ssCategorie;
 
     public function getId(): ?int

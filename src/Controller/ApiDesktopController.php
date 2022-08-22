@@ -73,9 +73,9 @@ class ApiDesktopController extends AbstractController
     
     
     }
-    // #[Route('/desktop/liste/{id}', name: 'app_desktop_details', methods: ['GET'])]
-    // public function details(Produit $produit): Response
-    // {$produit->findAll();
-    //     return $this->json($produit,200,["Content-type"=>"application/json"],["groups"=>"read:liste"]);
-    // }
-}
+//     #[Route('/desktop/liste/{id}', name: 'app_desktop_details', methods: ['GET'])]
+//     public function details(Produit $produit): Response
+//     {$produit->findByID();
+//         return $this->json($produit,200,["Content-type"=>"application/json"],["groups"=>"read:liste"]);
+//     }
+ }
