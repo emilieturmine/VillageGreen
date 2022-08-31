@@ -25,7 +25,10 @@
 						<tr>
 							<td>{{ ss_categorie.id }}</td>
 							<td>{{ ss_categorie.nom }}</td>
-							<td>{{ ss_categorie.photo }}</td>
+							<td><img src="{{ '/imagesVG/ssCatPho/' ~ sscat.photo }}"
+								alt="{{sscat.nom}}"
+								class="text-dark img.fluid"
+								 /></td>
 							<td class="text-center">
 								<a href="{{ path('app_ss_categorie_show', {'id': ss_categorie.id}) }}" class=" btn btn-info mr-5">Voir</a>
 								<a href="{{ path('app_ss_categorie_edit', {'id': ss_categorie.id}) }}" class=" btn btn-warning mr-5">Modifier</a>

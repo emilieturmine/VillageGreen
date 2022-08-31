@@ -15,7 +15,8 @@
 					<div class="col-4  text-center mt-5">
 						<a href="{{ path("app_catalogue_produit", {produit: prosscat.id}) }}">
 							<div class="card-body text-dark mt-5">
-								<img src="{{ absolute_url ("/imagesVG/propho/{{prosscat.photo}}")}}" alt="{{prosscat.libelle}}"style="width:200px;height:200px" class="text-dark img.fluid mt-5" >
+							<img src="{{ '/imagesVG/ssCatPho/' ~ prosscat.photo }}"
+							alt="{{prosscat.nom}}" style="width:200px;height:200px" class="text-dark img.fluid mt-5" >
 								<h4 class="card-title text-dark mt-3">{{prosscat.libelle}}</h4>
 								<h4 class="card-title text-danger mt-3 "><strong>{{prosscat.prixUnitaire}} € </strong></h4>
 							</div>

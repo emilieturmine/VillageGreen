@@ -9,7 +9,8 @@
 		{% block body %}
 <div class="row">
 			<div class="col-12">
-				<img src="{{ absolute_url ("imagesVG/Component/b1.png") }}" alt="banniere" class="img-fluid" >
+			
+			<img src="{{ '/imagesVG/Component/b1.png'}}" alt="banniere" class="img-fluid" >
 				<article>
 					<h1 class="text-center mt-4"><strong>Bienvenue!!</strong></h1>
 						<p class="ml-5 text-center mt-3"><strong> Je suis aujourd’hui très fier de diriger cette entreprise familiale indépendante de plus de 1.500 employés et de 15.850.000 clients. 
@@ -27,7 +28,8 @@
 					<div class=" col-3 justify-content-space-between text-center mt-5">
 						<a   href="{{ path('app_catalogue_categorie', { categorie: categorie.id} ) }}">	
 							<div class="card-body text-dark">
-								<img class="text-dark" src="{{ absolute_url ("/imagesVG/CatPho/{{categorie.photo}}")}}" alt="{{categorie.nom}}" class="img.fluid" style="width:250px;height:250px">
+							<img src= "{{ "/imagesVG/CatPho/" ~ categorie.photo }}" alt="{{categorie.nom}}" class="text-dark img-fluid"style="width: 250px;;height: 250px;" >
+
 									<h5 class="card-title text-dark mt-3">{{categorie.nom}}</h5>
 							</div>
 						</a>
@@ -67,8 +69,9 @@
 							<div class="col-3 justify-content-space-between text-center mt-5">
 								<a href="{{ path('app_marques_produit', { fournisseur: fournisseur.id} ) }}">	
 									<div class="card-body text-dark">
-										<img src= "{{ absolute_url ("imagesVG/foupho/{{fournisseur.photo}}")}}" alt="{{fournisseur.nom}}" class="img-fluid"style="width:250px;height:250px;">
-											
+
+									<img src= "{{ "/imagesVG/foupho/" ~ fournisseur.photo }}" alt="{{fournisseur.nom}}" class="img-fluid"style="width: 250px;;height: 250px;" >
+		
 									</div>
 								</a>
 							</div>
@@ -86,7 +89,8 @@
 						{% for actu in actus %}
 							<div class="col-3">
 								<div class="card">
-									<img src="{{ absolute_url ("imagesVG/actupho/{{actu.photo}}")}}" alt="{{actu.nom}}" class="img-fluid"style="width:300px;height:300px;">
+								<img src= "{{ "/imagesVG/actupho/" ~ actu.photo }}" alt="{{actu.nom}}" class="img-fluid"style="width:300px;height:300px;">
+
 										<div class="card-body">
 											<h5 class="card-title">{{actu.titre}}</h5>
 										</div>

@@ -31,7 +31,8 @@
 							<td>{{ produit.id }}</td>
 							<td>{{ produit.libelle }}</td>
 							<td>{{ produit.prixUnitaire }}</td>
-							<td>{{ produit.photo }}</td>
+							<td><img src="{{ '/imagesVG/propho/' ~ produit.photo }}"
+							alt="{{produit.libelle}}" class="img-fluid" style="width:250px;height:250px"></td>
 
 							<td class="text-center">
 								<a href="{{ path('app_produit_show', {'id': produit.id}) }}" class=" btn btn-info mr-5">Details</a>

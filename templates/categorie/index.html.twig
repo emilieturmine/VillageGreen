@@ -28,7 +28,8 @@
 						<tr>
 							<td>{{ categorie.id }}</td>
 							<td>{{ categorie.nom }}</td>
-							<td>{{ categorie.photo }}</td>
+							<td><img src="{{ '/imagesVG/CatPho/' ~ categorie.photo }}"
+							alt="{{categorie.nom}}" class="text-dark img.fluid" style="width:250px;height:250px"></td>
 							<td class="text-center">
 								<a href="{{ path('app_categorie_show', {'id': categorie.id}) }}" class=" btn btn-info mr-5">Voir</a>
 								<a href="{{ path('app_categorie_edit', {'id': categorie.id}) }}" class=" btn btn-warning mr-5">Modifier</a>

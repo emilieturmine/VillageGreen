@@ -1,49 +1,92 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Actu
+{% block title %}
+  Actu
 {% endblock %}
 
 {% block body %}
-	
-	<div class="col-12">
-		<h1 class="text-info text-center mt-5">Actualités</h1>
-	</div>
-	<table class="table">
-		<tbody>
-			<tr>
-				<th>Id</th>
-				<td>{{ actu.id }}</td>
-			</tr>
-			<tr>
-				<th>Nom</th>
-				<td>{{ actu.nom }}</td>
-			</tr>
-			<tr>
-				<th>Type</th>
-				<td>{{ actu.type }}</td>
-			</tr>
-			<tr>
-				<th>Date</th>
-				<td>{{ actu.date ? actu.date|date('Y-m-d H:i:s') : '' }}</td>
-			</tr>
-			<tr>
-				<th>Lieu</th>
-				<td>{{ actu.lieu }}</td>
-			</tr>
-			<tr>
-				<th>Photo1</th>
-				<td>{{ actu.photo1 }}</td>
-			</tr>
-			<tr>
-				<th>Photo2</th>
-				<td>s{{ actu.photo2 }}</td>
-			</tr>
-		</tbody>
-	</table>
+  <div class="col-12">
+    <h1 class="text-info text-center mt-5">
+      Actualités
+    </h1>
+  </div>
+  <table class="table">
+    <tbody>
+      <tr>
+        <th>
+          Id
+        </th>
+        <td>
+          {{ actu.id }}
+        </td>
+      </tr>
+      <tr>
+        <th>
+          Nom
+        </th>
+        <td>
+          {{ actu.nom }}
+        </td>
+      </tr>
+      <tr>
+        <th>
+          Type
+        </th>
+        <td>
+          {{ actu.type }}
+        </td>
+      </tr>
+      <tr>
+        <th>
+          Date
+        </th>
+        <td>
+          {{ actu.date ? actu.date|date('Y-m-d H:i:s') : '' }}
+        </td>
+      </tr>
+      <tr>
+        <th>
+          Lieu
+        </th>
+        <td>
+          {{ actu.lieu }}
+        </td>
+      </tr>
+      <tr>
+        <th>
+          Photo1
+        </th>
 
-	<a href="{{ path('app_actu_index') }}">back to list</a>
+        <td>
+          <img src="{{ '/imagesVG/Actupho/' ~ actu.photo1 }}"
+            alt="{{ actu.photo1 }}"
+            class="img-fluid"
+            style="width: 250px;;height: 250px;" />
+        </td>
+      </tr>
+      <tr>
+        <th>
+          Photo2
+        </th>
+        <td>
+          s{{ actu.photo2 }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
-	<a href="{{ path('app_actu_edit', {'id': actu.id}) }}">edit</a>
+  <a href="{{ path('app_actu_index') }}">back to list</a>
 
-	{{ include('actu/_delete_form.html.twig') }}
+  <a href="{{
+    path(
+      'app_actu_edit',
+      {
+        id: actu.id
+      }
+    )
+    }}">
+    edit
+  </a>
+
+  {{ include('actu/_delete_form.html.twig') }}
 {% endblock %}
