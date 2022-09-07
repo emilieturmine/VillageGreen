@@ -94,8 +94,8 @@ class Produit
     
     private $ssCategorie;
 
-    #[ORM\OneToMany(mappedBy: 'produit', targetEntity: Commentaires::class)]
-    private $commentaires;
+    // #[ORM\OneToMany(mappedBy: 'produit', targetEntity: Commentaires::class)]
+    // private $commentaires;
 
     public function __construct()
     {
@@ -253,33 +253,33 @@ class Produit
         return $this;
     }
 
-    /**
-     * @return Collection<int, Commentaires>
-     */
-    public function getCommentaires(): Collection
-    {
-        return $this->commentaires;
-    }
+    // /**
+    //  * @return Collection<int, Commentaires>
+    //  */
+    // public function getCommentaires(): Collection
+    // {
+    //     return $this->commentaires;
+    // }
 
-    public function addCommentaire(Commentaires $commentaire): self
-    {
-        if (!$this->commentaires->contains($commentaire)) {
-            $this->commentaires[] = $commentaire;
-            $commentaire->setProduit($this);
-        }
+    // public function addCommentaire(Commentaires $commentaire): self
+    // {
+    //     if (!$this->commentaires->contains($commentaire)) {
+    //         $this->commentaires[] = $commentaire;
+    //         $commentaire->setProduit($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeCommentaire(Commentaires $commentaire): self
-    {
-        if ($this->commentaires->removeElement($commentaire)) {
-            // set the owning side to null (unless already changed)
-            if ($commentaire->getProduit() === $this) {
-                $commentaire->setProduit(null);
-            }
-        }
+    // public function removeCommentaire(Commentaires $commentaire): self
+    // {
+    //     if ($this->commentaires->removeElement($commentaire)) {
+    //         // set the owning side to null (unless already changed)
+    //         if ($commentaire->getProduit() === $this) {
+    //             $commentaire->setProduit(null);
+    //         }
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 }
