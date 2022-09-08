@@ -11,14 +11,16 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Core\Annotation\ApiResource;
 
 #[ORM\Entity(repositoryClass: ProduitRepository::class)]
-#[ApiResource()]
 
+#[ApiResource(
+    normalizationContext: [ "groups" => ["read:commande","read:categorie"]]
+)]
 class Produit
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    #[Groups(['read:liste', "read:categorie"])]
+    #[Groups(['read:liste', "read:categorie","read:commande"])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
@@ -30,13 +32,12 @@ class Produit
     )]
 
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
-    #[Groups(['read:liste', "read:categorie"])]
+    #[Groups(['read:liste', "read:categorie", "read:commande"])]
     private $reference;
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
-    #[Groups(['read:liste', 'read:categorie'])]
-    private $libelle;
+    #[Groups(['read:liste', "read:categorie", "read:commande"])]    private $libelle;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     #[Assert\Length(
@@ -46,52 +47,52 @@ class Produit
         maxMessage: 'La description doit faire maximum {{ limit }} caractere',
     )]
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')] 
-    #[Groups(["read:categorie"])]    
-    private $description;
+    #[Groups(['read:liste', "read:categorie", "read:commande"])]
+        private $description;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     #[Assert\Positive]
-    #[Groups(['read:liste', 'read:categorie'])]
+    #[Groups(['read:liste', "read:categorie", "read:commande"])]
     private $prixUnitaire;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    #[Groups(["read:categorie"])]
+    #[Groups(['read:liste', "read:categorie", "read:commande"])]
     private $photo;
 
     #[ORM\Column(type: 'integer')]
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     #[Assert\PositiveOrZero]
-    #[Groups(['read:liste', "read:categorie"])]
+    #[Groups(['read:liste', "read:categorie", "read:commande"])]
     private $stock;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     #[Assert\Positive]
-    #[Groups(["read:categorie"])]
+    #[Groups(['read:liste', "read:categorie", "read:commande"])]
     private $tva;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     #[Assert\Positive]
-    #[Groups(["read:categorie"])]
+    #[Groups(['read:liste', "read:categorie", "read:commande"])]
     private $prixAchat;
 
     #[ORM\ManyToOne(targetEntity: Fournisseur::class, inversedBy: 'produits')]
-    #[Groups(['read:liste', "read:categorie"])]
+    #[Groups(['read:liste', "read:categorie", "read:commande"])]
     private $fournisseur;
 
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    #[Groups(["read:categorie"])]
+    #[Groups(['read:liste', "read:categorie", "read:commande"])]
     private $photo2;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    #[Groups(["read:categorie"])]
+    #[Groups(['read:liste', "read:categorie", "read:commande"])]
     private $photo3;
 
     #[ORM\ManyToOne(targetEntity: SsCategorie::class, inversedBy: 'produits')]
-    
+    #[Groups(['read:liste', "read:categorie", "read:commande"])]
     private $ssCategorie;
 
     // #[ORM\OneToMany(mappedBy: 'produit', targetEntity: Commentaires::class)]

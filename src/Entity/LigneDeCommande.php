@@ -5,32 +5,43 @@ namespace App\Entity;
 use App\Repository\LigneDeCommandeRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: LigneDeCommandeRepository::class)]
+#[ApiResource(
+    normalizationContext: [ "groups" => ["read:commande"]]
+)]
 class LigneDeCommande
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups(["read:commande"])]
     private $id;
 
     #[ORM\Column(type: 'integer')]
     #[Assert\Positive]
+    #[Groups(["read:commande"])]
     private $quantite;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
     #[Assert\Positive]
+    #[Groups(["read:commande"])]
     private $prixVente;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
     #[Assert\Positive]
+    #[Groups(["read:commande"])]
     private $totalLigne;
 
     #[ORM\OneToOne(targetEntity: Produit::class, cascade: ['persist', 'remove'])]
+    #[Groups(["read:commande"])]
     private $produit;
 
     #[ORM\ManyToOne(targetEntity: Commande::class, inversedBy: 'ligneDeCommandes')]
-    private $commande;
+   
+    #[Groups(["read:commande"])]
+     private $commande;
 
     public function getId(): ?int
     {

@@ -7,22 +7,29 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: CommandeRepository::class)]
+#[ApiResource(
+    normalizationContext: [ "groups" => ["read:commande"]]
+)]
 class Commande
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups(["read:commande"])]
     private $id;
 
     #[ORM\Column(type: 'date')]
     #[Assert\Date]
+    #[Groups(["read:commande"])]
     private $date;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
     #[Assert\Positive]
-    
+    #[Groups(["read:commande"])]
     private $total;
 
     #[ORM\Column(type: 'string', length: 255)]
@@ -32,6 +39,7 @@ class Commande
         minMessage: 'La description doit faire minimum {{ limit }} caractere ',
         maxMessage: 'La description doit faire maximum {{ limit }} caractere',
     )]
+    #[Groups(["read:commande"])]
     private $statut;
 
     #[ORM\Column(type: 'integer')]
@@ -42,25 +50,31 @@ class Commande
         maxMessage: 'La description doit faire maximum {{ limit }} caractere',
     )]
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
+    #[Groups(["read:commande"])]
     private $cpF;
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
+    #[Groups(["read:commande"])]
     private $villeF;
 
 
     #[ORM\OneToMany(mappedBy: 'commande', targetEntity: Livraison::class)]
+    #[Groups(["read:commande"])]
     private $livraisons;
 
     #[ORM\OneToMany(mappedBy: 'commande', targetEntity: LigneDeCommande::class)]
+    #[Groups(["read:commande"])]
     private $ligneDeCommandes;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'commandes')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(["read:commande"])]
     private $user;
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
+    #[Groups(["read:commande"])]
     private $adresseF;
 
     public function __construct()
