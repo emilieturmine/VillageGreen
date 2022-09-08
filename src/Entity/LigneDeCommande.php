@@ -39,9 +39,7 @@ class LigneDeCommande
     private $produit;
 
     #[ORM\ManyToOne(targetEntity: Commande::class, inversedBy: 'ligneDeCommandes')]
-   
-    #[Groups(["read:commande"])]
-     private $commande;
+    private $commande;
 
     public function getId(): ?int
     {

@@ -37,7 +37,8 @@ class Produit
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
-    #[Groups(['read:liste', "read:categorie", "read:commande"])]    private $libelle;
+    #[Groups(['read:liste', "read:categorie", "read:commande"])] 
+       private $libelle;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     #[Assert\Length(
@@ -79,7 +80,7 @@ class Produit
     private $prixAchat;
 
     #[ORM\ManyToOne(targetEntity: Fournisseur::class, inversedBy: 'produits')]
-    #[Groups(['read:liste', "read:categorie", "read:commande"])]
+    
     private $fournisseur;
 
 
@@ -92,7 +93,7 @@ class Produit
     private $photo3;
 
     #[ORM\ManyToOne(targetEntity: SsCategorie::class, inversedBy: 'produits')]
-    #[Groups(['read:liste', "read:categorie", "read:commande"])]
+   
     private $ssCategorie;
 
     // #[ORM\OneToMany(mappedBy: 'produit', targetEntity: Commentaires::class)]

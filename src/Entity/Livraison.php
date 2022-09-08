@@ -5,20 +5,28 @@ namespace App\Entity;
 use App\Repository\LivraisonRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: LivraisonRepository::class)]
+#[ApiResource(
+    normalizationContext: [ "groups" => ["read:commande"]]
+)]
 class Livraison
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups(["read:commande"])]
     private $id;
 
     #[ORM\Column(type: 'date', nullable: true)]
     #[Assert\Date]
+    #[Groups(["read:commande"])]
     private $date;
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
+    #[Groups(["read:commande"])]
     private $adresseL;
 
     #[ORM\Column(type: 'integer')]
@@ -29,11 +37,12 @@ class Livraison
         maxMessage: 'La reference doit faire maximum {{ limit }} caractere',
     )]
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
+    #[Groups(["read:commande"])]
     private $cpL;
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
-    
+    #[Groups(["read:commande"])]
     private $villeL;
 
     #[ORM\ManyToOne(targetEntity: Commande::class, inversedBy: 'livraisons')]

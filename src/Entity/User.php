@@ -15,52 +15,52 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 #[ApiResource(
-    normalizationContext: [ "groups" => ["read:commande"]]
+    normalizationContext: [ "groups" => ["read:commande","read:client"]]
 )]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    #[Groups(["read:commande"])]
+    #[Groups(["read:commande","read:client"])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
     #[Assert\Email(
         message: 'Votre adresse {{ value }} est invalide.',
     )]
-    #[Groups(["read:commande"])]
+    #[Groups(["read:commande","read:client"])]
     private $email;
 
     #[ORM\Column(type: 'json')]
     #[Assert\Json(
         message: "Cette donnée n'est pas connue"
     )]
-    #[Groups(["read:commande"])]
+    #[Groups(["read:commande","read:client"])]
     private $roles;
 
     #[ORM\Column(type: 'string')]
-    #[Groups(["read:commande"])]
+    #[Groups(["read:commande","read:client"])]
        private $password;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
-    #[Groups(["read:commande"])]
+    #[Groups(["read:commande","read:client"])]
     private $pseudo;
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
-    #[Groups(["read:commande"])]
+    #[Groups(["read:commande","read:client"])]
     private $nom;
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
-    #[Groups(["read:commande"])]
+    #[Groups(["read:commande","read:client"])]
     private $prenom;
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
-    #[Groups(["read:commande"])]
+    #[Groups(["read:commande","read:client"])]
     private $adresse;
 
     #[ORM\Column(type: 'string', length: 255)]
@@ -71,25 +71,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         maxMessage: 'La reference doit faire maximum {{ limit }} caractere',
     )]
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
-    #[Groups(["read:commande"])]
+    #[Groups(["read:commande","read:client"])]
     private $cp;
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\NotBlank(message: 'La valeur ne peut rester null')]
-    #[Groups(["read:commande"])]
+    #[Groups(["read:commande","read:client"])]
     private $ville;
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\Positive]
-    #[Groups(["read:commande"])]
+    #[Groups(["read:commande","read:client"])]
     private $coefficient;
 
-    #[Groups(["read:commande"])]
+    #[Groups(["read:commande","read:client"])]
     private $commercial;
 
     
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Commande::class, orphanRemoval: true)]
-    #[Groups(["read:commande"])]
+    
     private $commandes;
 
     #[ORM\Column(type: 'boolean')]
