@@ -1,0 +1,1321 @@
+//src/controller/adminController
+
+<?php
+
+namespace App\Controller\Admin;
+
+use App\Entity\Secteur;
+use App\Entity\Evenement;
+use App\Entity\Organisme;
+use App\Entity\Departement;
+use App\Entity\User;
+
+use App\Repository\SecteurRepository;
+use App\Repository\CandidatRepository;
+use App\Repository\EvenementRepository;
+use App\Repository\OrganismeRepository;
+use App\Repository\DepartementRepository;
+use App\Repository\StatistiqueRepository;
+use App\Repository\UserRepository;
+
+use App\Controller\Admin\CandidatController;
+use App\Controller\Admin\EvenementController;
+
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+class AdminController extends AbstractController
+{
+
+    // renvoi a l'espace personnelle d'un utilisateur avec le role admin
+    #[Route('/admin', name: 'app_admin')]
+    public function index(CandidatRepository $candidatRepository, SecteurRepository $secteurRepository, EvenementRepository $evenementRepository, OrganismeRepository $organismeRepository): Response
+    {     
+            $user = $this->getUser();
+            $nbCandidatOrganisme = $candidatRepository->NombreCandidatParOrganismePrescripteur();
+            $nbEvenementOrganisme = $evenementRepository->NombreEvenementParOrganisme();
+
+            // dd($nbCandidatOrganisme);
+        
+        return $this->render('admin/index.html.twig', [
+            'controller_name' => 'AdminController',
+            'evenements' => $evenementRepository->findBy(["createur" => $user]), 
+            'candidats' => $candidatRepository->findAll(), 
+            'secteurs' => $secteurRepository->findAll($user), 
+            'organismes' => $organismeRepository->findAll($user),
+            'evenements' => $evenementRepository->findAll(),
+            'nbCandidatOrganisme' => $nbCandidatOrganisme,
+            'nbEvenementOrganisme' => $nbEvenementOrganisme
+        ]);
+    }
+    // renvoi a l'espace personnelle d'un utilisateur avec le role prescripteur
+    #[Route('/prescripteur', name: 'app_prescripteur')]
+    public function prescripteur(): Response
+    {
+        return $this->render('admin/prescripteur.html.twig', [
+            'controller_name' => 'AdminController',
+        ]);
+    }
+    // renvoi a l'espace personnelle d'un utilisateur avec le role organisateur
+
+    #[Route('/organisateur', name: 'app_organisateur')]
+    public function organisateur(CandidatRepository $candidatRepository, SecteurRepository $secteurRepository, EvenementRepository $evenementRepository, OrganismeRepository $organismeRepository): Response
+    {
+        $user = $this->getUser();
+        $nbCandidatOrganisme = $candidatRepository->NombreCandidatParOrganismePrescripteur();
+
+        $nbEvenement = $evenementRepository->CountEvenement();
+        return $this->render('admin/organisateur.html.twig', [
+            'candidats' => $candidatRepository->findAll(["prescripteur" => $user]), 
+            'secteurs' => $secteurRepository->findAll($user), 
+            'organismes' => $organismeRepository->findAll($user),
+            'evenements' => $evenementRepository->findBy(["createur" => $user]),
+            'nbCandidatOrganisme' => $nbCandidatOrganisme,
+        ]);
+    }
+
+    // renvoi a la page recherche avancée d'un utilisateur avec le role prescripteur
+    #[Route('/recherche', name: 'app_recherche')]
+    public function recherche(OrganismeRepository $organismerepository, DepartementRepository $departementRepository, SecteurRepository $secteurRepository): Response
+    {
+        $organisme = $organismerepository->findAllOrganisme();
+        $secteur = $secteurRepository->findAllSecteur();
+        $departement = $departementRepository->findAllDepartement();
+        return $this->render('admin/recherche/recherche.html.twig', [
+            'organisme' => $organisme,
+            'secteur' => $secteur,
+            'departement' => $departement,
+        ]);
+    }
+    // renvoi un tableau avec les evenements se deroulant pour le secteur selectionné
+
+    #[Route('/recherche/secteur/{secteur}', name: 'app_recherche_secteur')]
+    public function app_recherche_secteur(Evenement $evenement, EvenementRepository $evenementRepository, Secteur $secteur): Response
+    {
+
+        return $this->render('admin/recherche/secteur.html.twig', [
+            'secteur' => $secteur, 'evenement' => $evenement, 'evenementRepository' => $evenementRepository
+        ]);
+    }
+
+    // renvoi un tableau avec les evenements se deroulant pour l'organisme selectionné
+
+    #[Route('/recherche/organisme/{organisme}', name: 'app_recherche_organisme')]
+    public function app_recherche_organisme(Evenement $evenement, EvenementRepository $evenementRepository, Organisme $organisme): Response
+    {
+
+        return $this->render('admin/recherche/organisme.html.twig', [
+            'organisme' => $organisme, 'evenement' => $evenement, 'evenementRepository' => $evenementRepository
+        ]);
+    }
+    // renvoi un tableau avec les evenements se deroulant pour le departement selectionné
+
+    #[Route('/recherche/departement/{departement}', name: 'app_recherche_departement')]
+    public function app_recherche_departement(Departement $departement): Response
+    {
+
+
+        return $this->render('admin/recherche/departement.html.twig', [
+            'departement' => $departement,
+        ]);
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//CandidatRepository
+
+<?php
+
+namespace App\Repository;
+
+// permet l'utilisation des données
+
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
+
+use App\Entity\Candidat;
+
+/**
+ * @extends ServiceEntityRepository<Candidat>
+ *
+ * @method Candidat|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Candidat|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Candidat[]    findAll()
+ * @method Candidat[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ */
+class CandidatRepository extends ServiceEntityRepository
+{
+
+
+    //fonctions de base 
+
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, Candidat::class);
+    }
+
+    public function save(Candidat $entity, bool $flush = false): void
+    {
+        $this->getEntityManager()->persist($entity);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+
+    public function remove(Candidat $entity, bool $flush = false): void
+    {
+        $this->getEntityManager()->remove($entity);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+
+
+    ###########################################################################
+    ###########################################################################
+    ###########################################################################
+    ###########################################################################
+    ###########################################################################
+    ###########################################################################
+    ###########################################################################
+
+    //Fonctions stats kraief
+  
+    public function countByName()
+    {
+        $query = $this->createQueryBuilder('c')
+            ->select("COUNT(c.nom) as countName ");
+        return $query->getQuery()->getResult();
+    }
+
+   
+    public function countByPresence()
+    {
+        $query = $this->createQueryBuilder('c')
+            ->select("COUNT(c.present) as countPresent ")
+            ->where("c.present LIKE 'oui'");
+        return $query->getQuery()->getResult();
+    }
+
+
+    public function countByIntegration()
+    {
+        $query = $this->createQueryBuilder('c')
+            ->select("COUNT(c.integration) as countIntegration ")
+            ->where("c.integration LIKE 'oui'");
+        return $query->getQuery()->getResult();
+    }
+
+    //{# pourcentage = (montant partiel / montant total) x 100  #}
+
+  
+    public function countByInscription()
+    {
+        $query = $this->createQueryBuilder('c')
+            ->select("(COUNT(c.integration+c.present) / COUNT(c.nom)) * 100 as countInscription");
+        return $query->getQuery()->getResult();
+    }
+
+   
+    public function countByNonInscription()
+    {
+        $query = $this->createQueryBuilder('c')
+            ->select("COUNT(c.integration) as countNonInscription")
+            ->where("c.integration LIKE 'non'");
+        return $query->getQuery()->getResult();
+    }
+
+   
+    public function countByTauxPresences()
+    {
+        $query = $this->createQueryBuilder('c')
+            ->select("(COUNT(c.present)  / COUNT(c.nom))*100 as tauxPresence")
+            ->where("c.present LIKE 'oui'");
+        return $query->getQuery()->getResult();
+    }
+
+   
+    public function countByTauxIntegration()
+    {
+        $query = $this->createQueryBuilder('c')
+            ->select("(COUNT(c.integration) / COUNT(c.nom)) * 100 as tauxIntegration")
+            ->where("c.integration LIKE 'oui'");
+        return $query->getQuery()->getResult();
+    }
+
+
+
+
+    ###########################################################################
+    ###########################################################################
+    ###########################################################################
+    ###########################################################################
+    ###########################################################################
+    ###########################################################################
+    ###########################################################################
+
+    public function NombreCandidatParOrganismePrescripteur()
+    {
+        $stat = $this->getEntityManager()->getConnection();
+
+        $sql = '
+        SELECT COUNT(*) as nbCandidats, c.present as nbPresence,c.integration as nbIntegration,o.nom as "organismeNom" 
+        FROM candidat c
+        JOIN user u ON u.id = c.prescripteur_id
+        JOIN organisme o ON o.id = u.organisme_id
+        GROUP BY o.nom
+             ';
+        $stmt = $stat->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
+    //Exemples fournit par symfony
+
+
+    //    /**
+    //     * @return Candidat[] Returns an array of Candidat objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('c')
+    //            ->andWhere('c.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('c.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
+
+    //    public function findOneBySomeField($value): ?Candidat
+    //    {
+    //        return $this->createQueryBuilder('c')
+    //            ->andWhere('c.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
+}
+ ###########################################################################
+    ###########################################################################
+    ###########################################################################
+    ###########################################################################
+    ###########################################################################
+    ###########################################################################
+    ###########################################################################
+    
+    //EvenementRepository
+    
+    
+    <?php
+
+    namespace App\Repository;
+    
+    // permet l'utilisation des données
+    
+    use App\Entity\Evenement;
+    use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+    use Doctrine\Persistence\ManagerRegistry;
+    
+    /**
+     * @extends ServiceEntityRepository<Evenement>
+     *
+     * @method Evenement|null find($id, $lockMode = null, $lockVersion = null)
+     * @method Evenement|null findOneBy(array $criteria, array $orderBy = null)
+     * @method Evenement[]    findAll()
+     * @method Evenement[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+     */
+    class EvenementRepository extends ServiceEntityRepository
+    {
+        public function __construct(ManagerRegistry $registry)
+        {
+            parent::__construct($registry, Evenement::class);
+        }
+    
+        public function save(Evenement $entity, bool $flush = false): void
+        {
+            $this->getEntityManager()->persist($entity);
+    
+            if ($flush) {
+                $this->getEntityManager()->flush();
+            }
+        }
+    
+        public function remove(Evenement $entity, bool $flush = false): void
+        {
+            $this->getEntityManager()->remove($entity);
+    
+            if ($flush) {
+                $this->getEntityManager()->flush();
+            }
+        }
+    
+        ###########################################################################
+        ###########################################################################
+        ###########################################################################
+        ###########################################################################
+        ###########################################################################
+        ###########################################################################
+        ###########################################################################
+    
+        /**
+         * Rechercher les evenements en fonction du formulaire
+         * @return void
+         */
+        public function search($mots = null, $organisme = null, $secteur = null)
+        {
+            $query = $this->createQueryBuilder('e');
+    
+    
+            if ($mots != null) {
+                $query->andWhere('MATCH_AGAINST(e.nom, e.ville) AGAINST (:mots boolean)>0')
+                    ->setParameter('mots', $mots);
+            }
+    
+    
+    
+            if ($organisme != null) {
+                $query->Join('e.createur', 'u')
+                    ->join('u.organisme', 'o')
+                    ->andwhere('o.id = :id')
+                    ->setParameter('id', $organisme);
+            }
+            if ($secteur != null) {
+                $query->Join('e.secteurs', 's')
+                    ->andwhere('s.id = :id')
+                    ->setParameter('id', $secteur);
+            }
+    
+            return $query->getQuery()->getResult();
+        }
+    
+        ###########################################################################
+        ###########################################################################
+        ###########################################################################
+        ###########################################################################
+        ###########################################################################
+        ###########################################################################
+        ###########################################################################
+        /**
+         * @return  Evenement[] Le nombre d'evenement crée
+         */
+    
+        public function CountEvenement()
+        {
+            $query = $this->createQueryBuilder('e')
+                ->select("COUNT(e.nom) as countEvenenement ");
+            return $query->getQuery()->getResult();
+        }
+    
+    
+    
+    
+    
+    
+    
+        public function NombreEvenementParOrganisme()
+        {
+            $stat = $this->getEntityManager()->getConnection();
+    
+            $sql = '
+            SELECT COUNT(*) as nbEvenement,o.nom as "organismeNom" 
+            FROM evenement e
+            JOIN user u ON u.id = e.createur_id
+            JOIN organisme o ON o.id = u.organisme_id
+            GROUP BY o.nom
+                 ';
+            $stmt = $stat->prepare($sql);
+            $resultSet = $stmt->executeQuery();
+    
+            // returns an array of arrays (i.e. a raw data set)
+            return $resultSet->fetchAllAssociative();
+        }
+        //Exemples fournit par symfony
+    
+    
+        //    /**
+        //     * @return Evenement[] Returns an array of Evenement objects
+        //     */
+        //    public function findByExampleField($value): array
+        //    {
+        //        return $this->createQueryBuilder('e')
+        //            ->andWhere('e.exampleField = :val')
+        //            ->setParameter('val', $value)
+        //            ->orderBy('e.id', 'ASC')
+        //            ->setMaxResults(10)
+        //            ->getQuery()
+        //            ->getResult()
+        //        ;
+        //    }
+    
+        //    public function findOneBySomeField($value): ?Evenement
+        //    {
+        //        return $this->createQueryBuilder('e')
+        //            ->andWhere('e.exampleField = :val')
+        //            ->setParameter('val', $value)
+        //            ->getQuery()
+        //            ->getOneOrNullResult()
+        //        ;
+        //    }
+    }
+    #############################################################################################
+    ###################################################################
+    ###########################################################################
+///organisme repository
+    <?php
+
+namespace App\Repository;
+
+// permet l'utilisation des données
+
+
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
+
+use App\Entity\Organisme;
+
+/**
+ * @extends ServiceEntityRepository<Organisme>
+ *
+ * @method Organisme|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Organisme|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Organisme[]    findAll()
+ * @method Organisme[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ */
+class OrganismeRepository extends ServiceEntityRepository
+{
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, Organisme::class);
+    }
+
+    public function save(Organisme $entity, bool $flush = false): void
+    {
+        $this->getEntityManager()->persist($entity);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+
+    public function remove(Organisme $entity, bool $flush = false): void
+    {
+        $this->getEntityManager()->remove($entity);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+
+    /**
+     * @return Organisme[] Returns an array of Organisme objects
+     */
+
+    public function findAllOrganisme(): array
+    {
+        return $this->createQueryBuilder('o')
+            ->getQuery()
+            ->getResult();
+    }
+
+    ###########################################################################
+    ###########################################################################
+    ###########################################################################
+    ###########################################################################
+    ###########################################################################
+    ###########################################################################
+    ###########################################################################
+
+    //Exemples fournit par symfony
+
+
+
+
+    //    /**
+    //     * @return Organisme[] Returns an array of Organisme objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('o')
+    //            ->andWhere('o.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('o.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
+
+    //    public function findOneBySomeField($value): ?Organisme
+    //    {
+    //        return $this->createQueryBuilder('o')
+    //            ->andWhere('o.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
+}
+///////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+
+<?php
+// permet l'utilisation des données
+
+namespace App\Repository;
+
+
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
+
+use App\Entity\Secteur;
+
+/**
+ * @extends ServiceEntityRepository<Secteur>
+ *
+ * @method Secteur|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Secteur|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Secteur[]    findAll()
+ * @method Secteur[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ */
+class SecteurRepository extends ServiceEntityRepository
+{
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, Secteur::class);
+    }
+
+    public function save(Secteur $entity, bool $flush = false): void
+    {
+        $this->getEntityManager()->persist($entity);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+
+    public function remove(Secteur $entity, bool $flush = false): void
+    {
+        $this->getEntityManager()->remove($entity);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+    /**
+     * @return Secteur[] Returns an array of Secteur objects
+     */
+
+    public function findAllSecteur(): array
+    {
+        return $this->createQueryBuilder('s')
+            ->getQuery()
+            ->getResult();
+    }
+
+    ###########################################################################
+    ###########################################################################
+    ###########################################################################
+    ###########################################################################
+    ###########################################################################
+    ###########################################################################
+    ###########################################################################
+
+    //Exemples fournit par symfony
+
+    //    /**
+    //     * @return Secteur[] Returns an array of Secteur objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('s')
+    //            ->andWhere('s.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('s.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
+
+    //    public function findOneBySomeField($value): ?Secteur
+    //    {
+    //        return $this->createQueryBuilder('s')
+    //            ->andWhere('s.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+<?php
+
+namespace App\Repository;
+
+// permet l'utilisation des données
+
+
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
+
+use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
+
+use App\Entity\User;
+
+/**
+ * @extends ServiceEntityRepository<User>
+ *
+ * @method User|null find($id, $lockMode = null, $lockVersion = null)
+ * @method User|null findOneBy(array $criteria, array $orderBy = null)
+ * @method User[]    findAll()
+ * @method User[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ */
+class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
+{
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, User::class);
+    }
+
+    public function save(User $entity, bool $flush = false): void
+    {
+        $this->getEntityManager()->persist($entity);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+
+    public function remove(User $entity, bool $flush = false): void
+    {
+        $this->getEntityManager()->remove($entity);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+
+    ###########################################################################
+    ###########################################################################
+    ###########################################################################
+    ###########################################################################
+    ###########################################################################
+    ###########################################################################
+    ###########################################################################
+
+    /**
+     * Used to upgrade (rehash) the user's password automatically over time.
+     */
+    public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
+    {
+        if (!$user instanceof User) {
+            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
+        }
+
+        $user->setPassword($newHashedPassword);
+
+        $this->save($user, true);
+    }
+
+
+    /**
+     * @return  User[] les utilisateurs en attente de validation
+     */
+
+    public function findAllValidationInscription()
+    {
+        $validation = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            SELECT * FROM user v
+            WHERE v.status = "provisoire"
+            
+            ';
+        $stmt = $validation->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
+    ###########################################################################
+    ###########################################################################
+    ###########################################################################
+    ###########################################################################
+    ###########################################################################
+    ###########################################################################
+    ###########################################################################
+
+    //Exemples fournit par symfony
+    //    /**
+    //     * @return User[] Returns an array of User objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('u')
+    //            ->andWhere('u.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('u.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
+
+    //    public function findOneBySomeField($value): ?User
+    //    {
+    //        return $this->createQueryBuilder('u')
+    //            ->andWhere('u.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
+}
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Mon espace Admin
+{% endblock %}
+{% block body %}
+ 	<h1 class="text-center mt-3 mb-5">
+		Mon espace Admin
+		</h1></div></div>
+  <div class="container">
+
+	
+		<div class="row">
+		<div class="col-4">
+		<h4 class="text-center ">Nombre d'évenement par secteur
+			 </h4>
+		<div class="table-responsive">
+			<table class="table table-small table-bordered table-hover">
+				<thead class="text-center">
+					<tr>
+						<th scope="col-2">
+							Secteur
+						</th>
+						<th scope="col-2">
+							Nombre d'évènements
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for secteur in secteurs %}
+						<tr scope="row">
+							<td>
+								<h5 class="text-center">{{ secteur.nom }}</h5>
+							</td>
+							<td>
+
+								<h5 class="text-center">{{ secteur.evenements|length }}</h5>
+
+							</td>
+
+						{% endfor %}
+					</tbody>
+				</tbody>
+			</table>
+		</div></div>
+	
+  <div class="col-4">
+  <h4 class="text-center mb-3">Nombre d'evenement par organisme
+	   </h4>
+	   <div class="table-responsive">
+	   <table class=" col-4 table table-small table-bordered table-hover">
+		  <thead class="text-center">
+			  <tr>
+				  <th class="text-center" scope="col-3">
+					  Organisme
+				  </th>
+				  <th class="text-center" scope="col-1">
+					  Nombre d'evenement
+				  </th>
+				  
+			  </tr>
+		  </thead><tbody>
+			  
+  {% for organisme in nbEvenementOrganisme %}
+  
+	  <tr scope="row">
+		  <td class="text-center">{{organisme.organismeNom}}</td>
+			<td class="text-center">{{organisme.nbEvenement}}</td>
+	  
+		
+	  {% endfor %}
+
+
+				  </tr>
+			</tbody></table></div></div>	
+			<div class="col-4">
+		<h4 class="text-center mb-3">Nombre de candidats par organisme
+			 </h4>
+			 <div class="table-responsive">
+			 <table class=" col-4 table table-small table-bordered table-hover">
+				<thead class="text-center">
+					<tr>
+						<th class="text-center" scope="col-3">
+							Organisme
+						</th>
+						<th class="text-center" scope="col-1">
+							Nombre de candidats
+						</th>
+						
+					</tr>
+				</thead><tbody>
+					
+		{% for organisme in nbCandidatOrganisme %}
+		
+    		<tr scope="row">
+    			<td class="text-center">{{organisme.organismeNom}}</td>
+	  			<td class="text-center">{{organisme.nbCandidats}}</td>
+			
+	  		
+			{% endfor %}
+
+
+						</tr>
+				  </tbody></table></div></div>
+
+   <div class="row">
+	
+		<div class="col-10 ">
+	<h4 class="text-center mt-5">Recapitulatif des resultats par evenement:</h4>
+	<div class="table-responsive mt-5 ">
+		<table class=" table table-small table-bordered table-hover mb-5">
+			<thead >
+				<tr>
+					<th scope="col-2">
+						Nom de l'evenement
+					</th>
+					<th scope="col-2">
+						Date de l'evenement
+					</th>
+					<th scope="col-2">
+						nombre de place disponible
+					</th>
+					<th scope="col-2">
+						nombre d'inscrit
+					</th>
+					<th scope="col-1">
+						Presence
+					</th>
+					<th scope="col-1">
+						Integration
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for evenement in evenements %}
+					<tr scope="row">
+						<td>
+							
+								{{ evenement.nom }}
+							
+						</td>
+						<td>
+							
+							{{ evenement.date ? evenement.date|date('d/m/Y à H\\hi') : '' }}
+					
+						</td>
+						<td>
+							
+							{{ evenement.places - (evenement.candidats|length) }}
+						</td>
+						<td>
+							{{ evenement.candidats|length }}
+						</td>
+						{% set total_present = 0 %}
+						{% set total_integration = 0 %}
+						{% for candidat in evenement.candidats %}
+							{% if candidat.present == "Oui" %}
+								{% set total_present = total_present + 1 %}
+							{% endif %}
+							{% if candidat.integration == "Oui" %}
+								{% set total_integration = total_integration + 1 %}
+							{% endif %}
+						{% endfor %}
+			<td>
+				{{ total_present }} 
+			</td>
+			<td>		
+				{{ total_integration }} 
+			</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+
+		</table> </div></div></div>
+
+   
+				
+	
+
+  <div class="col-10 ">
+<h4 class = "text-center mt-3 mb-5">Recapitulatif des resultats par evenement en pourcentage:</h4>
+<div class="table-responsive">
+  <table class=" table table-small table-bordered table-hover mb-5">
+    <thead >
+      <tr>
+        <th scope="col-2">
+          Nom de l'evenement
+        </th>
+        <th scope="col-2">
+          Date de l'evenement
+        </th>
+        <th scope="col-2">
+          nombre de place disponible
+        </th>
+        <th scope="col-2">
+          nombre d'inscrit
+        </th>
+        <th scope="col-1">
+          Presence
+        </th>
+        <th scope="col-1">
+          Integration
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for evenement in evenements %}
+        <tr scope="row">
+          <td>
+           
+              {{ evenement.nom }}
+            
+          </td>
+          <td>
+            
+            {{ evenement.date ? evenement.date|date('d/m/Y à H\\hi') : '' }}
+        
+          </td>
+          <td>
+            
+			{{ evenement.places - (evenement.candidats|length) }}
+        </td>
+          <td>
+            
+              {{ ((evenement.candidats|length) / (evenement.places) * 100) | round}} %
+          </td>
+          
+          {% set percent_presence_candidat = 0 %} 
+          {% set percent_integration_candidat = 0 %}         
+          {% set nb_candidat = 0 %}
+          {% set total_present = 0 %}
+          {% set total_integration = 0 %}
+          {% for candidat in evenement.candidats %}
+            {% if candidat.present == "Oui" %}
+              {% set total_present = total_present + 1 %}
+            {% endif %}
+            {% if candidat.integration == "Oui" %}
+              {% set total_integration = total_integration + 1 %}
+            {% endif %}
+          {% endfor %}
+            
+                          <td>
+                          
+                            {% set nb_candidat = 0 + (evenement.candidats|length) %}
+                           
+                            {% if nb_candidat == 0 %}
+                            {% set percent_presence_candidat = 0 %}
+                            {% set percent_integration_candidat = 0 %}
+                            {% else %}
+                            {% set percent_presence_candidat =  (total_present / nb_candidat) * 100  %}
+                            {% set percent_integration_candidat =  (total_integration / nb_candidat) * 100  %}
+                          {% endif %}
+
+              {{percent_presence_candidat| round }} %
+              
+            </td>
+            <td>
+              
+                
+              {{percent_integration_candidat| round }} %
+
+            </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+
+  </table> </div>
+  </div></div></div>
+
+
+
+
+
+
+{% endblock %}
+////////////////////////////////////////////////////////////////////////////////////////////
+Admin/organisateur.html.twig
+
+/////////////////////////////////////////////////////////////////////////////
+
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Mon espace Organisateur
+{% endblock %}
+
+{% block body %}
+<div class="container">
+<div class="row">
+		<h1 class=" text-center mt-3 mb-5">
+			Mon espace Organisateur
+		</h1>
+		
+		<div class="col-5">
+		<h4 class="text-center mb-3">Nombre d'évenement par secteur:
+			 </h3>
+		<div class="table-responsive">
+			<table class=" col-5 table table-small table-bordered table-hover">
+				<thead class="text-center">
+					<tr>
+						<th scope="col-3">
+							Secteur
+						</th>
+						<th scope="col-2">
+							Nombre d'évènements
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for secteur in secteurs %}
+						<tr scope="row">
+							<td>
+								<h5 class="text-center">{{ secteur.nom }}</h5>
+							</td>
+							<td>
+
+								<h5 class="text-center">{{ secteur.evenements|length }}</h5>
+
+							</td>
+
+						{% endfor %}
+					</tbody>
+				</tbody>
+			</table>
+		</div></div>
+		<div class="col-5">
+		<h4 class="text-center mb-3">Nombre de candidats par organisme :
+			 </h4>
+			 <div class="table-responsive">
+			 <table class=" col-4 table table-small table-bordered table-hover">
+				<thead class="text-center">
+					<tr>
+						<th class="text-center" scope="col-3">
+							Organisme
+						</th>
+						<th class="text-center" scope="col-2">
+							Nombre de candidats
+						</th>
+						
+					</tr>
+				</thead><tbody>
+					
+		{% for organisme in nbCandidatOrganisme %}
+		
+    		<tr scope="row">
+    			<td class="text-center">{{organisme.organismeNom}}</td>
+	  			<td class="text-center">{{organisme.nbCandidats}}</td>
+			
+	  		
+			{% endfor %}
+
+
+						</tr>
+				  </tbody></table></div></div>
+				</div>
+				<div class="col-1"></div>
+		<div class="col-10 mt-3">
+	<h4 class="text-center mb-3">Recapitulatif des resultats par evenement:</h4>
+	<div class="table-responsive">
+		<table class=" table table-small table-bordered table-hover">
+			<thead class="text-center">
+				<tr>
+					<th scope="col-2">
+						Nom de l'evenement
+					</th>
+					<th scope="col-2">
+						Date de l'evenement
+					</th>
+					<th scope="col-2">
+						nombre de place disponible
+					</th>
+					<th scope="col-2">
+						nombre d'inscrit
+					</th>
+					<th scope="col-1">
+						Presence
+					</th>
+					<th scope="col-1">
+						Integration
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for evenement in evenements %}
+					<tr scope="row">
+						<td>
+							<h5 class="text-center">
+								{{ evenement.nom }}
+							</h5>
+						</td>
+						<td>
+							
+							{{ evenement.date ? evenement.date|date('d/m/Y à H\\hi') : '' }}
+					
+						</td>
+						<td>
+							
+							{{ evenement.places - (evenement.candidats|length) }}
+						</td>
+						<td>
+							{{ evenement.candidats|length }}
+						</td>
+						{% set total_present = 0 %}
+						{% set total_integration = 0 %}
+						{% for candidat in evenement.candidats %}
+							{% if candidat.present == "Oui" %}
+								{% set total_present = total_present + 1 %}
+							{% endif %}
+							{% if candidat.integration == "Oui" %}
+								{% set total_integration = total_integration + 1 %}
+							{% endif %}
+						{% endfor %}
+			<td>
+				{{ total_present }} 
+			</td>
+			<td>		
+				{{ total_integration }} 
+			</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+
+		</table> </div></div>
+
+<div class="col-1"></div>
+
+
+
+	<div class="col-1"></div>
+	
+
+		<div class="col-10 ">
+	<h4 class="text-center  mt-3 mb-3">Recapitulatif des resultats par evenement en pourcentage:</h4>
+	<div class="table-responsive">
+		<table class=" table table-small table-bordered table-hover">
+			<thead class="text-center">
+				<tr>
+					<th scope="col-2">
+						Nom de l'evenement
+					</th>
+					<th scope="col-2">
+						Date de l'evenement
+					</th>
+					<th scope="col-2">
+						nombre de place disponible
+					</th>
+					<th scope="col-2">
+						nombre d'inscrit
+					</th>
+					<th scope="col-1">
+						Presence
+					</th>
+					<th scope="col-1">
+						Integration
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for evenement in evenements %}
+					<tr scope="row">
+						<td>
+							<h5 class="text-center">
+								{{ evenement.nom }}
+							</h5>
+						</td>
+						<td>
+							
+							{{ evenement.date ? evenement.date|date('d/m/Y à H\\hi') : '' }}
+					
+						</td>
+						<td>
+							
+							{{ evenement.places - (evenement.candidats|length) }}
+					</td>
+						<td>
+							
+								{{ ((evenement.candidats|length) / (evenement.places) * 100) | round}} %
+						</td>
+						
+									
+
+						{% set percent_presence_candidat = 0 %} 
+						{% set percent_integration_candidat = 0 %}         
+						{% set nb_candidat = 0 %}
+						{% set total_present = 0 %}
+						{% set total_integration = 0 %}
+						{% for candidat in evenement.candidats %}
+						  {% if candidat.present == "Oui" %}
+							{% set total_present = total_present + 1 %}
+						  {% endif %}
+						  {% if candidat.integration == "Oui" %}
+							{% set total_integration = total_integration + 1 %}
+						  {% endif %}
+						{% endfor %}
+						  
+										<td>
+										
+										  {% set nb_candidat = 0 + (evenement.candidats|length) %}
+										 
+										  {% if nb_candidat == 0 %}
+										  {% set percent_presence_candidat = 0 %}
+										  {% set percent_integration_candidat = 0 %}
+										  {% else %}
+										  {% set percent_presence_candidat =  (total_present / nb_candidat) * 100  %}
+										  {% set percent_integration_candidat =  (total_integration / nb_candidat) * 100  %}
+										{% endif %}
+			  
+							{{percent_presence_candidat| round }} %
+							
+						  </td>
+						  <td>
+							
+							  
+							{{percent_integration_candidat| round }} %
+			  
+						  </td>
+					  </tr>
+					{% endfor %}
+			</tbody>
+
+		</table> </div>
+		</div></div>
+	{% endblock %}
